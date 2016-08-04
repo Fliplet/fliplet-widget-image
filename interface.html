@@ -1,0 +1,13 @@
+<div>
+  {{#if image}}
+  <button data-select-image class="btn btn-primary">Change image</button>
+  <p>Selected image:</p>
+  <img src="{{image.url}}" style="max-height:200px" />
+  <hr />
+  <form>
+  Width: <input type="text" name="width" value="{{width}}" />
+  </form>
+  {{else}}
+  <button data-select-image class="btn btn-primary">Select image</button>
+  {{/if}}
+</div>

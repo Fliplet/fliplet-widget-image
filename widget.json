@@ -1,0 +1,24 @@
+{
+  "name": "Image",
+  "package": "com.fliplet.image",
+  "version": "1.0.0",
+  "icon": "img/icon.png",
+  "tags": ["type:component", "category:general"],
+  "provider_only": false,
+  "providers": [
+    "com.fliplet.file-manager"
+  ],
+  "interface": {
+    "dependencies": [
+      "fliplet-core",
+      "fliplet-studio-ui"
+    ],
+    "assets": [
+      "js/interface.js"
+    ]
+  },
+  "build": {
+    "dependencies": [],
+    "assets": []
+  }
+}
