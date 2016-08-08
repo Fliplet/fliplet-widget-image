@@ -1,13 +1,47 @@
 <div>
   {{#if image}}
-  <button data-select-image class="btn btn-primary">Change image</button>
-  <p>Selected image:</p>
-  <img src="{{image.url}}" style="max-height:200px" />
-  <hr />
-  <form>
-  Width: <input type="text" name="width" value="{{width}}" />
+  <header>
+    <p>Edit your image</p>
+    <a href="#">Need help?</a>
+  </header>
+  <div id="preview-image">
+    <img src="{{image.url}}" />
+  </div>
+  <div class="button-holder">
+    <div data-select-image class="btn btn-primary">Replace</div>
+    <div class="btn btn-default">Edit</div>
+    <div class="btn btn-danger">Remove</div>
+  </div>
+
+  <form class="form-horizontal" action="#">
+    <div class="form-group">
+      <div class="col-xs-4 control-label">
+        <label>Do you want to add a link?</label>
+      </div>
+
+      <div class="col-xs-8">
+        <div class="radio-buttons clearfix">
+          <div class="radio">
+            <input type="radio" id="link-yes" name="link-image" value="link-yes">
+            <label for="link-yes">
+              Yes
+            </label>
+          </div>
+          <div class="radio">
+            <input type="radio" id="link-no" name="link-image" value="link-no" checked>
+            <label for="link-no">
+              No
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="action"></div>
+
   </form>
+
   {{else}}
-  <button data-select-image class="btn btn-primary">Select image</button>
+  <div id="image-manager"></div>
   {{/if}}
 </div>

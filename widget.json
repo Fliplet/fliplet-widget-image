@@ -6,7 +6,8 @@
   "tags": ["type:component", "category:general"],
   "provider_only": false,
   "providers": [
-    "com.fliplet.file-manager"
+    "com.fliplet.file-manager",
+    "com.fliplet.link"
   ],
   "interface": {
     "dependencies": [
@@ -14,7 +15,8 @@
       "fliplet-studio-ui"
     ],
     "assets": [
-      "js/interface.js"
+      "js/interface.js",
+      "css/interface.css"
     ]
   },
   "build": {
