@@ -6,6 +6,11 @@
   height: 100%;
   border: 0;
 }
+
+.image-widget-holder,
+#image-manager {
+  overflow: hidden;
+}
 /*BUTTONS*/
 
 .btn {
@@ -281,7 +286,7 @@ label {
   color: #FFF;
 }
 
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 488px) {
   header {
     font-size: 1.0em;
   }
