@@ -12,7 +12,7 @@ linkActionProvider.then(function (result) {
   window.location.reload();
 });
 
-if (data !== {}) {
+if ( $.isEmptyObject(data) ) {
   Fliplet.Widget.open('com.fliplet.image-manager', {
     selector: "#image-manager",
     single: true,
@@ -27,9 +27,11 @@ if (data !== {}) {
 
 // Fired from Fliplet Studio when the external save button is clicked
 Fliplet.Widget.onSaveRequest(function () {
-  Fliplet.Widget.save(data).then(function () {
-    Fliplet.Widget.complete();
-  });
+  if ( !$.isEmptyObject(data) ) {
+    Fliplet.Widget.save(data).then(function () {
+      Fliplet.Widget.complete();
+    });
+  }
 })
 
 function showLinkActions() {
