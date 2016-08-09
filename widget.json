@@ -20,7 +20,12 @@
     ]
   },
   "build": {
-    "dependencies": [],
-    "assets": []
+    "dependencies": [
+      "fliplet-core",
+      "fliplet-studio-ui"
+    ],
+    "assets": [
+      "css/build.css"
+    ]
   }
 }

@@ -6,4 +6,15 @@
     padding: 20px;
     color: #333333;
     font-size: 32px;
+    cursor: pointer;
+    -webkit-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-user-modify: read-only !important;
+}
+.image-placeholder:after {
+    content: "\f03e";
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    -webkit-font-smoothing: antialiased;
 }
