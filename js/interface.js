@@ -31,17 +31,12 @@ Fliplet.Widget.onSaveRequest(function () {
     Fliplet.Widget.save(data).then(function () {
       Fliplet.Widget.complete();
     });
+  } else {
+    Fliplet.Widget.complete();
   }
 })
 
-function showLinkActions() {
-  if ($('#link-yes').is(':checked')) {
-    $('#action').addClass('show');
-  } else if ($('#link-no').is(':checked')) {
-    $('#action').removeClass('show');
-  }
-}
-
+// Events
 $('input[name="link-image"]:radio').on('change', function() {
   showLinkActions();
 });
@@ -49,3 +44,12 @@ $('input[name="link-image"]:radio').on('change', function() {
 $('#help_tip').on('click', function() {
   alert("During beta, please use live chat and let us know what you need help with.");
 });
+
+// Toggle to show and hide link actions
+function showLinkActions() {
+  if ($('#link-yes').is(':checked')) {
+    $('#action').addClass('show');
+  } else if ($('#link-no').is(':checked')) {
+    $('#action').removeClass('show');
+  }
+}
