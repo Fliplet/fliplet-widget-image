@@ -45,3 +45,7 @@ function showLinkActions() {
 $('input[name="link-image"]:radio').on('change', function() {
   showLinkActions();
 });
+
+$('#help_tip').on('click', function() {
+  alert("During beta, please use live chat and let us know what you need help with.");
+});
