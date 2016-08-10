@@ -22,9 +22,11 @@
   "build": {
     "dependencies": [
       "fliplet-core",
+      "fliplet-navigate",
       "fliplet-studio-ui"
     ],
     "assets": [
+      "js/build.js",
       "css/build.css"
     ]
   }

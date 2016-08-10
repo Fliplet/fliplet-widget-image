@@ -1,5 +1,5 @@
 {{#if image}}
-  <img src="{{image.url}}" />
+  <img data-image-id="{{id}}" src="{{image.url}}" />
 {{else}}
-  <div class="image-placeholder">&nbsp;</div>
+  <div data-image-id="{{id}}" class="image-placeholder">&nbsp;</div>
 {{/if}}
