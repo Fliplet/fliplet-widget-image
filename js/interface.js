@@ -3,11 +3,6 @@ var linkActionProvider = Fliplet.Widget.open('com.fliplet.link', {
   selector: '#action',
   data: data.action
 });
-var imageManagerProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
-  selector: "#image-manager",
-  single: true,
-  type: 'image'
-});
 
 // 0. Initialized Image Manager if there are no 'data'
 if ( $.isEmptyObject(data) ) {
@@ -48,7 +43,7 @@ linkActionProvider.then(function (result) {
 });
 
 // If link is set change radio button
-if ( data.action.hasOwnProperty("action") ) {
+if ( data.action && data.action.hasOwnProperty("action") ) {
   $("#link-yes").prop("checked", true);
 }
 
