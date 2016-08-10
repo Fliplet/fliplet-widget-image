@@ -3,15 +3,13 @@ var linkActionProvider = Fliplet.Widget.open('com.fliplet.link', {
   selector: '#action',
   data: data.action
 });
-
-// 3. Fired when the provider has finished
-linkActionProvider.then(function (result) {
-  data.action = result.data;
-  return Fliplet.Widget.save(data);
-}).then(function () {
-  window.location.reload();
+var imageManagerProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
+  selector: "#image-manager",
+  single: true,
+  type: 'image'
 });
 
+// 0. Initialized Image Manager if there are no 'data'
 if ( $.isEmptyObject(data) ) {
   Fliplet.Widget.open('com.fliplet.image-manager', {
     selector: "#image-manager",
@@ -25,16 +23,34 @@ if ( $.isEmptyObject(data) ) {
   });
 };
 
-// Fired from Fliplet Studio when the external save button is clicked
+// 1. Fired from Fliplet Studio when the external save button is clicked
 Fliplet.Widget.onSaveRequest(function () {
   if ( !$.isEmptyObject(data) ) {
-    Fliplet.Widget.save(data).then(function () {
-      Fliplet.Widget.complete();
-    });
+    $('form').submit();
   } else {
     Fliplet.Widget.complete();
   }
-})
+});
+
+// 2. Fired when the user submits the form
+$('form').submit(function (event) {
+  event.preventDefault();
+  linkActionProvider.forwardSaveRequest();
+});
+
+// 3. Fired when the provider has finished
+linkActionProvider.then(function (result) {
+  data.action = result.data;
+
+  Fliplet.Widget.save(data).then(function () {
+    Fliplet.Widget.complete();
+  });
+});
+
+// If link is set change radio button
+if ( data.action.hasOwnProperty("action") ) {
+  $("#link-yes").prop("checked", true);
+}
 
 // Events
 $('input[name="link-image"]:radio').on('change', function() {
