@@ -23,7 +23,7 @@ Fliplet.Widget.onSaveRequest(function () {
   if ( !$.isEmptyObject(data) ) {
     $('form').submit();
   } else {
-    Fliplet.Widget.complete();
+    alert('Please choose an image first.');
   }
 });
 
@@ -48,13 +48,9 @@ if ( data.action && data.action.hasOwnProperty("action") ) {
 }
 
 // Events
-$('input[name="link-image"]:radio').on('change', function() {
-  showLinkActions();
-});
+$('input[name="link-image"]:radio').on('change', showLinkActions);
 
-$('#help_tip').on('click', function() {
-  alert("During beta, please use live chat and let us know what you need help with.");
-});
+$('.button-holder .btn').on('click', showBetaAlert);
 
 // Toggle to show and hide link actions
 function showLinkActions() {
@@ -63,4 +59,13 @@ function showLinkActions() {
   } else if ($('#link-no').is(':checked')) {
     $('#action').removeClass('show');
   }
+}
+
+// Temporary alerts for Beta
+$('#help_tip').on('click', function() {
+  alert("During beta, please use live chat and let us know what you need help with.");
+});
+
+function showBetaAlert() {
+  alert("During beta, these options are disabled.");
 }
