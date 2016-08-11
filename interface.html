@@ -22,13 +22,13 @@
       <div class="col-xs-8">
         <div class="radio-buttons clearfix">
           <div class="radio">
-            <input type="radio" id="link-yes" name="link-image" value="link-yes">
+            <input type="radio" id="link-yes" name="link-image" value="link-yes" {{#if link}} checked {{/if}}>
             <label for="link-yes">
               Yes
             </label>
           </div>
           <div class="radio">
-            <input type="radio" id="link-no" name="link-image" value="link-no" checked>
+            <input type="radio" id="link-no" name="link-image" value="link-no" {{#unless link}} checked {{/unless}}>
             <label for="link-no">
               No
             </label>
