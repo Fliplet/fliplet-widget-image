@@ -45,6 +45,7 @@ linkActionProvider.then(function (result) {
 // If link is set change radio button
 if ( data.action && data.action.hasOwnProperty("action") ) {
   $("#link-yes").prop("checked", true);
+  showLinkActions();
 }
 
 // Events
