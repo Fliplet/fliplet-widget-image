@@ -23,7 +23,9 @@ Fliplet.Widget.onSaveRequest(function () {
   if ( !$.isEmptyObject(data) ) {
     $('form').submit();
   } else {
-    alert('Please choose an image first.');
+    return Fliplet.Widget.displayMessage({
+      text: 'Please choose an image first.'
+    });
   }
 });
 
