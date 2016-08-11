@@ -43,13 +43,17 @@ linkActionProvider.then(function (result) {
   });
 });
 
-// If link is set change radio button
-if ( data.action && data.action.hasOwnProperty("action") ) {
-  $("#link-yes").prop("checked", true);
-}
-
 // Events
 $('input[name="link-image"]:radio').on('change', showLinkActions);
+
+// If link is set change radio button
+if (data.link === 'true') {
+  $("#link-yes").prop("checked", true);
+  $("#link-yes").change();
+} else {
+  $("#link-no").prop("checked", true);
+  $("#link-no").change();
+}
 
 $('.button-holder .btn').on('click', showBetaAlert);
 
