@@ -1,17 +1,33 @@
 var data = Fliplet.Widget.getData() || {};
+var linkSet;
 var linkActionProvider = Fliplet.Widget.open('com.fliplet.link', {
   selector: '#action',
-  data: data.action
-});
+  data: data.action,
+  onEvent: function (e) {
+    // contains e.event and e.data
+    linkSet = e.set;
 
-Fliplet.Widget.toggleSaveButton(true);
+    if (typeof linkSet == "undefined") {
+      Fliplet.Widget.toggleSaveButton(true);
+    } else {
+      Fliplet.Widget.toggleSaveButton(linkSet);
+    }
+  }
+});
 
 // 0. Initialized Image Manager if there are no 'data'
 if ( $.isEmptyObject(data) ) {
   Fliplet.Widget.open('com.fliplet.image-manager', {
     selector: "#image-manager",
     single: true,
-    type: 'image'
+    type: 'image',
+    onEvent: function (e) {
+      // contains e.event and e.data
+      linkSet = e.set;
+      if ( linkSet == true ) {
+        Fliplet.Widget.toggleSaveButton(linkSet);
+      }
+    }
   }).then(function (result) {
     data.image = result.data;
     return Fliplet.Widget.save(data);
@@ -67,6 +83,7 @@ function showLinkActions() {
     $('#action').addClass('show');
   } else if ($('#link-no').is(':checked')) {
     $('#action').removeClass('show');
+    Fliplet.Widget.toggleSaveButton(true);
   }
 }
 
