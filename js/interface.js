@@ -4,6 +4,8 @@ var linkActionProvider = Fliplet.Widget.open('com.fliplet.link', {
   data: data.action
 });
 
+Fliplet.Widget.toggleSaveButton(true);
+
 // 0. Initialized Image Manager if there are no 'data'
 if ( $.isEmptyObject(data) ) {
   Fliplet.Widget.open('com.fliplet.image-manager', {
