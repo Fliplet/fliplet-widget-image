@@ -71,7 +71,7 @@ linkActionProvider.then(function (result) {
 $('input[name="link-image"]:radio').on('change', showLinkActions);
 
 // If link is set change radio button
-if (data.link === 'true') {
+if (data.link === 'true' || data.link === true) {
   $("#link-yes").prop("checked", true);
   $("#link-yes").change();
 } else {
