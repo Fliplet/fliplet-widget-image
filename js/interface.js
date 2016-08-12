@@ -14,8 +14,8 @@ var linkActionProvider = Fliplet.Widget.open('com.fliplet.link', {
     } else {
       Fliplet.Widget.toggleSaveButton(linkSet);
     }
-    */
-  }
+
+  }*/
 });
 
 // 0. Initialized Image Manager if there are no 'data'
