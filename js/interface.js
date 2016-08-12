@@ -2,7 +2,9 @@ var data = Fliplet.Widget.getData() || {};
 var linkSet;
 var linkActionProvider = Fliplet.Widget.open('com.fliplet.link', {
   selector: '#action',
-  data: data.action,
+  data: data.action
+  // Removed until fixed
+  /*
   onEvent: function (e) {
     // contains e.event and e.data
     linkSet = e.set;
@@ -12,6 +14,7 @@ var linkActionProvider = Fliplet.Widget.open('com.fliplet.link', {
     } else {
       Fliplet.Widget.toggleSaveButton(linkSet);
     }
+    */
   }
 });
 
@@ -20,14 +23,15 @@ if ( $.isEmptyObject(data) ) {
   Fliplet.Widget.open('com.fliplet.image-manager', {
     selector: "#image-manager",
     single: true,
-    type: 'image',
+    type: 'image'
+    /*
     onEvent: function (e) {
       // contains e.event and e.data
       linkSet = e.set;
       if ( linkSet == true ) {
         Fliplet.Widget.toggleSaveButton(linkSet);
       }
-    }
+    }*/
   }).then(function (result) {
     data.image = result.data;
     return Fliplet.Widget.save(data);
@@ -83,7 +87,6 @@ function showLinkActions() {
     $('#action').addClass('show');
   } else if ($('#link-no').is(':checked')) {
     $('#action').removeClass('show');
-    Fliplet.Widget.toggleSaveButton(true);
   }
 }
 
