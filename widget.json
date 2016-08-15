@@ -22,7 +22,8 @@
   "build": {
     "dependencies": [
       "fliplet-core",
-      "fliplet-navigate"
+      "fliplet-navigate",
+      "font-awesome"
     ],
     "assets": [
       "js/build.js",
