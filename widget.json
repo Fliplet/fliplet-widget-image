@@ -29,5 +29,8 @@
       "js/build.js",
       "css/build.css"
     ]
-  }
+  },
+  "references": [
+    "action.page:page"
+  ]
 }
