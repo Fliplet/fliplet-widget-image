@@ -1,6 +1,7 @@
 .fl-widget-provider {
     border: 0;
     width: 100%;
+    height: 100%;
     background-color: transparent;
 }
 #image-manager {
@@ -8,6 +9,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    padding: 15px;
     position: absolute;
 }
 .image-widget-holder {
@@ -104,10 +106,6 @@ header a {
 .button-holder .btn {
     margin-right: 10px;
 }
-.button-holder .btn:last-child {
-    margin-right: 0;
-    float: right;
-}
 .form-horizontal {
     margin-top: 30px;
 }
@@ -127,10 +125,6 @@ header a {
 }
 .section h2 small {
     color: #14505e;
-}
-.control-label {
-    text-align: right;
-    padding-top: 12px;
 }
 label {
     font-weight: normal;
@@ -157,7 +151,7 @@ label {
     height: 44px;
     top: -1px;
     right: -1px;
-    background-color: #00abd2;
+    background-color: #cbcfd1;
     text-align: center;
     line-height: 44px;
     font-size: 18px;
