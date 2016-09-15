@@ -1,46 +1,21 @@
 <div class="image-widget-holder">
-  {{#if image}}
   <header>
-    <p>Edit your image</p>
+    <p>Configure your image</p>
     <a id="help_tip" href="#">Need help?</a>
   </header>
+
+  {{#if image}}
   <div id="preview-image">
     <img src="{{image.url}}" />
   </div>
   <div class="button-holder">
-    <div data-select-image class="btn btn-default">Replace</div>
     <div class="btn btn-default">Edit</div>
   </div>
-
-  <form class="form-horizontal">
-    <div class="form-group">
-      <div class="col-sm-4 control-label">
-        <label>Do you want to add a link?</label>
-      </div>
-
-      <div class="col-sm-8">
-        <div class="radio-buttons clearfix">
-          <div class="radio">
-            <input type="radio" id="link-yes" name="link-image" value="link-yes" {{#if link}} checked {{/if}}>
-            <label for="link-yes">
-              Yes
-            </label>
-          </div>
-          <div class="radio">
-            <input type="radio" id="link-no" name="link-image" value="link-no" {{#unless link}} checked {{/unless}}>
-            <label for="link-no">
-              No
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="action"></div>
-
-  </form>
-
-  {{else}}
-  <div id="image-manager"></div>
+  <div class="titles">
+    <p>Image library</p>
+  </div>
   {{/if}}
+
+  <div id="image-manager"></div>
+
 </div>
