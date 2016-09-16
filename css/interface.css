@@ -9,7 +9,6 @@
     height: 100%;
 }
 .image-widget-holder {
-    overflow: hidden;
     padding: 15px 0;
     position: absolute;
     left: 15px;
