@@ -26,15 +26,7 @@ function save(notifyComplete) {
 
 // 1. Fired from Fliplet Studio when the external save button is clicked
 Fliplet.Widget.onSaveRequest(function () {
-  if ( !$.isEmptyObject(data) ) {
-    Fliplet.Widget.save(data).then(function () {
-      Fliplet.Widget.complete();
-    });
-  } else {
-    return Fliplet.Widget.displayMessage({
-      text: 'Please choose an image first.'
-    });
-  }
+  imageProvider.forwardSaveRequest();
 });
 
 // Events
