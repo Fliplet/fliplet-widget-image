@@ -12,12 +12,11 @@ var imageProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
 });
 
 imageProvider.then(function (result) {
-  if (result.data && $('#pinchToZoom').is(":checked")) {
-    data.action = {
-      action: 'pinchToZoom',
-      pinchToZoom: result.data
-    }
   data.image = result.data || data.image;
+  data.action = {};
+  if (data.image && $('#pinchToZoom').is(":checked")) {
+    data.action.action = 'pinchToZoom';
+    data.action.pinchToZoom = data.image;
   }
   save(true);
 });
