@@ -6,14 +6,9 @@ if (data.link && data.link.action === 'pinchToZoom') {
 }
 
 var imageProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
-  // If provided, the iframe will be appended here,
-  // otherwise will be displayed as a full-size iframe overlay
   selector: "#image-manager",
   single: true,
-  type: 'image',
-  // Events fired from the provider
-  onEvent: function (event, data) {}
-
+  type: 'image'
 });
 
 imageProvider.then(function (result) {
