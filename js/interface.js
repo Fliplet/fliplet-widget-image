@@ -1,7 +1,7 @@
 var data = Fliplet.Widget.getData() || {};
 
 // Load interface data
-if (data.link && data.link.action === 'pinchToZoom') {
+if (data.action && data.action.action === 'pinchToZoom') {
   $('#pinchToZoom').prop('checked', true);
 }
 
@@ -13,7 +13,7 @@ var imageProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
 
 imageProvider.then(function (result) {
   data.image = result.data;
-  if ($('#pinchToZoom').is(":checked")) {
+  if (result.data && $('#pinchToZoom').is(":checked")) {
     data.action = {
       action: 'pinchToZoom',
       pinchToZoom: result.data
