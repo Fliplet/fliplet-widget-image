@@ -1,5 +1,10 @@
 var data = Fliplet.Widget.getData() || {};
 
+// Load interface data
+if (data.action && data.action.action === 'pinchToZoom') {
+  $('#pinchToZoom').prop('checked', true);
+}
+
 var imageProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
   selector: "#image-manager",
   single: true,
@@ -7,7 +12,12 @@ var imageProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
 });
 
 imageProvider.then(function (result) {
-  data.image = result.data;
+  data.image = result.data || data.image;
+  data.action = {};
+  if (data.image && $('#pinchToZoom').is(":checked")) {
+    data.action.action = 'pinchToZoom';
+    data.action.pinchToZoom = data.image;
+  }
   save(true);
 });
 
@@ -35,3 +45,4 @@ $('#help_tip').on('click', function() {
 function showBetaAlert() {
   alert("During beta, these options are disabled.");
 }
+

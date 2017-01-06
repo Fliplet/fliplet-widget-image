@@ -11,11 +11,23 @@
   <div class="button-holder">
     <div class="btn btn-default">Edit</div>
   </div>
+  {{/if}}
   <div class="titles">
     <p>Image library</p>
   </div>
-  {{/if}}
-
+  <div class="form-group clearfix">
+    <div class="col-sm-4 control-label">
+      <label for="pinchToZoom">Do you want to allow user to tap on the image to zoom it?</label>
+    </div>
+    <div class="col-sm-8">
+      <div class="checkbox">
+        <input type="checkbox" id="pinchToZoom">
+        <label for="pinchToZoom" class="text-left">
+          <span class="check"><i class="fa fa-check"></i></span> Yes, please
+        </label>
+        <p class="help-block">The image will open in a fullscreen overlay and users will be able to zoom in and out.</p>
+      </div>
+    </div>
+  </div>
   <div id="image-manager"></div>
-
 </div>
