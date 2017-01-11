@@ -152,7 +152,7 @@ header a {
 }
 
 .control-label {
-    text-align: right;
+    text-align: left;
     padding-top: 12px;
 }
 
@@ -228,6 +228,11 @@ label {
     height: 44px;
     cursor: pointer;
     opacity: 0;
+}
+
+.form-group {
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
 .form-group .btn-default {
