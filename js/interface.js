@@ -14,9 +14,9 @@ var imageProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
 imageProvider.then(function (result) {
   data.image = result.data || data.image;
   data.action = {};
-    data.action.pinchToZoom = data.image;
   if (data.image && $('#gallery').is(":checked")) {
     data.action.action = 'gallery';
+    data.action.images = [data.image];
   }
   save(true);
 });
