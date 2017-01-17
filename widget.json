@@ -22,7 +22,8 @@
   "build": {
     "dependencies": [
       "fliplet-core",
-      "font-awesome"
+      "font-awesome",
+      "photoswipe"
     ],
     "assets": [
       "js/build.js",

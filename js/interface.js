@@ -1,8 +1,8 @@
 var data = Fliplet.Widget.getData() || {};
 
 // Load interface data
-if (data.action && data.action.action === 'pinchToZoom') {
-  $('#pinchToZoom').prop('checked', true);
+if (data.action && data.action.action === 'gallery') {
+  $('#gallery').prop('checked', true);
 }
 
 var imageProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
@@ -14,9 +14,9 @@ var imageProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
 imageProvider.then(function (result) {
   data.image = result.data || data.image;
   data.action = {};
-  if (data.image && $('#pinchToZoom').is(":checked")) {
-    data.action.action = 'pinchToZoom';
-    data.action.pinchToZoom = data.image;
+  if (data.image && $('#gallery').is(":checked")) {
+    data.action.action = 'gallery';
+    data.action.images = [data.image];
   }
   save(true);
 });
