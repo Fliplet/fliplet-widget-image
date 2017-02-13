@@ -1,8 +1,20 @@
-$('[data-image-id]').click(function (event) {
-  event.preventDefault();
+Fliplet.Widget.instance('image', function (data) {
+  var $el = $(this);
+  var img;
+  var imageUrl = data.image && data.image.url;
 
-  var data = Fliplet.Widget.getData($(this).data('image-id'));
-  if (data.action) {
-    Fliplet.Navigate.to(data.action);
+  // Load images after DOM Load
+  if (imageUrl && !$el.attr('src')) {
+    Fliplet.Navigator.onReady().then(function () {
+      $el[0].src = imageUrl;
+    });
   }
+
+  $el.click(function (event) {
+    event.preventDefault();
+
+    if (data.action) {
+      Fliplet.Navigate.to(data.action);
+    }
+  });
 });

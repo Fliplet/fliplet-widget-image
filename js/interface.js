@@ -25,6 +25,7 @@ function save(notifyComplete) {
   Fliplet.Widget.save(data).then(function () {
     if (notifyComplete) {
       Fliplet.Widget.complete();
+      Fliplet.Studio.emit('reload-page-preview');
     }
   });
 }
