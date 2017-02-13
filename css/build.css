@@ -18,3 +18,8 @@
     font-size: inherit;
     -webkit-font-smoothing: antialiased;
 }
+
+img[data-image-id] {
+    max-width: 100%;
+    height: auto;
+}
