@@ -25,12 +25,12 @@ Fliplet.Widget.instance('image', function (data) {
       $(this).hide().fadeIn(200);
     }).attr('src', imageUrl);
 
+    if (!data.action) {
+      return;
+    }
     $img.on('click', function (event) {
       event.preventDefault();
-
-      if (data.action) {
-        Fliplet.Navigate.to(data.action);
-      }
-    })
+      Fliplet.Navigate.to(data.action);
+    });
   });
 });
