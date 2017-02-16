@@ -1,25 +1,33 @@
 .image-placeholder {
-    border: 1px solid #cccccc;
-    background-color: rgba(217, 221, 222, 0.5);
-    text-align: center;
-    display: block;
-    padding: 20px;
-    color: #333333;
-    font-size: 32px;
-    cursor: pointer;
-    -webkit-user-select: none !important;
-    -ms-user-select: none !important;
-    user-select: none !important;
-    -webkit-user-modify: read-only !important;
+  border: 1px solid #cccccc;
+  background-color: rgba(217, 221, 222, 0.5);
+  text-align: center;
+  display: block;
+  padding: 20px;
+  color: #333333;
+  font-size: 32px;
+  cursor: pointer;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-user-modify: read-only !important;
 }
 .image-placeholder:after {
-    content: "\f03e";
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    -webkit-font-smoothing: antialiased;
+  content: "\f03e";
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  -webkit-font-smoothing: antialiased;
 }
 
 img[data-image-id] {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+canvas.lazy-placeholder {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+  /* Uncertain at the moment where the 5px comes from at the moment, but is consistent across devices and image size */
+  margin-bottom: -5px;
 }
