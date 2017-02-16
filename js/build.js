@@ -1,20 +1,34 @@
 Fliplet.Widget.instance('image', function (data) {
-  var $el = $(this);
-  var img;
+
+  var canvas = this;
   var imageUrl = data.image && data.image.url;
 
   // Load images after DOM Load
-  if (imageUrl && !$el.attr('src')) {
+  if (imageUrl) {
     Fliplet.Navigator.onReady().then(function () {
-      $el[0].src = imageUrl;
+      var $placeholder = $(canvas);
+      var img = document.createElement('IMG');
+      var propsToCopy = ['style', 'className', 'width', 'height'];
+      propsToCopy.forEach(function(x){
+        if (canvas.hasOwnProperty(x)) {
+          img[x] = canvas[x];
+        }
+      });
+      img.dataset.imageId = canvas.dataset.imageId;
+      img.classList.remove('lazy-placeholder');
+      var $img = $(img);
+      $img.on('load', function(){
+        $placeholder.replaceWith(this);
+        $(this).hide().fadeIn(200);
+      }).attr('src', imageUrl);
+
+      $img.on('click', function (event) {
+        event.preventDefault();
+
+        if (data.action) {
+          Fliplet.Navigate.to(data.action);
+        }
+      })
     });
   }
-
-  $el.click(function (event) {
-    event.preventDefault();
-
-    if (data.action) {
-      Fliplet.Navigate.to(data.action);
-    }
-  });
 });
