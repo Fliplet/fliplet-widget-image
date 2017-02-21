@@ -18,6 +18,10 @@ imageProvider.then(function (result) {
     data.action.action = 'gallery';
     data.action.images = [data.image];
   }
+  if (data.image && data.image.size) {
+    data.image.width = data.image.size[0];
+    data.image.height = data.image.size[1];
+  }
   save(true);
 });
 
@@ -46,4 +50,3 @@ $('#help_tip').on('click', function() {
 function showBetaAlert() {
   alert("During beta, these options are disabled.");
 }
-
