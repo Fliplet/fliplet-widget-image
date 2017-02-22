@@ -1,5 +1,5 @@
 {{#if image}}
-  <canvas data-image-id="{{id}}" class="lazy-placeholder" data-image-id="{{id}}" {{#if image.width}}width="{{image.width}}"{{/if}} {{#if image.height}}height="{{image.height}}"{{/if}}></canvas>
+  <canvas data-image-id="{{id}}" class="lazy-placeholder" data-image-uuid="{{uuid}}" {{#if image.width}}width="{{image.width}}"{{/if}} {{#if image.height}}height="{{image.height}}"{{/if}}></canvas>
 {{else}}
   <span data-image-id="{{id}}" class="image-placeholder">&nbsp;</span>
 {{/if}}
