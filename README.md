@@ -19,5 +19,5 @@ Clone and run for development:
 $ git clone https://github.com/WebooOnline/fliplet-widget-image.git
 $ cd fliplet-widget-image
 
-$ fliplet run-widget
+$ fliplet run
 ```
