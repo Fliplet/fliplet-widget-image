@@ -30,4 +30,14 @@ canvas.lazy-placeholder {
   display: inline-block;
   /* Uncertain at the moment where the 5px comes from at the moment, but is consistent across devices and image size */
   margin-bottom: -5px;
+  opacity: 0;
+}
+
+img.lazy-placeholder {
+  opacity: 0;
+}
+
+img.lazy-loaded {
+  opacity: 1;
+  transition: opacity: 0.2s;
 }

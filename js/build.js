@@ -18,11 +18,14 @@ Fliplet.Widget.instance('image', function (data) {
       }
     });
     img.dataset.imageId = canvas.dataset.imageId;
-    img.classList.remove('lazy-placeholder');
     var $img = $(img);
     $img.on('load', function(){
-      $placeholder.replaceWith(this);
-      $(this).hide().fadeIn(200);
+      var img = this;
+      $placeholder.replaceWith(img);
+      setTimeout(function(){
+        img.classList.remove('lazy-placeholder');
+        img.classList.add('lazy-loaded');
+      }, 0);
     }).attr('src', imageUrl);
 
     if (!data.action) {
