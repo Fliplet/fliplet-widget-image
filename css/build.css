@@ -35,6 +35,7 @@ canvas.lazy-placeholder {
 
 img.lazy-placeholder {
   opacity: 0;
+  transition: opacity: 0.2s;
 }
 
 img.lazy-loaded {
