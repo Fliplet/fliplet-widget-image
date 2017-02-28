@@ -29,7 +29,7 @@ canvas.lazy-placeholder {
   height: auto;
   display: inline-block;
   /* Uncertain at the moment where the 5px comes from at the moment, but is consistent across devices and image size */
-  margin-bottom: -5px;
+  margin-bottom: -9px;
   opacity: 0;
 }
 
