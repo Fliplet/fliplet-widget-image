@@ -9,19 +9,17 @@ Fliplet.Widget.instance('image', function (data) {
 
   var $placeholder = $(canvas);
   var img = document.createElement('IMG');
-  var propsToCopy = ['style', 'className', 'width', 'height'];
-  propsToCopy.forEach(function(x){
-    if (canvas.hasOwnProperty(x)) {
-      img[x] = canvas[x];
-    }
-  });
+  img.className = canvas.className;
+  img.style = canvas.style;
+  img.width = canvas.width;
+  img.height = canvas.height;
   img.dataset.imageId = canvas.dataset.imageId;
   var $img = $(img);
   $img.on('load', function(){
     var img = this;
     $placeholder.replaceWith(img);
-    img.classList.add('lazy-loaded');
     setTimeout(function(){
+      img.classList.add('lazy-loaded');
       img.classList.remove('lazy-placeholder');
     }, 0);
   }).attr('src', imageUrl);
