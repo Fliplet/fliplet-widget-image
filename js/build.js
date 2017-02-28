@@ -7,30 +7,28 @@ Fliplet.Widget.instance('image', function (data) {
     return;
   }
 
-  // Load images after DOM Load
-  Fliplet.Navigator.onReady().then(function () {
-    var $placeholder = $(canvas);
-    var img = document.createElement('IMG');
-    var propsToCopy = ['style', 'className', 'width', 'height'];
-    propsToCopy.forEach(function(x){
-      if (canvas.hasOwnProperty(x)) {
-        img[x] = canvas[x];
-      }
-    });
-    img.dataset.imageId = canvas.dataset.imageId;
-    img.classList.remove('lazy-placeholder');
-    var $img = $(img);
-    $img.on('load', function(){
-      $placeholder.replaceWith(this);
-      $(this).hide().fadeIn(200);
-    }).attr('src', imageUrl);
+  var $placeholder = $(canvas);
+  var img = document.createElement('IMG');
+  img.className = canvas.className;
+  img.style = canvas.style;
+  img.width = canvas.width;
+  img.height = canvas.height;
+  img.dataset.imageId = canvas.dataset.imageId;
+  var $img = $(img);
+  $img.on('load', function(){
+    var img = this;
+    $placeholder.replaceWith(img);
+    setTimeout(function(){
+      img.classList.add('lazy-loaded');
+      img.classList.remove('lazy-placeholder');
+    }, 0);
+  }).attr('src', imageUrl);
 
-    if (!data.action) {
-      return;
-    }
-    $img.on('click', function (event) {
-      event.preventDefault();
-      Fliplet.Navigate.to(data.action);
-    });
+  if (!data.action) {
+    return;
+  }
+  $img.on('click', function (event) {
+    event.preventDefault();
+    Fliplet.Navigate.to(data.action);
   });
 });
