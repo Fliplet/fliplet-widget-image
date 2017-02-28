@@ -21,8 +21,8 @@ Fliplet.Widget.instance('image', function (data) {
     var img = this;
     $placeholder.replaceWith(img);
     setTimeout(function(){
-      img.classList.remove('lazy-placeholder');
       img.classList.add('lazy-loaded');
+      img.classList.remove('lazy-placeholder');
     }, 0);
   }).attr('src', imageUrl);
 
