@@ -5,13 +5,77 @@
   </header>
 
   {{#if image}}
-  <div id="preview-image">
-    <img src="{{image.url}}" />
-  </div>
-  <div class="button-holder">
-    <div class="btn btn-default">Edit</div>
-  </div>
+    <div class="image-previewer">
+      <div id="preview-image">
+        <img src="{{image.url}}" />
+      </div>
+      <div class="button-holder">
+        <div class="btn btn-primary" id="showEditButton">Edit</div>
+        <div class="pull-right">
+          {{image.width}} x {{image.height}}
+        </div>
+      </div>
+    </div>
+    <div class="image-editor">
+      <div id="preview-image-editor">
+        <img src="{{image.url}}" />
+      </div>
+      <div class="image-editor-main">
+        <div class="button-holder">
+          <div class="btn btn-primary" id="saveEditChangesButton">Save changes</div>
+          <div class="btn btn-default" id="closeEditButton">Close</div>
+          <div class="pull-right">
+            {{image.width}} x {{image.height}}
+          </div>
+        </div>
+        <div class="button-holder">
+          <div class="btn btn-default" id="cropEditButton">Crop</div>
+          <div class="btn btn-default" id="resizeEditButton">Resize</div>
+          <div class="btn btn-default" id="rotateEditButton">Rotate</div>
+        </div>
+      </div>
+
+      <div class="image-editor-crop">
+        Crop
+        <div class="pull-right">
+          {{image.width}} x {{image.height}}
+        </div>
+
+        <div class="button-holder">
+          <div class="btn btn-primary" id="applyCrop">Apply</div>
+          <div class="btn btn-default" id="cancelCrop">Cancel</div>
+        </div>
+      </div>
+
+
+      <div class="image-editor-resize">
+        Resize
+        <div class="pull-right">
+          {{image.width}} x {{image.height}}
+        </div>
+
+        <div class="button-holder">
+          <div class="btn btn-primary" id="applyResize">Apply</div>
+          <div class="btn btn-default" id="cancelResize">Cancel</div>
+        </div>
+      </div>
+
+
+      <div class="image-editor-rotate">
+        Rotate
+        <div class="pull-right">
+          {{image.width}} x {{image.height}}
+        </div>
+
+        <div class="button-holder">
+          <div class="btn btn-primary" id="applyRotate">Apply</div>
+          <div class="btn btn-default" id="cancelRotate">Cancel</div>
+        </div>
+      </div>
+    </div>
   {{/if}}
+
+
   <div class="titles">
     <p>Image library</p>
   </div>

@@ -116,6 +116,21 @@ header a {
     max-height: 250px;
 }
 
+#preview-image-editor {
+    position: relative;
+    text-align: center;
+    border: 1px solid #d9ddde;
+    background-color: #FFF;
+}
+
+#preview-image-editor img {
+    width: auto;
+    max-width: 100%;
+    max-height: 250px;
+}
+
+
+
 .button-holder {
     padding: 10px 0;
     margin-bottom: 30px;
@@ -345,3 +360,28 @@ label {
 .radio .select-holder {
     padding-left: 30px;
 }
+
+
+.pull-left {
+       float: left !important;
+   }
+.pull-right {
+    float: right !important;
+}
+
+.image-editor {
+    display: none;
+}
+
+.image-editor-crop {
+    display: none;
+}
+
+.image-editor-resize {
+    display: none;
+}
+
+.image-editor-rotate {
+    display: none;
+}
+
