@@ -3,6 +3,7 @@ var data = Fliplet.Widget.getData() || {};
 var SELECTOR = {
   IMAGE_PREVIWER: '.image-previewer',
   IMAGE_EDITOR: '.image-editor',
+  IMAGE_EDITOR_IMAGE: '#imageEditor',
   IMAGE_EDITOR_MAIN: '.image-editor-main',
   IMAGE_EDITOR_CROP: '.image-editor-crop',
   IMAGE_EDITOR_RESIZE: '.image-editor-resize',
@@ -109,7 +110,9 @@ function closeEdit(){
 
 //Crop
 function showCrop(){
+  //$(SELECTOR.IMAGE_EDITOR_IMAGE).Jcrop();
   swithEditorMode(EDITOR_MODE.CROP);
+
 }
 
 function applyCrop(){
