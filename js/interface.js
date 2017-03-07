@@ -1,9 +1,10 @@
 var data = Fliplet.Widget.getData() || {};
+console.log(data);
 
 var SELECTOR = {
   IMAGE_PREVIWER: '.image-previewer',
   IMAGE_EDITOR: '.image-editor',
-  IMAGE_EDITOR_IMAGE: '#imageEditor',
+  IMAGE_PREVIEWER_CANVAS_WRAPPER: '#preview-image-editor',
   IMAGE_EDITOR_MAIN: '.image-editor-main',
   IMAGE_EDITOR_CROP: '.image-editor-crop',
   IMAGE_EDITOR_RESIZE: '.image-editor-resize',
@@ -19,7 +20,24 @@ var SELECTOR = {
   BTN_EDIT_RESIZE_CANCEL: '#cancelResize',
   BTN_EDIT_ROTATE_SHOW: '#rotateEditButton',
   BTN_EDIT_ROTATE_APPLY: '#applyRotate',
-  BTN_EDIT_ROTATE_CANCEL: '#cancelRotate'
+  BTN_EDIT_ROTATE_CANCEL: '#cancelRotate',
+  CANVAS_EDITOR: '#canvasEditor',
+  CANVAS_SOURCE: '#canvasSource',
+  BTN_EDIT_ROTATE_LEFT: '#rotateLeft',
+  BTN_EDIT_ROTATE_RIGHT: '#rotateRight',
+  INPUT_EDIT_RESIZE_WIDTH: '#width',
+  INPUT_EDIT_RESIZE_HEIGHT: '#height',
+  INPUT_EDIT_RESIZE_LOCK_RATIO: '#lock-ratio',
+  DIV_EDIT_RESIZE_RATIO_DANGER: '.bg-danger',
+  DIV_EDIT_CORP_CONTAINER: '',
+  INPUT_EDIT_CROP_X: '#crop_x',
+  INPUT_EDIT_CROP_Y: '#crop_y',
+  INPUT_EDIT_CROP_W: '#crop_w',
+  INPUT_EDIT_CROP_H: '#crop_h',
+  SELECT_EDIT_ASPECT_RATIO: '#aspectRatio',
+  DIV_PULL_RIGHT: '.pull-right',
+  DIV_EDIT_CROP_COORDS_FORM: '#coordsForm',
+  LOADER: '#loader'
 };
 
 var EDITOR_MODE = {
@@ -28,6 +46,8 @@ var EDITOR_MODE = {
   RESIZE: 'resize',
   ROTATE: 'rotate'
 };
+
+var canvasEditor;
 
 // Load interface data
 if (data.action && data.action.action === 'gallery') {
@@ -68,6 +88,11 @@ Fliplet.Widget.onSaveRequest(function () {
   imageProvider.forwardSaveRequest();
 });
 
+// Temporary alerts for Beta
+$('#help_tip').on('click', function () {
+  alert("During beta, please use live chat and let us know what you need help with.");
+});
+
 // Events
 $(SELECTOR.BTN_EDIT_SHOW).on('click', showEdit);
 
@@ -87,69 +112,280 @@ $(SELECTOR.BTN_EDIT_ROTATE_SHOW).on('click', showRotate);
 $(SELECTOR.BTN_EDIT_ROTATE_APPLY).on('click', applyRotate);
 $(SELECTOR.BTN_EDIT_ROTATE_CANCEL).on('click', closeRotate);
 
+$(SELECTOR.BTN_EDIT_ROTATE_LEFT).on('click', canvasRotateLeft);
+$(SELECTOR.BTN_EDIT_ROTATE_RIGHT).on('click', canvasRotateRight);
+
+$(SELECTOR.INPUT_EDIT_RESIZE_WIDTH).on('input', widthChangedWithoutFocusOut);
+$(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).on('input', heightChangedWithoutFocusOut);
+
+$(SELECTOR.INPUT_EDIT_RESIZE_LOCK_RATIO).on('click', changeLockRatio);
+
+$(SELECTOR.SELECT_EDIT_ASPECT_RATIO).on('change', changeAspectRatio);
+
+$(SELECTOR.INPUT_EDIT_CROP_X).on('focusout', updateCropMask);
+$(SELECTOR.INPUT_EDIT_CROP_Y).on('focusout', updateCropMask);
+$(SELECTOR.INPUT_EDIT_CROP_W).on('focusout', updateCropMask);
+$(SELECTOR.INPUT_EDIT_CROP_H).on('focusout', updateCropMask);
 
 // Temporary alerts for Beta
-$('#help_tip').on('click', function() {
+$('#help_tip').on('click', function () {
   alert("During beta, please use live chat and let us know what you need help with.");
 });
 
 //Edit
-function showEdit(){
-  $(SELECTOR.IMAGE_PREVIWER).hide();
-  $(SELECTOR.IMAGE_EDITOR).show();
+function showEdit() {
+  if (data.image){
+    $(SELECTOR.IMAGE_PREVIWER).hide();
+    $(SELECTOR.IMAGE_EDITOR).show();
+
+    canvasEditor = new CanvasEditor({
+      sourceCanvas : document.createElement("canvas"),
+      editorCanvas : document.createElement("canvas"),
+      image: data.image,
+      beforeRenderCallback: showLoader,
+      afterRenderCallback: hideLoader
+    });
+
+    canvasEditor.init(function() {
+      canvasEditor.appendEditorCanvas($(SELECTOR.IMAGE_PREVIEWER_CANVAS_WRAPPER));
+    });
+  }
 }
 
-function saveEdit(){
-  closeEdit();
+function showLoader() {
+  $(canvasEditor.editorCanvas).hide();
+  $(SELECTOR.LOADER).show();
 }
 
-function closeEdit(){
+function hideLoader() {
+  $(SELECTOR.LOADER).hide();
+  $(canvasEditor.editorCanvas).show();
+}
+
+function saveEdit() {
+  showLoader();
+  canvasEditor.sourceCanvas.toBlob(function(result) {
+    var formData = new FormData();
+    formData.append('file', result);
+    Fliplet.Media.Files.upload({
+      data: formData
+    }).then(function (files) {
+      data.image = files[0];
+      if (data.image && data.image.size) {
+        data.image.width = data.image.size[0];
+        data.image.height = data.image.size[1];
+      }
+      save(true);
+    })
+  });
+}
+
+function closeEdit() {
+  $(canvasEditor.sourceCanvas).remove();
+  $(canvasEditor.editorCanvas).remove();
+
   $(SELECTOR.IMAGE_EDITOR).hide();
   $(SELECTOR.IMAGE_PREVIWER).show();
 }
 
 //Crop
-function showCrop(){
-  //$(SELECTOR.IMAGE_EDITOR_IMAGE).Jcrop();
+function showCrop() {
   swithEditorMode(EDITOR_MODE.CROP);
-
+  canvasEditor.applyEditorCanvasChanges();
+  canvasEditor.createCropMask(updateCropCoords);
 }
 
-function applyCrop(){
+function updateCropCoords (coords, proportion) {
+  $(SELECTOR.INPUT_EDIT_CROP_X).val(Math.round(coords.x * proportion));
+  $(SELECTOR.INPUT_EDIT_CROP_Y).val(Math.round(coords.y * proportion));
+  $(SELECTOR.INPUT_EDIT_CROP_W).val(Math.round(coords.w * proportion));
+  $(SELECTOR.INPUT_EDIT_CROP_H).val(Math.round(coords.h * proportion));
+}
+
+function applyCrop() {
+  var x = $(SELECTOR.INPUT_EDIT_CROP_X).val();
+  var y = $(SELECTOR.INPUT_EDIT_CROP_Y).val();
+  var w = $(SELECTOR.INPUT_EDIT_CROP_W).val();
+  var h = $(SELECTOR.INPUT_EDIT_CROP_H).val();
+
+  canvasEditor.cropEditorCanvas(x, y, w, h, afterCropApply);
+}
+
+function afterCropApply() {
+  canvasEditor.applyEditorCanvasChanges();
+  changePullRight();
   closeCrop();
 }
 
-function closeCrop(){
+function closeCrop() {
+  canvasEditor.destroyCropMask($(SELECTOR.IMAGE_PREVIEWER_CANVAS_WRAPPER));
   swithEditorMode(EDITOR_MODE.MAIN);
 }
 
+function changeAspectRatio() {
+  var aspectRatio = $(SELECTOR.SELECT_EDIT_ASPECT_RATIO).val();
+  var ratio;
+  switch(aspectRatio) {
+    case 'original': ratio =  canvasEditor.editorCanvas.width / canvasEditor.editorCanvas.height;
+      break;
+    case 'smaller': ratio = 4;
+      break;
+    case 'medium': ratio = 16/9;
+      break;
+    case 'big': ratio = 4/3;
+      break;
+    case 'square': ratio = 1;
+      break;
+    case 'custom':
+    default: ratio = 0;
+      break;
+  }
+
+  if(aspectRatio !== 'custom'){
+    $(SELECTOR.DIV_EDIT_CROP_COORDS_FORM).css('display', 'none');
+  } else {
+    $(SELECTOR.DIV_EDIT_CROP_COORDS_FORM).css('display', '');
+  }
+
+  var jcropApi = $(canvasEditor.editorCanvas).parent().data('Jcrop');
+  jcropApi.setOptions({
+    aspectRatio: ratio
+  });
+}
+
+function updateCropMask(){
+  var x = parseInt($(SELECTOR.INPUT_EDIT_CROP_X).val());
+  var y = parseInt($(SELECTOR.INPUT_EDIT_CROP_Y).val());
+  var w = parseInt($(SELECTOR.INPUT_EDIT_CROP_W).val());
+  var h = parseInt($(SELECTOR.INPUT_EDIT_CROP_H).val());
+  canvasEditor.updateCropMask(x, y, w, h);
+}
+
 //Resize
-function showResize(){
+function showResize() {
+  $(SELECTOR.INPUT_EDIT_RESIZE_WIDTH).val(canvasEditor.sourceCanvas.width);
+  $(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).val(canvasEditor.sourceCanvas.height);
   swithEditorMode(EDITOR_MODE.RESIZE);
+  //canvasEditor.resetEditorCanvas();
 }
 
-function applyResize(){
-  closeResize();
+function applyResize() {
+  canvasEditor.applyEditorCanvasChanges();
+
+  changePullRight();
+  hideResize();
 }
 
-function closeResize(){
+function widthChanged() {
+  var ratio = canvasEditor.editorCanvas.height / canvasEditor.editorCanvas.width;
+  var width = parseInt($(SELECTOR.INPUT_EDIT_RESIZE_WIDTH).val());
+  var height = parseInt($(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).val());
+  if ($(SELECTOR.INPUT_EDIT_RESIZE_LOCK_RATIO).prop('checked')) {
+    height =  Math.round(width * ratio);
+    $(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).val(height);
+  }
+
+  canvasEditor.resizeEditorCanvas(width, height);
+}
+
+function heightChanged() {
+  var ratio =  canvasEditor.editorCanvas.width / canvasEditor.editorCanvas.height;
+  var width = parseInt($(SELECTOR.INPUT_EDIT_RESIZE_WIDTH).val());
+  var height = parseInt($(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).val());
+  if ($(SELECTOR.INPUT_EDIT_RESIZE_LOCK_RATIO).prop('checked')) {
+    width = Math.round(height * ratio);
+    $(SELECTOR.INPUT_EDIT_RESIZE_WIDTH).val(width);
+  }
+
+  canvasEditor.resizeEditorCanvas(width, height);
+}
+
+var sizeChangedTimeout = null;
+
+function createSizeChangedTimeout(callback) {
+  if(sizeChangedTimeout) {
+    clearTimeout(sizeChangedTimeout);
+    sizeChangedTimeout = null;
+  }
+  sizeChangedTimeout = setTimeout(function() {
+    callback()
+  }, 350);
+}
+
+function widthChangedWithoutFocusOut(e) {
+  var currentWidth = Math.round(+e.target.value) || canvasEditor.currentImage.width;
+  if(currentWidth !== Math.round(+e.target.value)) {
+    $(SELECTOR.INPUT_EDIT_RESIZE_WIDTH).val(currentWidth);
+  }
+  createSizeChangedTimeout(widthChanged);
+}
+
+function heightChangedWithoutFocusOut(e) {
+  var currentHeight = Math.round(+e.target.value) || canvasEditor.currentImage.height;
+  if(currentHeight !== Math.round(+e.target.value)) {
+    $(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).val(currentHeight);
+  }
+  createSizeChangedTimeout(heightChanged);
+}
+
+function changeLockRatio() {
+  if ($(SELECTOR.INPUT_EDIT_RESIZE_LOCK_RATIO).prop('checked')) {
+    $(SELECTOR.DIV_EDIT_RESIZE_RATIO_DANGER).hide();
+    widthChanged();
+  } else {
+    $(SELECTOR.DIV_EDIT_RESIZE_RATIO_DANGER).show();
+  }
+}
+
+function closeResize() {
+  canvasEditor.resetEditorCanvas();
+  hideResize();
+}
+
+function hideResize(){
   swithEditorMode(EDITOR_MODE.MAIN);
 }
 
 //Rotate
-function showRotate(){
+function showRotate() {
   swithEditorMode(EDITOR_MODE.ROTATE);
 }
 
-function applyRotate(){
-  closeRotate();
+
+function applyRotate() {
+  canvasEditor.applyEditorCanvasChanges();
+
+  changePullRight();
+  hideRotate();
 }
 
-function closeRotate(){
+function closeRotate() {
+  canvasEditor.resetEditorCanvas();
+  hideRotate();
+}
+
+function hideRotate() {
   swithEditorMode(EDITOR_MODE.MAIN);
 }
 
-function swithEditorMode(mode){
+function canvasRotateLeft() {
+  canvasEditor.rotateEditorCanvas(-90);
+}
+
+function canvasRotateRight() {
+  canvasEditor.rotateEditorCanvas(90);
+}
+
+function changePullRight() {
+  $(SELECTOR.DIV_PULL_RIGHT)
+  .empty();
+  $(SELECTOR.DIV_PULL_RIGHT)
+  .append(canvasEditor.sourceCanvas.width +
+    'x' + canvasEditor.sourceCanvas.height);
+}
+
+
+function swithEditorMode(mode) {
   $(SELECTOR.IMAGE_EDITOR_MAIN).hide();
   $(SELECTOR.IMAGE_EDITOR_CROP).hide();
   $(SELECTOR.IMAGE_EDITOR_RESIZE).hide();
@@ -171,5 +407,4 @@ function swithEditorMode(mode){
   }
 
   $(selector).show();
-
 }

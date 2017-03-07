@@ -1,3 +1,4 @@
+
 .fl-widget-provider {
     width: 100%;
     border: 0;
@@ -121,6 +122,7 @@ header a {
     text-align: center;
     border: 1px solid #d9ddde;
     background-color: #FFF;
+    min-height: 250px;
 }
 
 #preview-image-editor img {
@@ -396,3 +398,41 @@ label {
     margin-bottom: 15px;
 }
 
+#preview-image-editor canvas{
+    margin: auto;
+    max-height: 250px !important;
+    display: block;
+}
+
+#radio-warning {
+    display:none;
+}
+.image-editor .form-inline .btn {
+    margin-right: 6px;
+}
+.image-editor .button-holder{
+   margin-bottom: 0;
+}
+.edit-type {
+    margin-top: 10px;
+}
+.image-editor .bg-danger p {
+    padding: 15px;
+}
+.image-editor-crop select {
+    margin-top: 10px;
+}
+.image-editor-resize .form-horizontal {
+    margin-top: 0;
+}
+
+#loader {
+    position: relative;
+    top: 100px;
+}
+
+.editCanvasWrapper {
+   max-height: 250px !important;
+   margin-bottom: -5px;
+   display: inline-block
+}
