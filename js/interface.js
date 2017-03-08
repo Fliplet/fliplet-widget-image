@@ -1,5 +1,4 @@
 var data = Fliplet.Widget.getData() || {};
-console.log(data);
 
 var SELECTOR = {
   IMAGE_PREVIWER: '.image-previewer',
@@ -166,7 +165,7 @@ function saveEdit() {
   showLoader();
   canvasEditor.sourceCanvas.toBlob(function(result) {
     var formData = new FormData();
-    formData.append('file', result);
+    formData.append("blob",result, data.image.name + '.jpeg');
     Fliplet.Media.Files.upload({
       data: formData
     }).then(function (files) {
@@ -177,7 +176,7 @@ function saveEdit() {
       }
       save(true);
     })
-  });
+  }), 'image/jpeg';
 }
 
 function closeEdit() {

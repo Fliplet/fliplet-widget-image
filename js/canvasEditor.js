@@ -26,7 +26,7 @@ CanvasEditor.prototype.init = function(callback){
 
 CanvasEditor.prototype.loadImageFromUrl = function(imgUrl, callback){
   var img = new Image,
-    src = imgUrl + '?_='+Date.now(); // insert image url here
+    src = imgUrl; // insert image url here
 
   img.crossOrigin = "Anonymous";
 
