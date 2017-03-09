@@ -1,6 +1,6 @@
 {
   "name": "Image",
-  "package": "com.fliplet.imageeditor",
+  "package": "com.fliplet.image",
   "version": "1.0.0",
   "icon": "img/icon.png",
   "tags": ["type:component", "category:general"],
