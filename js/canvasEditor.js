@@ -7,7 +7,7 @@ var CanvasEditor = function(config){
   this.HERMITE = new Hermite_class();
   this.lastCropCoordindates;
   this.MAX_CANVAS_HEIGHT = 250;
-  this.CROP_MASK_IDENTATION = 10;
+  this.CROP_MASK_IDENTATION = 15;
   this.beforeRenderCallback = config.beforeRenderCallback || function(){};
   this.afterRenderCallback = config.afterRenderCallback || function(){};
 };
@@ -221,5 +221,18 @@ CanvasEditor.prototype.updateCropMask = function(x, y, w, h) {
   var jcropApi = $(this.editorCanvas).parent().data('Jcrop');
   jcropApi.setOptions({
     setSelect: [maskX, maskY, maskW, maskH]
+  });
+};
+
+CanvasEditor.prototype.resetCropMaskToDefault = function() {
+
+  var jcropApi = $(this.editorCanvas).parent().data('Jcrop');
+  jcropApi.setOptions({
+    setSelect: [
+      this.CROP_MASK_IDENTATION,
+      this.CROP_MASK_IDENTATION,
+      this.editorCanvas.clientWidth - this.CROP_MASK_IDENTATION * 2,
+      this.editorCanvas.clientHeight - this.CROP_MASK_IDENTATION * 2
+    ]
   });
 };

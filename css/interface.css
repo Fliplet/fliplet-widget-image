@@ -121,7 +121,7 @@ header a {
     position: relative;
     text-align: center;
     border: 1px solid #d9ddde;
-    background-color: #FFF;
+    background-color: transparent;
     min-height: 250px;
 }
 
