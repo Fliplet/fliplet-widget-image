@@ -294,6 +294,7 @@ function widthChanged() {
   var height = parseInt($(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).val());
   if ($(SELECTOR.INPUT_EDIT_RESIZE_LOCK_RATIO).prop('checked')) {
     height =  Math.round(width * ratio);
+    if (height < 1) height = 1;
     $(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).val(height);
   }
 
@@ -306,6 +307,7 @@ function heightChanged() {
   var height = parseInt($(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).val());
   if ($(SELECTOR.INPUT_EDIT_RESIZE_LOCK_RATIO).prop('checked')) {
     width = Math.round(height * ratio);
+    if (width < 1) width = 1;
     $(SELECTOR.INPUT_EDIT_RESIZE_WIDTH).val(width);
   }
 

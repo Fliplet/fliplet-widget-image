@@ -83,6 +83,8 @@ CanvasEditor.prototype.applyEditorCanvasChanges = function() {
 CanvasEditor.prototype.resizeCanvas = function(canvas, width, height, callback) {
   var that = this;
   callback = callback || function(){};
+  if (width < 1) width = 1;
+  if (height < 1) height = 1;
   this.beforeRenderCallback();
   this.HERMITE.resample(canvas, width, height, true, function() {
     that.afterRenderCallback();
