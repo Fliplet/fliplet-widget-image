@@ -141,6 +141,7 @@ function showEdit() {
       sourceCanvas : document.createElement("canvas"),
       editorCanvas : document.createElement("canvas"),
       image: data.image,
+      isDev: window.location.hostname === 'localhost',
       beforeRenderCallback: showLoader,
       afterRenderCallback: hideLoader
     });

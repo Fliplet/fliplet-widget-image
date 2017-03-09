@@ -398,12 +398,6 @@ label {
     margin-bottom: 15px;
 }
 
-#preview-image-editor canvas{
-    margin: auto;
-    max-height: 250px !important;
-    display: block;
-}
-
 #radio-warning {
     display:none;
 }
@@ -430,9 +424,28 @@ label {
     position: relative;
     top: 100px;
 }
-
+#preview-image-editor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#preview-image-editor #loader {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100px;
+    height: 54px;
+}
 .editCanvasWrapper {
-   max-height: 250px !important;
-   margin-bottom: -5px;
-   display: inline-block
+   display: inline-block;
+   font-size: 0;
+}
+.editCanvasWrapper canvas{
+    margin: auto;
+    max-height: 250px !important;
+    max-width: 100%;
+    vertical-align: middle;
 }

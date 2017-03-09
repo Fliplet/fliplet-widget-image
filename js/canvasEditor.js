@@ -2,6 +2,7 @@ var CanvasEditor = function(config){
   this.sourceCanvas = config.sourceCanvas;
   this.editorCanvas = config.editorCanvas;
   this.originalImage = config.image;
+  this.isDev = config.isDev || false;
   this.currentImage = null; // this is current image
   this.HERMITE = new Hermite_class();
   this.lastCropCoordindates;
@@ -25,8 +26,9 @@ CanvasEditor.prototype.init = function(callback){
 };
 
 CanvasEditor.prototype.loadImageFromUrl = function(imgUrl, callback){
-  var img = new Image,
-    src = imgUrl; // insert image url here
+  //add local dev
+  var img = new Image;
+  var src = imgUrl + (this.isDev ? '?_=' + Date.now() : ''); // insert image url here
 
   img.crossOrigin = "Anonymous";
 
@@ -155,8 +157,8 @@ CanvasEditor.prototype.createCropMask = function(updateCropCoords) {
       setSelect: [
         that.CROP_MASK_IDENTATION,
         that.CROP_MASK_IDENTATION,
-        that.editorCanvas.width - that.CROP_MASK_IDENTATION * 2,
-        that.editorCanvas.height - that.CROP_MASK_IDENTATION * 2
+        that.editorCanvas.clientWidth - that.CROP_MASK_IDENTATION * 2,
+        that.editorCanvas.clientHeight - that.CROP_MASK_IDENTATION * 2
       ],
       onChange: function (coords) {
         if (!that.isCoordsEquel(coords, that.lastCropCoordindates)) {
@@ -170,8 +172,8 @@ CanvasEditor.prototype.createCropMask = function(updateCropCoords) {
     updateCropCoords({
       x: that.CROP_MASK_IDENTATION,
       y: that.CROP_MASK_IDENTATION,
-      w: that.editorCanvas.width - that.CROP_MASK_IDENTATION * 2,
-      h: that.editorCanvas.height - that.CROP_MASK_IDENTATION * 2
+      w: that.editorCanvas.clientWidth - that.CROP_MASK_IDENTATION * 2,
+      h: that.editorCanvas.clientHeight - that.CROP_MASK_IDENTATION * 2
     }, proportion);
   });
 };
