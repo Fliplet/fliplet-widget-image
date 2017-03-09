@@ -5,13 +5,162 @@
   </header>
 
   {{#if image}}
-  <div id="preview-image">
-    <img src="{{image.url}}" />
-  </div>
-  <div class="button-holder">
-    <div class="btn btn-default">Edit</div>
-  </div>
+    <div class="image-previewer">
+      <div id="preview-image">
+        <img src="{{image.url}}" />
+      </div>
+      <div class="button-holder">
+        <div class="btn btn-primary" id="showEditButton">Edit image</div>
+        <div class="pull-right">
+          {{image.width}} x {{image.height}}
+        </div>
+      </div>
+    </div>
+    <div class="image-editor">
+      <div id="preview-image-editor">
+        <div id="loader">
+          <div class="spinner-holder animated">
+            <div class="spinner-overlay">Loading...</div>
+            <p>Loading...</p>
+          </div>
+        </div>
+      </div>
+      <div class="image-editor-main">
+        <div class="button-holder">
+          <div class="form-inline">
+            <div class="btn btn-primary" id="saveEditChangesButton">Save changes</div>
+            <div class="btn btn-default" id="closeEditButton">Discard</div>
+            <div class="pull-right">
+              {{image.width}} x {{image.height}}
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="btn btn-default" id="cropEditButton">Crop</div>
+            <div class="btn btn-default" id="resizeEditButton">Resize</div>
+            <div class="btn btn-default" id="rotateEditButton">Rotate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-editor-crop">
+        <div class="edit-type">Crop
+          <div class="pull-right">
+            {{image.width}} x {{image.height}}
+          </div>
+        </div>
+
+        <div class="button-holder">
+          <div class="form-inline">
+            <div class="btn btn-primary" id="applyCrop">Apply</div>
+            <div class="btn btn-default" id="cancelCrop">Cancel</div>
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <span>Aspect ratio</span>
+          <select class="form-control" id="aspectRatio">
+            <option value="custom" selected>Custom</option>
+            <option value="original">Original</option>
+            <option value="smaller">Smaller banner (4:1)</option>
+            <option value="medium">Medium banner (16:9)</option>
+            <option value="big">Big banner (4:3)</option>
+            <option value="square">Square (1:1)</option>
+          </select>
+        </div>
+
+        <div class="form-horizontal clearfix">
+          <div class="form-group" id="coordsForm">
+            <div class="col-xs-6">
+              <div class="input-group">
+                  <label class="input-group-addon">X</label>
+                  <input class="form-control" id="crop_x" type="number" min="0"/>
+              </div>
+
+              <div class="input-group">
+                <label class="input-group-addon">W</label>
+                <input class="form-control" id="crop_w" type="number" min="1"/>
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <div class="input-group">
+                <label class="input-group-addon">Y</label>
+                <input class="form-control" id="crop_y" type="number" min="0"/>
+              </div>
+
+              <div class="input-group">
+                <label class="input-group-addon">H</label>
+                <input class="form-control" id="crop_h" type="number" min="1"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-editor-resize">
+        <div class="edit-type">
+          Resize
+          <div class="pull-right">
+            {{image.width}} x {{image.height}}
+          </div>
+        </div>
+        <div class="button-holder">
+          <div class="form-inline">
+            <div class="btn btn-primary" id="applyResize">Apply</div>
+            <div class="btn btn-default" id="cancelResize">Cancel</div>
+          </div>
+        </div>
+
+        <div class="form-horizontal clearfix">
+          <div class="form-group">
+            <div class="col-xs-6">
+              <div class="input-group">
+                <label class="input-group-addon">W</label>
+                <input class="form-control" id="width" type="number" min="1"/>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="input-group">
+                <label class="input-group-addon">H</label>
+                <input class="form-control" id="height" type="number" min="1"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkbox">
+          <input type="checkbox" id="lock-ratio" checked>
+          <label for="lock-ratio" class="text-left">
+            <span class="check"><i class="fa fa-check"></i></span> Lock aspect ratio
+          </label>
+        </div>
+
+        <div class="bg-danger" id="radio-warning"><p>Warning: Unlocking the aspect ratio may distort the image.</p></div>
+      </div>
+
+      <div class="image-editor-rotate">
+        <div class="edit-type">
+          Rotate
+          <div class="pull-right">
+            {{image.width}} x {{image.height}}
+          </div>
+        </div>
+        <div class="button-holder">
+          <div class="form-inline">
+            <div class="btn btn-primary" id="applyRotate">Apply</div>
+            <div class="btn btn-default" id="cancelRotate">Cancel</div>
+          </div>
+
+          <div class="form-inline">
+            <div class="btn btn-default" id="rotateLeft">Rotate Left</div>
+            <div class="btn btn-default" id="rotateRight">Rotate Right</div>
+          </div>
+        </div>
+      </div>
+    </div>
   {{/if}}
+
+
   <div class="titles">
     <p>Image library</p>
   </div>
