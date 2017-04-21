@@ -11,6 +11,7 @@
   ],
   "interface": {
     "dependencies": [
+      "!fliplet-ravenjs",
       "fliplet-core",
       "fliplet-studio-ui",
       "fliplet-media"
