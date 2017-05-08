@@ -30,9 +30,11 @@
           <div class="form-inline">
             <div class="btn btn-primary" id="saveEditChangesButton">Save changes</div>
             <div class="btn btn-link" id="closeEditButton">Discard</div>
+            {{#if image.width}}
             <div class="pull-right">
               {{image.width}} x {{image.height}}
             </div>
+            {{/if}}
           </div>
           <div class="form-inline">
             <div class="btn btn-default" id="cropEditButton"><i class="fa fa-crop"></i> Crop</div>
@@ -158,24 +160,21 @@
         </div>
       </div>
     </div>
+    <div class="form-group clearfix">
+      <div class="col-sm-8 col-sm-offset-4">
+        <div class="checkbox checkbox-icon">
+          <input type="checkbox" id="gallery">
+          <label for="gallery" class="text-left">
+            <span class="check"><i class="fa fa-check"></i></span> Enable pinch-to-zoom
+          </label>
+        </div>
+      </div>
+    </div>
   {{/if}}
 
 
   <div class="titles">
     <p>Image library</p>
-  </div>
-  <div class="form-group clearfix">
-    <div class="col-sm-4 control-label">
-      <label for="gallery">Do you want to allow user to tap on the image to zoom it?</label>
-    </div>
-    <div class="col-sm-8">
-      <div class="checkbox checkbox-icon">
-        <input type="checkbox" id="gallery">
-        <label for="gallery" class="text-left">
-          <span class="check"><i class="fa fa-check"></i></span> Yes, please
-        </label>
-      </div>
-    </div>
   </div>
   <div id="image-manager"></div>
 </div>
