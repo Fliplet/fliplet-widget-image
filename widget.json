@@ -37,6 +37,7 @@
     ]
   },
   "references": [
-    "action.page:page"
+    "action.page:page",
+    "image.id:mediaFile"
   ]
 }
