@@ -161,15 +161,25 @@
       </div>
     </div>
     <div class="form-group clearfix">
-      <div class="col-sm-8 col-sm-offset-4">
-        <div class="checkbox checkbox-icon">
-          <input type="checkbox" id="gallery">
-          <label for="gallery" class="text-left">
-            <span class="check"><i class="fa fa-check"></i></span> Enable pinch-to-zoom
+      <div class="col-xs-12 control-label">
+        <label>Do you want to enable a tap action?</label>
+      </div>
+      <div class="col-sm-8">
+        <div class="radio radio-icon">
+          <input type="radio" id="pinch" name="tap_action" value="pinch">
+          <label for="pinch">
+            <span class="check"><i class="fa fa-circle"></i></span> Enable pinch-to-zoom
+          </label>
+        </div>
+        <div class="radio radio-icon">
+          <input type="radio" id="link" name="tap_action" value="link">
+          <label for="link">
+            <span class="check"><i class="fa fa-circle"></i></span> Enable other tap actions
           </label>
         </div>
       </div>
     </div>
+    <div class="link-actions"></div>
   {{/if}}
 
 

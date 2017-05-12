@@ -49,9 +49,44 @@ var EDITOR_MODE = {
 
 var canvasEditor;
 
+var linkActionProvider;
+
 // Load interface data
 if (data.action && data.action.action === 'gallery') {
-  $('#gallery').prop('checked', true);
+  $('#pinch').prop('checked', true);
+}
+
+// Load link data
+if (data.action && data.action.action !== 'gallery') {
+  initLinkProvider(data.action);
+  $('.link-actions').addClass('show');
+  $('#link').prop('checked', true);
+}
+
+//mehtod used to init the link provider
+function initLinkProvider(linkAction) {
+  linkActionProvider = Fliplet.Widget.open('com.fliplet.link', {
+    selector: '.link-actions',
+    data: linkAction,
+    onEvent: function (event, data) {
+      if (event === 'interface-validate') {
+        Fliplet.Widget.toggleSaveButton(data.isValid === true);
+      }
+    },
+    closeOnSave: false
+  });
+  linkActionProvider.then(function (result) {
+    data.action = result.data;
+  });
+}
+
+function save(notifyComplete) {
+  Fliplet.Widget.save(data).then(function () {
+    if (notifyComplete) {
+      Fliplet.Widget.complete();
+      Fliplet.Studio.emit('reload-page-preview');
+    }
+  });
 }
 
 var imageProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
@@ -63,7 +98,7 @@ var imageProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
 imageProvider.then(function (result) {
   data.image = result.data || data.image;
   data.action = {};
-  if (data.image && $('#gallery').is(":checked")) {
+  if (data.image && $('#pinch').is(':checked')) {
     data.action.action = 'gallery';
     data.action.images = [data.image];
   }
@@ -71,21 +106,30 @@ imageProvider.then(function (result) {
     data.image.width = data.image.size[0];
     data.image.height = data.image.size[1];
   }
-  save(true);
 });
 
-function save(notifyComplete) {
-  Fliplet.Widget.save(data).then(function () {
-    if (notifyComplete) {
-      Fliplet.Widget.complete();
-      Fliplet.Studio.emit('reload-page-preview');
+//handle the tap_action change event
+$('input[name="tap_action"]').on('change', function () {
+  if ($(this).val() === "link") {
+    if (!linkActionProvider) {
+      initLinkProvider();
     }
-  });
-}
+    $('.link-actions').addClass('show');
+    return;
+  }
+  $('.link-actions').removeClass('show');
+});
 
 // 1. Fired from Fliplet Studio when the external save button is clicked
 Fliplet.Widget.onSaveRequest(function () {
+  var providersPromises = [imageProvider];
   imageProvider.forwardSaveRequest();
+  if (linkActionProvider && !$('#pinch').is(':checked')) {
+    providersPromises.push(linkActionProvider);
+    linkActionProvider.forwardSaveRequest();
+  }
+  //when the provider promises are finished save the data.
+  Fliplet.Widget.all(providersPromises).then(save);
 });
 
 // Temporary alerts for Beta

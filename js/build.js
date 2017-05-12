@@ -1,20 +1,20 @@
 Fliplet.Widget.instance('image', function (data) {
 
-  $.fn.fadeInImg = function(img){
-    return $(this).each(function(){
+  $.fn.fadeInImg = function (img) {
+    return $(this).each(function () {
       var $placeholder = $(this);
       $placeholder.replaceWith(img);
-      setTimeout(function(){
+      setTimeout(function () {
         img.classList.add('lazy-loaded');
-        setTimeout(function(){
+        setTimeout(function () {
           img.classList.remove('lazy-placeholder');
         }, 0);
       }, 0);
     });
-  }
+  };
 
-  var canvas = this;
-  var imageUrl = data.image && data.image.url;
+  var canvas = this,
+    imageUrl = data.image && data.image.url;
 
   if (!imageUrl) {
     return;
