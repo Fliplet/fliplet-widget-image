@@ -68,20 +68,20 @@ function initLinkProvider(linkAction) {
   linkActionProvider = Fliplet.Widget.open('com.fliplet.link', {
     selector: '.link-actions',
     data: linkAction,
-    onEvent: function (event, data) {
+    onEvent: function(event, data) {
       if (event === 'interface-validate') {
         Fliplet.Widget.toggleSaveButton(data.isValid === true);
       }
     },
     closeOnSave: false
   });
-  linkActionProvider.then(function (result) {
+  linkActionProvider.then(function(result) {
     data.action = result.data;
   });
 }
 
 function save(notifyComplete) {
-  Fliplet.Widget.save(data).then(function () {
+  Fliplet.Widget.save(data).then(function() {
     if (notifyComplete) {
       Fliplet.Widget.complete();
       Fliplet.Studio.emit('reload-page-preview');
@@ -95,7 +95,7 @@ var imageProvider = Fliplet.Widget.open('com.fliplet.image-manager', {
   type: 'image'
 });
 
-imageProvider.then(function (result) {
+imageProvider.then(function(result) {
   data.image = result.data || data.image;
   data.action = data.action || {};
   if (data.image && $('#pinch').is(':checked')) {
@@ -109,8 +109,13 @@ imageProvider.then(function (result) {
 });
 
 //handle the tap_action change event
-$('input[name="tap_action"]').on('change', function () {
-  if ($(this).val() === "link") {
+$('input[name="tap_action"]').on('change', function() {
+  if ($(this).is(':checked')) {
+    // Makes sure there is only one checkbox checked at a time
+    $('input[name="tap_action"]').not(this).prop('checked', false);
+  }
+
+  if ($(this).val() === "link" && $(this).is(':checked')) {
     if (!linkActionProvider) {
       initLinkProvider();
     }
@@ -121,7 +126,7 @@ $('input[name="tap_action"]').on('change', function () {
 });
 
 // 1. Fired from Fliplet Studio when the external save button is clicked
-Fliplet.Widget.onSaveRequest(function () {
+Fliplet.Widget.onSaveRequest(function() {
   var providersPromises = [imageProvider];
   imageProvider.forwardSaveRequest();
   if (linkActionProvider && !$('#pinch').is(':checked')) {
@@ -133,7 +138,7 @@ Fliplet.Widget.onSaveRequest(function () {
 });
 
 // Temporary alerts for Beta
-$('#help_tip').on('click', function () {
+$('#help_tip').on('click', function() {
   alert("During beta, please use live chat and let us know what you need help with.");
 });
 
@@ -172,19 +177,19 @@ $(SELECTOR.INPUT_EDIT_CROP_W).on('change paste keyup', updateCropMask);
 $(SELECTOR.INPUT_EDIT_CROP_H).on('change paste keyup', updateCropMask);
 
 // Temporary alerts for Beta
-$('#help_tip').on('click', function () {
+$('#help_tip').on('click', function() {
   alert("During beta, please use live chat and let us know what you need help with.");
 });
 
 //Edit
 function showEdit() {
-  if (data.image){
+  if (data.image) {
     $(SELECTOR.IMAGE_PREVIWER).hide();
     $(SELECTOR.IMAGE_EDITOR).show();
 
     canvasEditor = new CanvasEditor({
-      sourceCanvas : document.createElement("canvas"),
-      editorCanvas : document.createElement("canvas"),
+      sourceCanvas: document.createElement("canvas"),
+      editorCanvas: document.createElement("canvas"),
       image: data.image,
       isDev: window.location.hostname === 'localhost',
       beforeRenderCallback: showLoader,
@@ -212,10 +217,10 @@ function saveEdit() {
   canvasEditor.sourceCanvas.toBlob(function(result) {
     var formData = new FormData();
     var fileName = data.image.name.replace(/\.[^/.]+$/, "");
-    formData.append("blob",result, fileName + '.jpeg');
+    formData.append("blob", result, fileName + '.jpeg');
     Fliplet.Media.Files.upload({
       data: formData
-    }).then(function (files) {
+    }).then(function(files) {
       data.image = files[0];
       if (data.image && data.image.size) {
         data.image.width = data.image.size[0];
@@ -249,7 +254,7 @@ function showCustomCropRatio() {
   $(SELECTOR.DIV_EDIT_CROP_COORDS_FORM).css('display', '');
 }
 
-function updateCropCoords (coords, proportion) {
+function updateCropCoords(coords, proportion) {
   $(SELECTOR.INPUT_EDIT_CROP_X).val(Math.round(coords.x * proportion));
   $(SELECTOR.INPUT_EDIT_CROP_Y).val(Math.round(coords.y * proportion));
   $(SELECTOR.INPUT_EDIT_CROP_W).val(Math.round(coords.w * proportion));
@@ -280,23 +285,29 @@ function closeCrop() {
 function changeAspectRatio() {
   var aspectRatio = $(SELECTOR.SELECT_EDIT_ASPECT_RATIO).val();
   var ratio;
-  switch(aspectRatio) {
-    case 'original': ratio =  canvasEditor.editorCanvas.width / canvasEditor.editorCanvas.height;
+  switch (aspectRatio) {
+    case 'original':
+      ratio = canvasEditor.editorCanvas.width / canvasEditor.editorCanvas.height;
       break;
-    case 'smaller': ratio = 4;
+    case 'smaller':
+      ratio = 4;
       break;
-    case 'medium': ratio = 16/9;
+    case 'medium':
+      ratio = 16 / 9;
       break;
-    case 'big': ratio = 4/3;
+    case 'big':
+      ratio = 4 / 3;
       break;
-    case 'square': ratio = 1;
+    case 'square':
+      ratio = 1;
       break;
     case 'custom':
-    default: ratio = 0;
+    default:
+      ratio = 0;
       break;
   }
 
-  if(aspectRatio !== 'custom'){
+  if (aspectRatio !== 'custom') {
     $(SELECTOR.DIV_EDIT_CROP_COORDS_FORM).css('display', 'none');
   } else {
     $(SELECTOR.DIV_EDIT_CROP_COORDS_FORM).css('display', '');
@@ -308,9 +319,9 @@ function changeAspectRatio() {
   });
 
   canvasEditor.resetCropMaskToDefault();
- }
+}
 
-function updateCropMask(){
+function updateCropMask() {
   var x = parseInt($(SELECTOR.INPUT_EDIT_CROP_X).val());
   var y = parseInt($(SELECTOR.INPUT_EDIT_CROP_Y).val());
   var w = parseInt($(SELECTOR.INPUT_EDIT_CROP_W).val());
@@ -337,7 +348,7 @@ function widthChanged() {
   var width = parseInt($(SELECTOR.INPUT_EDIT_RESIZE_WIDTH).val());
   var height = parseInt($(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).val());
   if ($(SELECTOR.INPUT_EDIT_RESIZE_LOCK_RATIO).prop('checked')) {
-    height =  Math.round(width * ratio);
+    height = Math.round(width * ratio);
     if (height < 1) height = 1;
     $(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).val(height);
   }
@@ -346,7 +357,7 @@ function widthChanged() {
 }
 
 function heightChanged() {
-  var ratio =  canvasEditor.editorCanvas.width / canvasEditor.editorCanvas.height;
+  var ratio = canvasEditor.editorCanvas.width / canvasEditor.editorCanvas.height;
   var width = parseInt($(SELECTOR.INPUT_EDIT_RESIZE_WIDTH).val());
   var height = parseInt($(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).val());
   if ($(SELECTOR.INPUT_EDIT_RESIZE_LOCK_RATIO).prop('checked')) {
@@ -361,7 +372,7 @@ function heightChanged() {
 var sizeChangedTimeout = null;
 
 function createSizeChangedTimeout(callback) {
-  if(sizeChangedTimeout) {
+  if (sizeChangedTimeout) {
     clearTimeout(sizeChangedTimeout);
     sizeChangedTimeout = null;
   }
@@ -372,7 +383,7 @@ function createSizeChangedTimeout(callback) {
 
 function widthChangedWithoutFocusOut(e) {
   var currentWidth = Math.round(+e.target.value) || canvasEditor.currentImage.width;
-  if(currentWidth !== Math.round(+e.target.value)) {
+  if (currentWidth !== Math.round(+e.target.value)) {
     $(SELECTOR.INPUT_EDIT_RESIZE_WIDTH).val(currentWidth);
   }
   createSizeChangedTimeout(widthChanged);
@@ -380,7 +391,7 @@ function widthChangedWithoutFocusOut(e) {
 
 function heightChangedWithoutFocusOut(e) {
   var currentHeight = Math.round(+e.target.value) || canvasEditor.currentImage.height;
-  if(currentHeight !== Math.round(+e.target.value)) {
+  if (currentHeight !== Math.round(+e.target.value)) {
     $(SELECTOR.INPUT_EDIT_RESIZE_HEIGHT).val(currentHeight);
   }
   createSizeChangedTimeout(heightChanged);
@@ -400,7 +411,7 @@ function closeResize() {
   hideResize();
 }
 
-function hideResize(){
+function hideResize() {
   swithEditorMode(EDITOR_MODE.MAIN);
 }
 
@@ -436,10 +447,10 @@ function canvasRotateRight() {
 
 function changeDimensions(width, height) {
   $(SELECTOR.DIV_PULL_RIGHT)
-  .empty();
+    .empty();
   $(SELECTOR.DIV_PULL_RIGHT)
-  .append((width ? width : canvasEditor.sourceCanvas.width) +
-    'x' + (height ? height : canvasEditor.sourceCanvas.height));
+    .append((width ? width : canvasEditor.sourceCanvas.width) +
+      'x' + (height ? height : canvasEditor.sourceCanvas.height));
 }
 
 
