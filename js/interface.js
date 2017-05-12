@@ -61,6 +61,8 @@ if (data.action && data.action.action !== 'gallery') {
   initLinkProvider(data.action);
   $('.link-actions').addClass('show');
   $('#link').prop('checked', true);
+  //fallback for the cancel button
+  Fliplet.Widget.toggleSaveButton(true);
 }
 
 //mehtod used to init the link provider
@@ -77,6 +79,7 @@ function initLinkProvider(linkAction) {
   });
   linkActionProvider.then(function(result) {
     data.action = result.data;
+    imageProvider.forwardSaveRequest();
   });
 }
 
@@ -106,6 +109,7 @@ imageProvider.then(function(result) {
     data.image.width = data.image.size[0];
     data.image.height = data.image.size[1];
   }
+  save(true);
 });
 
 //handle the tap_action change event
@@ -127,14 +131,11 @@ $('input[name="tap_action"]').on('change', function() {
 
 // 1. Fired from Fliplet Studio when the external save button is clicked
 Fliplet.Widget.onSaveRequest(function() {
-  var providersPromises = [imageProvider];
-  imageProvider.forwardSaveRequest();
   if (linkActionProvider && !$('#pinch').is(':checked')) {
-    providersPromises.push(linkActionProvider);
     linkActionProvider.forwardSaveRequest();
+    return;
   }
-  //when the provider promises are finished save the data.
-  Fliplet.Widget.all(providersPromises).then(save);
+  imageProvider.forwardSaveRequest();
 });
 
 // Temporary alerts for Beta
