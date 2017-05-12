@@ -57,7 +57,7 @@ if (data.action && data.action.action === 'gallery') {
 }
 
 // Load link data
-if (data.action && data.action.action !== 'gallery') {
+if (data.action && data.action.action !== undefined && data.action.action !== 'gallery') {
   initLinkProvider(data.action);
   $('.link-actions').addClass('show');
   $('#link').prop('checked', true);
