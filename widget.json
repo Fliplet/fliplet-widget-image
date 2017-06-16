@@ -13,7 +13,8 @@
     "dependencies": [
       "fliplet-core",
       "fliplet-studio-ui",
-      "fliplet-media"
+      "fliplet-media",
+      "bootstrap"
     ],
     "assets": [
       "vendor/hermite/hermite.min.js",
