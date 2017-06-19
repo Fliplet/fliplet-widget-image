@@ -1,5 +1,5 @@
 var widgetId = Fliplet.Widget.getDefaultId();
-var data = Fliplet.Widget.getData() || {};
+var widgetData = Fliplet.Widget.getData() || {};
 
 var filePickerProvider;
 var imageEditorProvider;
@@ -12,17 +12,17 @@ function init() {
   imageEditorInit();
 
   // Load link action
-  if (data.action && data.action.action === 'gallery') {
+  if (widgetData.action && widgetData.action.action === 'gallery') {
     $('#pinch').prop('checked', true);
   }
 
-  if (data.action && data.action.action !== 'gallery') {
-    linkProviderInit(data.action);
+  if (widgetData.action && widgetData.action.action !== 'gallery') {
+    linkProviderInit(widgetData.action);
     $('.link-actions').addClass('show');
     $('#link').prop('checked', true);
   }
 
-  if (!data.action) {
+  if (!widgetData.action) {
     $('#none').prop('checked', true);
   }
 
@@ -63,7 +63,7 @@ function attahObservers() {
 }
 
 function filePickerDataInit() {
-  filePickerData = $.extend(true, data.files, {
+  filePickerData = $.extend(true, widgetData.files, {
     selectFiles: [],
     selectMultiple: false,
     type: 'image',
@@ -86,10 +86,12 @@ function filePickerInit() {
         case 'widget-rendered':
           break;
         case 'widget-set-info':
+          oldSelectedFileId = filePickerData.selectFiles.length ? filePickerData.selectFiles[0].id :
+            (widgetData.image) ? widgetData.image.id : '';
           filePickerData.selectFiles = data.length ? data : [];
           if (data.length) {
             save();
-            if (filePickerData.selectFiles[0].id !== data[0].id) {
+            if (oldSelectedFileId !== data[0].id) {
               imageEditorInit();
             }
           }
@@ -108,7 +110,7 @@ function filePickerInit() {
 }
 
 function imageEditorInit() {
-  if (!data.image) {
+  if (!widgetData.image) {
     return;
   }
 
@@ -119,7 +121,7 @@ function imageEditorInit() {
   imageEditorProvider = Fliplet.Widget.open('com.fliplet.image-editor', {
     selector: '.image-editor-holder',
     data: {
-      image: data.image
+      image: widgetData.image
     },
     onEvent: function(e, data) {
       switch (e) {
@@ -154,36 +156,36 @@ function linkProviderInit(linkAction) {
     closeOnSave: false
   });
   linkActionProvider.then(function(result) {
-    data.action = result.data;
+    widgetData.action = result.data;
   });
 }
 
 function save(notifyComplete) {
-  data.image = (filePickerData.selectFiles.length && filePickerData.selectFiles[0].url) ? filePickerData.selectFiles[0] : null;
-  data.files = {
-    selectFiles: filePickerData.selectFiles.length ? filePickerData.selectFiles : data.image && data.image.url ? [data.image] : []
+  widgetData.image = (filePickerData.selectFiles.length && filePickerData.selectFiles[0].url) ? filePickerData.selectFiles[0] : null;
+  widgetData.files = {
+    selectFiles: filePickerData.selectFiles.length ? filePickerData.selectFiles : widgetData.image && widgetData.image.url ? [widgetData.image] : []
   };
 
-  if (data.image && data.image.size) {
-    data.image.width = data.image.size[0];
-    data.image.height = data.image.size[1];
+  if (widgetData.image && widgetData.image.size) {
+    widgetData.image.width = widgetData.image.size[0];
+    widgetData.image.height = widgetData.image.size[1];
   }
 
-  if (data.image && $('#pinch').is(':checked')) {
-    data.action = {};
-    data.action.action = 'gallery';
-    data.action.images = [data.image];
+  if (widgetData.image && $('#pinch').is(':checked')) {
+    widgetData.action = {};
+    widgetData.action.action = 'gallery';
+    widgetData.action.images = [widgetData.image];
   }
 
-  if (data.image) {
+  if (widgetData.image) {
     $('.nav-tabs li').removeClass('disabled');
   }
 
-  if ($('#none').is(':checked') && data.action) {
-    data.action = null;
+  if ($('#none').is(':checked') && widgetData.action) {
+    widgetData.action = null;
   }
 
-  return Fliplet.Widget.save(data).then(function() {
+  return Fliplet.Widget.save(widgetData).then(function() {
     if (notifyComplete) {
       Fliplet.Widget.complete();
       Fliplet.Studio.emit('reload-page-preview');
