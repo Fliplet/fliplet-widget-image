@@ -86,8 +86,6 @@ function filePickerInit() {
         case 'widget-rendered':
           break;
         case 'widget-set-info':
-          var msg = data.length ? data.length + ' files selected' : 'no selected files';
-          Fliplet.Widget.info(msg);
           filePickerData.selectFiles = data.length ? data : [];
           if (data.length) {
             save();
@@ -104,7 +102,6 @@ function filePickerInit() {
   });
 
   filePickerProvider.then(function(data) {
-    Fliplet.Widget.info('');
     filePickerData.selectFiles = data.data.length ? data.data : [];
     save(true);
   });
