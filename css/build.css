@@ -7,20 +7,24 @@ img {
   border: 1px solid #cccccc;
   background-color: rgba(217, 221, 222, 0.5);
   text-align: center;
-  display: block;
-  padding: 20px;
+  display: inline-block;
+  box-sizing: border-box;
+  height: 100px;
+  padding: 0 20px;
   color: #333333;
   font-size: 32px;
   cursor: pointer;
+  width: 100%;
   -webkit-user-select: none !important;
   -ms-user-select: none !important;
   user-select: none !important;
   -webkit-user-modify: read-only !important;
 }
 .image-placeholder:after {
-  content: "\f03e";
-  font: normal normal normal 14px/1 FontAwesome;
+  content: "Image";
+  font: inherit;
   font-size: inherit;
+  line-height: 100px;
   -webkit-font-smoothing: antialiased;
 }
 
