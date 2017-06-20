@@ -12,7 +12,6 @@ img {
   height: 100px;
   padding: 0 20px;
   color: #333333;
-  font-size: 32px;
   cursor: pointer;
   width: 100%;
   -webkit-user-select: none !important;
@@ -24,6 +23,7 @@ img {
   content: "Image";
   font: inherit;
   font-size: inherit;
+  font-weight: 600;
   line-height: 100px;
   -webkit-font-smoothing: antialiased;
 }
