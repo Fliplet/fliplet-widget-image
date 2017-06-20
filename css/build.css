@@ -4,14 +4,14 @@ img {
 }
 
 .image-placeholder {
-  border: 1px solid #cccccc;
-  background-color: rgba(217, 221, 222, 0.5);
   text-align: center;
   display: inline-block;
   box-sizing: border-box;
   height: 100px;
   padding: 0 20px;
-  color: #333333;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #ddd;
+  color: #aaa;
   cursor: pointer;
   width: 100%;
   min-width: 100px;
