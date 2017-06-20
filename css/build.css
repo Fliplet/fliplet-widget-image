@@ -3,32 +3,6 @@ img {
   vertical-align: middle;
 }
 
-.image-placeholder {
-  text-align: center;
-  display: inline-block;
-  box-sizing: border-box;
-  height: 100px;
-  padding: 0 20px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: #ddd;
-  color: #aaa;
-  cursor: pointer;
-  width: 100%;
-  min-width: 100px;
-  -webkit-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-  -webkit-user-modify: read-only !important;
-}
-.image-placeholder:after {
-  content: "Image";
-  font: inherit;
-  font-size: inherit;
-  font-weight: 600;
-  line-height: 100px;
-  -webkit-font-smoothing: antialiased;
-}
-
 img[data-image-id] {
   max-width: 100%;
   height: auto;

@@ -14,7 +14,7 @@ Fliplet.Widget.instance('image', function (data) {
   };
 
   var canvas = this,
-    imageUrl = data.image && data.image.url;
+    imageUrl = data.image && data.image.url || 'http://placehold.it/2160x680.png?text=Image';
 
   if (!imageUrl) {
     return;
