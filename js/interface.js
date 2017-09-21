@@ -29,6 +29,14 @@ function init() {
   attahObservers();
 }
 
+function forwardSaveRequestFilePicker() {
+  if (filePickerProvider) {
+    return filePickerProvider.forwardSaveRequest();
+  }
+
+  save(true);
+}
+
 function attahObservers() {
   // Handle the tap_action change event
   $('input[name="tap_action"]').on('change', function() {
@@ -45,15 +53,10 @@ function attahObservers() {
   // 1. Fired from Fliplet Studio when the external save button is clicked
   Fliplet.Widget.onSaveRequest(function() {
     if (linkActionProvider && !$('#pinch').is(':checked') && !$('#none').is(':checked')) {
-      linkActionProvider.forwardSaveRequest();
+      return linkActionProvider.forwardSaveRequest();
+    } else {
+      forwardSaveRequestFilePicker();
     }
-
-    if (filePickerProvider) {
-      filePickerProvider.forwardSaveRequest();
-      return;
-    }
-
-    save(true);
   });
 
   // Temporary alerts for Beta
@@ -157,6 +160,7 @@ function linkProviderInit(linkAction) {
   });
   linkActionProvider.then(function(result) {
     widgetData.action = result.data;
+    forwardSaveRequestFilePicker();
   });
 }
 
