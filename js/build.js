@@ -8,6 +8,7 @@ Fliplet.Widget.instance('image', function (data) {
         img.classList.add('lazy-loaded');
         setTimeout(function () {
           img.classList.remove('lazy-placeholder');
+          $(img).trigger('loaded.bs.banner')
         }, 0);
       }, 0);
     });
