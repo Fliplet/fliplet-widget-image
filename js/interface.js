@@ -66,13 +66,13 @@ function attahObservers() {
 }
 
 function filePickerDataInit() {
-  filePickerData = $.extend(true, widgetData.files, {
-    selectFiles: [],
+  filePickerData = {
+    selectFiles: widgetData.image ? [widgetData.image] : [],
     selectMultiple: false,
     type: 'image',
     fileExtension: ['JPG', 'JPEG', 'PNG', 'GIF', 'TIFF'],
     autoSelectOnUpload: true
-  });
+  };
 }
 
 function filePickerInit() {
@@ -166,9 +166,6 @@ function linkProviderInit(linkAction) {
 
 function save(notifyComplete) {
   widgetData.image = (filePickerData.selectFiles.length && filePickerData.selectFiles[0].url) ? filePickerData.selectFiles[0] : null;
-  widgetData.files = {
-    selectFiles: filePickerData.selectFiles.length ? filePickerData.selectFiles : widgetData.image && widgetData.image.url ? [widgetData.image] : []
-  };
 
   if (widgetData.image && widgetData.image.size) {
     widgetData.image.width = widgetData.image.size[0];
