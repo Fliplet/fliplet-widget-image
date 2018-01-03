@@ -90,28 +90,6 @@
   padding-top: 12px;
 }
 
-label {
-  font-weight: normal;
-  color: #14505e;
-}
-
-.form-control {
-  border-radius: 6px;
-  border: 1px solid #e4e9eb;
-  color: #333;
-  height: 44px;
-  line-height: 44px;
-  padding: 0 15px;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.form-control:focus {
-  border-color: #00abd2;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 171, 210, .6);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 171, 210, .6);
-}
-
 .hidden-select {
   position: absolute;
   top: 0;
@@ -122,11 +100,6 @@ label {
   height: 44px;
   cursor: pointer;
   opacity: 0;
-}
-
-.form-group {
-  margin-left: -15px;
-  margin-right: -15px;
 }
 
 .form-group .btn-default {
