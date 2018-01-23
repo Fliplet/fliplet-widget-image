@@ -34,9 +34,11 @@ Fliplet.Widget.instance('image', function (data) {
   }).on('error', function(){
     $placeholder.fadeInImg(this);
 
-    if (Raven) {
+    if (typeof Raven !== 'undefined' && Raven.captureMessage) {
       Raven.captureMessage('Error loading image', {
         user: Fliplet.User.get('id'),
+        app: Fliplet.Env.get('appId'),
+        page: Fliplet.Env.get('pageId'),
         image: data.image
       });
     }
