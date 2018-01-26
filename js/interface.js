@@ -58,11 +58,6 @@ function attahObservers() {
       forwardSaveRequestFilePicker();
     }
   });
-
-  // Temporary alerts for Beta
-  $('#help_tip').on('click', function() {
-    alert("During beta, please use live chat and let us know what you need help with.");
-  });
 }
 
 function filePickerDataInit() {
