@@ -26,11 +26,7 @@ function init() {
     $('#none').prop('checked', true);
   }
 
-  if (widgetData.lazyLoad) {
-    $('#activate_lazyload').prop('checked', true);
-  } else {
-    $('#activate_lazyload').prop('checked', false);
-  }
+  $('#activate_lazyload').prop('checked', !!widgetData.lazyLoad);
 
   attahObservers();
 }
