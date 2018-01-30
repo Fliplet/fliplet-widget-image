@@ -56,6 +56,11 @@ Fliplet.Widget.instance('image', function (data) {
     return;
   }
 
+  // Trigger for banners
+  $('[data-image-id]').each(function(index, img) {
+    $(img).trigger('loaded.bs.banner')
+  });
+
   if (!data.action) {
     return;
   }
