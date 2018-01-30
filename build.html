@@ -1,9 +1,22 @@
-{{#if image}}
-  {{#and image.width image.height}}
-    <canvas data-image-id="{{id}}" data-image-uuid="{{uuid}}" class="lazy-placeholder"{{#if image.width}} width="{{image.width}}"{{/if}}{{#if image.height}} height="{{image.height}}"{{/if}}></canvas>
+
+
+
+
+
+{{#if lazyLoad}}
+  {{#if image}}
+    {{#and image.width image.height}}
+      <canvas data-image-id="{{id}}" data-image-uuid="{{uuid}}" class="lazy-placeholder" {{#if image.width}} width="{{image.width}}" {{/if}}{{#if image.height}} height="{{image.height}}" {{/if}}></canvas>
+    {{else}}
+      <img data-image-id="{{id}}" data-image-uuid="{{uuid}}" src="{{image.url}}" />
+    {{/and}}
   {{else}}
-    <img data-image-id="{{id}}" data-image-uuid="{{uuid}}" src="{{image.url}}" />
-  {{/and}}
+    <canvas data-image-id="{{id}}" data-image-uuid="{{uuid}}" class="lazy-placeholder" width="1680" height="460"></canvas>
+  {{/if}}
 {{else}}
-  <canvas data-image-id="{{id}}" data-image-uuid="{{uuid}}" class="lazy-placeholder" width="1680" height="460"></canvas>
+  {{#if image}}
+    <img data-image-id="{{id}}" src="{{image.url}}" />
+  {{else}}
+    <img data-image-id="{{id}}" src="https://placehold.it/2160x680.png?text=Image" />
+  {{/if}}
 {{/if}}

@@ -26,6 +26,12 @@ function init() {
     $('#none').prop('checked', true);
   }
 
+  if (widgetData.lazyLoad) {
+    $('#lazyload_yes').prop('checked', true);
+  } else {
+    $('#lazyload_no').prop('checked', true);
+  }
+
   attahObservers();
 }
 
@@ -179,6 +185,13 @@ function save(notifyComplete) {
 
   if ($('#none').is(':checked') && widgetData.action) {
     widgetData.action = null;
+  }
+
+  var lazyLoadValue = $('[name="enable_lazyload"]:checked').val();
+  if (lazyLoadValue === 'yes') {
+    widgetData.lazyLoad = true;
+  } else {
+    widgetData.lazyLoad = false;
   }
 
   return Fliplet.Widget.save(widgetData).then(function() {

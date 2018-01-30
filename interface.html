@@ -3,13 +3,11 @@
     <p>Configure your image</p>
     <a href="https://help.fliplet.com/article/5-adding-images-to-your-app" target="_blank">Need help?</a>
   </header>
-
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active" id="browse-control"><a href="#browse" aria-controls="browse" role="tab" data-toggle="tab">Select Image</a></li>
     <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="image-editor-control"><a href="#image-editor" aria-controls="image-editor" role="tab" data-toggle="tab">Image Editor</a></li>
     <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="interactive-control"><a href="#interactive" aria-controls="interactive" role="tab" data-toggle="tab">Interactive</a></li>
   </ul>
-
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="browse">
       <div class="row file-picker-holder"></div>
@@ -19,32 +17,48 @@
     </div>
     <div role="tabpanel" class="tab-pane" id="interactive">
       <div class="form-group clearfix">
-        <div class="col-xs-12 control-label">
+        <div class="col-sm-4 control-label">
           <label>Add an interaction to your image</label>
         </div>
-        <p class="clearfix"></p>
         <div class="col-sm-8">
           <div class="radio radio-icon">
             <input type="radio" id="none" name="tap_action" value="none">
             <label for="none">
-                <span class="check"><i class="fa fa-circle"></i></span> No interaction
-              </label>
+              <span class="check"><i class="fa fa-circle"></i></span> No interaction
+            </label>
           </div>
           <div class="radio radio-icon">
             <input type="radio" id="pinch" name="tap_action" value="pinch">
             <label for="pinch">
-                <span class="check"><i class="fa fa-circle"></i></span> Pinch-to-zoom
-              </label>
+              <span class="check"><i class="fa fa-circle"></i></span> Pinch-to-zoom
+            </label>
           </div>
           <div class="radio radio-icon">
             <input type="radio" id="link" name="tap_action" value="link">
             <label for="link">
-                <span class="check"><i class="fa fa-circle"></i></span> Other tap/click actions
-              </label>
+              <span class="check"><i class="fa fa-circle"></i></span> Other tap/click actions
+            </label>
+          </div>
+          <div class="link-actions"></div>
+        </div>
+      </div>
+      <div class="form-group clearfix inline-radio">
+        <div class="col-sm-4 control-label">
+          <label>Add an interaction to your image</label>
+        </div>
+        <div class="col-sm-8">
+          <div class="radio-buttons clearfix">
+            <div class="radio radio-icon">
+              <input type="radio" id="lazyload_yes" name="enable_lazyload" value="yes">
+              <label for="lazyload_yes">Yes</label>
+            </div>
+            <div class="radio radio-icon">
+              <input type="radio" id="lazyload_no" name="enable_lazyload" value="no">
+              <label for="lazyload_no">No</label>
+            </div>
           </div>
         </div>
       </div>
-      <div class="link-actions"></div>
     </div>
   </div>
 </div>
