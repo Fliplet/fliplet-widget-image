@@ -27,9 +27,9 @@ function init() {
   }
 
   if (widgetData.lazyLoad) {
-    $('#lazyload_yes').prop('checked', true);
+    $('#activate_lazyload').prop('checked', true);
   } else {
-    $('#lazyload_no').prop('checked', true);
+    $('#activate_lazyload').prop('checked', false);
   }
 
   attahObservers();
@@ -187,12 +187,8 @@ function save(notifyComplete) {
     widgetData.action = null;
   }
 
-  var lazyLoadValue = $('[name="enable_lazyload"]:checked').val();
-  if (lazyLoadValue === 'yes') {
-    widgetData.lazyLoad = true;
-  } else {
-    widgetData.lazyLoad = false;
-  }
+  var lazyLoadValue = $('#activate_lazyload').is(":checked");
+  widgetData.lazyLoad = lazyLoadValue;
 
   return Fliplet.Widget.save(widgetData).then(function() {
     if (notifyComplete) {
