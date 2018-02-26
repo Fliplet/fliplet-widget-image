@@ -49,6 +49,11 @@ Fliplet.Widget.instance('image', function (data) {
   }
   $img.on('click', function (event) {
     event.preventDefault();
-    Fliplet.Navigate.to(data.action);
+    if (data.action) {
+      // Set the title for GA Event
+      data.action.title = '<image>'
+      // Navigate
+      Fliplet.Navigate.to(data.action);
+    }
   });
 });
