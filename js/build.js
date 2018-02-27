@@ -51,7 +51,7 @@ Fliplet.Widget.instance('image', function (data) {
     event.preventDefault();
     if (data.action) {
       // Set the title for GA Event
-      data.action.title = '<image>'
+      data.action.title = '<image>';
       // Navigate
       Fliplet.Navigate.to(data.action);
     }
