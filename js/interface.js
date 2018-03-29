@@ -50,7 +50,7 @@ function attahObservers() {
   });
 
   $('.nav-tabs [data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    var tab = $(e.target).attr('aria-controls');
+    var tab = $(e.target).data('fl-target');
     if (tab === 'image-editor') {
       imageEditorInit();
     }
