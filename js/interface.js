@@ -9,7 +9,6 @@ var filePickerData;
 
 function init() {
   filePickerInit();
-  imageEditorInit();
 
   // Load link action
   if (widgetData.action && widgetData.action.action === 'gallery') {
@@ -48,6 +47,13 @@ function attahObservers() {
       return;
     }
     $('.link-actions').removeClass('show');
+  });
+
+  $('.nav-tabs [data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var tab = $(e.target).attr('href');
+    if (tab === '#image-editor') {
+      imageEditorInit();
+    }
   });
 
   // 1. Fired from Fliplet Studio when the external save button is clicked
@@ -115,6 +121,7 @@ function imageEditorInit() {
   if (imageEditorProvider) {
     imageEditorProvider = null;
     $('.image-editor-holder').html('');
+    $('.image-editor-loading').addClass('animated');
   }
   imageEditorProvider = Fliplet.Widget.open('com.fliplet.image-editor', {
     selector: '.image-editor-holder',
@@ -124,6 +131,7 @@ function imageEditorInit() {
     onEvent: function(e, data) {
       switch (e) {
         case 'widget-rendered':
+          $('.image-editor-loading').removeClass('animated');
           break;
         case 'widget-set-info':
           break;

@@ -5,9 +5,9 @@
   </header>
 
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active" id="browse-control"><a href="#browse" aria-controls="browse" role="tab" data-toggle="tab">Select Image</a></li>
-    <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="image-editor-control"><a href="#image-editor" aria-controls="image-editor" role="tab" data-toggle="tab">Image Editor</a></li>
-    <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="interactive-control"><a href="#interactive" aria-controls="interactive" role="tab" data-toggle="tab">Interactive</a></li>
+    <li role="presentation" class="active" id="browse-control"><a href="#browse" data-toggle="tab">Select Image</a></li>
+    <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="image-editor-control"><a href="#image-editor" data-toggle="tab">Image Editor</a></li>
+    <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="interactive-control"><a href="#interactive" data-toggle="tab">Interactive</a></li>
   </ul>
 
   <div class="tab-content">
@@ -15,6 +15,9 @@
       <div class="row file-picker-holder"></div>
     </div>
     <div role="tabpanel" class="tab-pane" id="image-editor">
+      <div class="spinner-holder image-editor-loading">
+        <div class="spinner-overlay">Loading...</div>
+      </div>
       <div class="image-editor-holder"></div>
     </div>
     <div role="tabpanel" class="tab-pane" id="interactive">
