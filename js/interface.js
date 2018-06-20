@@ -25,6 +25,13 @@ function init() {
     $('#none').prop('checked', true);
   }
 
+  if (!widgetData.fullScreen) {
+    $('#enable-fullscreen-no').prop('checked', true);
+  } else {
+    $('#enable-fullscreen-yes').prop('checked', true);
+    $('.interactions').addClass('disabled');
+  }
+
   attahObservers();
 }
 
@@ -47,6 +54,16 @@ function attahObservers() {
       return;
     }
     $('.link-actions').removeClass('show');
+  });
+
+  $('input[name="enable_option"]').on('change', function() {
+    if ($(this).val() === "show" && $(this).is(':checked')) {
+      $('.interactions').addClass('disabled');
+      save();
+      return;
+    }
+    $('.interactions').removeClass('disabled');
+    save();
   });
 
   $('.nav-tabs [data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -187,6 +204,12 @@ function save(notifyComplete) {
 
   if ($('#none').is(':checked') && widgetData.action) {
     widgetData.action = null;
+  }
+
+  if ($('input[name="enable_option"]').is(':checked') && $('input[name="enable_option"]:checked').val() === 'show') {
+    widgetData.fullScreen = true;
+  } else {
+    widgetData.fullScreen = false;
   }
 
   return Fliplet.Widget.save(widgetData).then(function() {
