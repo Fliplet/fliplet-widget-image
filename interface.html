@@ -7,7 +7,7 @@
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active" id="browse-control"><a href="#browse" data-toggle="tab">Select Image</a></li>
     <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="image-editor-control"><a href="#image-editor" data-toggle="tab">Image Editor</a></li>
-    <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="interactive-control"><a href="#interactive" data-toggle="tab">Interactive</a></li>
+    <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="interactive-control"><a href="#interactive" data-toggle="tab">Settings</a></li>
   </ul>
 
   <div class="tab-content">
@@ -21,7 +21,26 @@
       <div class="image-editor-holder"></div>
     </div>
     <div role="tabpanel" class="tab-pane" id="interactive">
-      <div class="form-group clearfix">
+      <div class="form-group clearfix inline-radio">
+        <div class="col-sm-4 control-label">
+          <label>Do you want the image to start expanded?</label>
+          <p class="helper-text">This will cover the entire screen and allow users to pinch to zoom without any initial interaction.</p>
+        </div>
+        <div class="col-sm-8">
+          <div class="radio-buttons clearfix">
+            <div class="radio radio-icon">
+              <input type="radio" id="enable-fullscreen-yes" name="enable_option" value="show">
+              <label for="enable-fullscreen-yes">Yes</label>
+            </div>
+            <div class="radio radio-icon">
+              <input type="radio" id="enable-fullscreen-no" name="enable_option" value="no-show">
+              <label for="enable-fullscreen-no">No</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group clearfix interactions">
         <div class="col-xs-12 control-label">
           <label>Add an interaction to your image</label>
         </div>

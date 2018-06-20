@@ -25,3 +25,42 @@ img.lazy-loaded {
   opacity: 1;
   transition: opacity 350ms;
 }
+
+.image-alert-placeholder {
+  padding: 20px;
+  text-align: center;
+  background: rgba(51,51,51,0.1);
+  border: 4px solid rgba(51,51,51,0.15);
+  margin-bottom: 10px;
+}
+
+.image-fullscreen-wrapper img,
+.image-alert-placeholder {
+  display: none;
+}
+
+.mode-interact .image-fullscreen-wrapper img,
+.mode-interact .image-alert-placeholder {
+  display: block;
+}
+
+.image-fullscreen-wrapper .pswp {
+  z-index: 8;
+}
+
+/* PhotoSwipe for iPhone X */
+.pswp__top-bar {
+  top: env(safe-area-inset-top);
+}
+
+.image-fullscreen-wrapper .pswp__top-bar {
+  display: none;
+}
+
+.image-fullscreen-wrapper .pswp__img--placeholder--blank {
+  background-color: transparent;
+}
+
+.image-fullscreen-wrapper .pswp__bg {
+  background-color: rgba(255, 255, 255, 1);
+}
