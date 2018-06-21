@@ -25,11 +25,8 @@ function init() {
     $('#none').prop('checked', true);
   }
 
-  if (!widgetData.fullScreen) {
-    $('#enable-fullscreen-no').prop('checked', true);
-  } else {
-    $('#enable-fullscreen-yes').prop('checked', true);
-    $('.interactions').addClass('disabled');
+  if (widgetData.fullScreen) {
+    $('#fullscreen').prop('checked', true);
   }
 
   attahObservers();
@@ -54,15 +51,6 @@ function attahObservers() {
       return;
     }
     $('.link-actions').removeClass('show');
-  });
-
-  $('input[name="enable_option"]').on('change', function() {
-    if ($(this).val() === "show" && $(this).is(':checked')) {
-      $('.interactions').addClass('disabled');
-      save();
-      return;
-    }
-    $('.interactions').removeClass('disabled');
     save();
   });
 
@@ -206,7 +194,7 @@ function save(notifyComplete) {
     widgetData.action = null;
   }
 
-  if ($('input[name="enable_option"]').is(':checked') && $('input[name="enable_option"]:checked').val() === 'show') {
+  if ($('#fullscreen').is(':checked') && $('input[name="tap_action"]:checked').val() === 'fullscreen') {
     widgetData.fullScreen = true;
   } else {
     widgetData.fullScreen = false;

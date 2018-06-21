@@ -21,25 +21,6 @@
       <div class="image-editor-holder"></div>
     </div>
     <div role="tabpanel" class="tab-pane" id="interactive">
-      <div class="form-group clearfix inline-radio">
-        <div class="col-sm-4 control-label">
-          <label>Do you want the image to start expanded?</label>
-          <p class="helper-text">This will cover the entire screen and allow users to pinch to zoom without any initial interaction.</p>
-        </div>
-        <div class="col-sm-8">
-          <div class="radio-buttons clearfix">
-            <div class="radio radio-icon">
-              <input type="radio" id="enable-fullscreen-yes" name="enable_option" value="show">
-              <label for="enable-fullscreen-yes">Yes</label>
-            </div>
-            <div class="radio radio-icon">
-              <input type="radio" id="enable-fullscreen-no" name="enable_option" value="no-show">
-              <label for="enable-fullscreen-no">No</label>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="form-group clearfix interactions">
         <div class="col-xs-12 control-label">
           <label>Add an interaction to your image</label>
@@ -50,6 +31,12 @@
             <input type="radio" id="none" name="tap_action" value="none">
             <label for="none">
                 <span class="check"><i class="fa fa-circle"></i></span> No interaction
+              </label>
+          </div>
+          <div class="radio radio-icon">
+            <input type="radio" id="fullscreen" name="tap_action" value="fullscreen">
+            <label for="fullscreen">
+                <span class="check"><i class="fa fa-circle"></i></span> Display in full screen mode
               </label>
           </div>
           <div class="radio radio-icon">
