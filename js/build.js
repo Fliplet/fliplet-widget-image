@@ -33,7 +33,7 @@ Fliplet.Widget.instance('image', function (data) {
         src: data.image.url,
         w: data.image.width,
         h: data.image.height,
-        msrc: data.image.versions['640>'].url
+        msrc: data.image.urlSmall ? data.image.urlSmall : data.image.url
       }
     ];
     var options = {
