@@ -1,10 +1,10 @@
 {{#if image}}
   {{#if fullScreen}}
     <div data-image-id="{{id}}" data-image-uuid="{{uuid}}">
-      <div class="image-alert-placeholder">
-        To view your expanded image, use <strong>Preview app</strong>.
-      </div>
       <div class="image-fullscreen-wrapper" data-widget-id="{{id}}">
+        <div class="image-alert-placeholder">
+          Displays in full screen mode
+        </div>
         <img src="{{image.url}}" />
       </div>
     </div>

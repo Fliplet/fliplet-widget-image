@@ -27,11 +27,22 @@ img.lazy-loaded {
 }
 
 .image-alert-placeholder {
-  padding: 20px;
-  text-align: center;
-  background: rgba(51,51,51,0.1);
-  border: 4px solid rgba(51,51,51,0.15);
-  margin-bottom: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 15px;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 18px;
+}
+
+.image-fullscreen-wrapper {
+  position: relative;
 }
 
 .image-fullscreen-wrapper img,
@@ -39,9 +50,12 @@ img.lazy-loaded {
   display: none;
 }
 
-.mode-interact .image-fullscreen-wrapper img,
-.mode-interact .image-alert-placeholder {
+.mode-interact .image-fullscreen-wrapper img {
   display: block;
+}
+
+.mode-interact .image-alert-placeholder {
+  display: flex;
 }
 
 .image-fullscreen-wrapper .pswp {
