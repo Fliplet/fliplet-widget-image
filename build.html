@@ -1,13 +1,13 @@
 {{#if image}}
   {{#if fullScreen}}
-    <div data-image-id="{{id}}" data-image-uuid="{{uuid}}">
-      <div class="image-fullscreen-wrapper" data-widget-id="{{id}}">
-        <div class="image-alert-placeholder">
+    <span data-image-id="{{id}}" data-image-uuid="{{uuid}}">
+      <span class="image-fullscreen-wrapper" data-widget-id="{{id}}">
+        <span class="image-alert-placeholder">
           Displays in full screen mode
-        </div>
+        </span>
         <img src="{{image.url}}" />
-      </div>
-    </div>
+      </span>
+    </span>
   {{else}}
     {{#and image.width image.height}}
       <canvas data-image-id="{{id}}" data-image-uuid="{{uuid}}" class="lazy-placeholder"{{#if image.width}} width="{{image.width}}"{{/if}}{{#if image.height}} height="{{image.height}}"{{/if}}></canvas>
