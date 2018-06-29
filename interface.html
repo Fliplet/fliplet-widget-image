@@ -4,20 +4,23 @@
     <a href="https://help.fliplet.com/article/5-adding-images-to-your-app" target="_blank">Need help?</a>
   </header>
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active" id="browse-control"><a href="#browse" aria-controls="browse" role="tab" data-toggle="tab">Select Image</a></li>
-    <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="image-editor-control"><a href="#image-editor" aria-controls="image-editor" role="tab" data-toggle="tab">Image Editor</a></li>
-    <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="interactive-control"><a href="#interactive" aria-controls="interactive" role="tab" data-toggle="tab">Interactive</a></li>
+    <li role="presentation" class="active" id="browse-control"><a href="#browse" data-toggle="tab">Select Image</a></li>
+    <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="image-editor-control"><a href="#image-editor" data-toggle="tab">Image Editor</a></li>
+    <li role="presentation" class="{{#unless image}}disabled{{/unless}}" id="interactive-control"><a href="#interactive" data-toggle="tab">Settings</a></li>
   </ul>
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="browse">
       <div class="row file-picker-holder"></div>
     </div>
     <div role="tabpanel" class="tab-pane" id="image-editor">
+      <div class="spinner-holder image-editor-loading">
+        <div class="spinner-overlay">Loading...</div>
+      </div>
       <div class="image-editor-holder"></div>
     </div>
     <div role="tabpanel" class="tab-pane" id="interactive">
-      <div class="form-group clearfix">
-        <div class="col-sm-4 control-label">
+      <div class="form-group clearfix interactions">
+        <div class="col-xs-4 control-label">
           <label>Add an interaction to your image</label>
         </div>
         <div class="col-sm-8">
@@ -32,6 +35,12 @@
             <label for="pinch">
               <span class="check"><i class="fa fa-circle"></i></span> Pinch-to-zoom
             </label>
+          </div>
+          <div class="radio radio-icon">
+            <input type="radio" id="fullscreen" name="tap_action" value="fullscreen">
+            <label for="fullscreen">
+                <span class="check"><i class="fa fa-circle"></i></span> Pinch-to-zoom (Full screen mode) - <small>This will cover any other content that you might have on the screen.</small>
+              </label>
           </div>
           <div class="radio radio-icon">
             <input type="radio" id="link" name="tap_action" value="link">

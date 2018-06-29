@@ -103,6 +103,11 @@
   padding-left: 15px;
 }
 
+.form-group.disabled {
+  pointer-events: none;
+  opacity: 0.2;
+}
+
 .form-group .btn-default {
   color: #333;
   background-color: #FFF;
@@ -122,6 +127,14 @@
   color: #FFF;
   background-color: #0087a6;
   border-color: #0087a6;
+}
+
+.inline-radio .radio.radio-icon + .radio.radio-icon {
+  margin-top: 0;
+}
+
+.inline-radio .radio.radio-icon input[type="radio"] + label {
+  padding-left: 15px;
 }
 
 .pull-left {

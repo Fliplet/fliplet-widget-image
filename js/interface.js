@@ -9,7 +9,6 @@ var filePickerData;
 
 function init() {
   filePickerInit();
-  imageEditorInit();
 
   // Load link action
   if (widgetData.action && widgetData.action.action === 'gallery') {
@@ -27,6 +26,10 @@ function init() {
   }
 
   $('#activate_lazyload').prop('checked', !!widgetData.lazyLoad);
+
+  if (widgetData.fullScreen) {
+    $('#fullscreen').prop('checked', true);
+  }
 
   attahObservers();
 }
@@ -50,6 +53,14 @@ function attahObservers() {
       return;
     }
     $('.link-actions').removeClass('show');
+    save();
+  });
+
+  $('.nav-tabs [data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var tab = $(e.target).attr('href');
+    if (tab === '#image-editor') {
+      imageEditorInit();
+    }
   });
 
   // 1. Fired from Fliplet Studio when the external save button is clicked
@@ -117,6 +128,7 @@ function imageEditorInit() {
   if (imageEditorProvider) {
     imageEditorProvider = null;
     $('.image-editor-holder').html('');
+    $('.image-editor-loading').addClass('animated');
   }
   imageEditorProvider = Fliplet.Widget.open('com.fliplet.image-editor', {
     selector: '.image-editor-holder',
@@ -126,6 +138,7 @@ function imageEditorInit() {
     onEvent: function(e, data) {
       switch (e) {
         case 'widget-rendered':
+          $('.image-editor-loading').removeClass('animated');
           break;
         case 'widget-set-info':
           break;
@@ -185,6 +198,12 @@ function save(notifyComplete) {
 
   var lazyLoadValue = $('#activate_lazyload').is(":checked");
   widgetData.lazyLoad = lazyLoadValue;
+
+  if ($('#fullscreen').is(':checked') && $('input[name="tap_action"]:checked').val() === 'fullscreen') {
+    widgetData.fullScreen = true;
+  } else {
+    widgetData.fullScreen = false;
+  }
 
   return Fliplet.Widget.save(widgetData).then(function() {
     if (notifyComplete) {
