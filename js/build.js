@@ -56,39 +56,51 @@ Fliplet.Widget.instance('image', function (data) {
     return;
   }
 
-  var $placeholder = $(canvas);
-  var img = document.createElement('IMG');
-  img.className = canvas.className;
-  img.style = canvas.style;
-  img.width = canvas.width;
-  img.height = canvas.height;
-  img.dataset.imageId = canvas.dataset.imageId;
-  var $img = $(img);
-  $img.on('load', function(){
-    $placeholder.fadeInImg(this);
-  }).on('error', function(){
-    $placeholder.fadeInImg(this);
+  if (data.lazyLoad) {
+    var $placeholder = $(canvas);
+    var img = document.createElement('IMG');
+    img.className = canvas.className;
+    img.style = canvas.style;
+    img.width = canvas.width;
+    img.height = canvas.height;
+    img.dataset.imageId = canvas.dataset.imageId;
+    var $img = $(img);
+    $img.on('load', function(){
+      $placeholder.fadeInImg(this);
+    }).on('error', function(){
+      $placeholder.fadeInImg(this);
 
-    if (typeof Raven !== 'undefined' && Raven.captureMessage) {
-      Raven.captureMessage('Error loading image', {
-        user: Fliplet.User.get('id'),
-        app: Fliplet.Env.get('appId'),
-        page: Fliplet.Env.get('pageId'),
-        image: data.image
-      });
+      if (typeof Raven !== 'undefined' && Raven.captureMessage) {
+        Raven.captureMessage('Error loading image', {
+          user: Fliplet.User.get('id'),
+          app: Fliplet.Env.get('appId'),
+          page: Fliplet.Env.get('pageId'),
+          image: data.image
+        });
+      }
+    }).attr('src', imageUrl);
+
+    if (!data.action) {
+      return;
     }
-  }).attr('src', imageUrl);
+    $img.on('click', function (event) {
+      event.preventDefault();
+      Fliplet.Navigate.to(data.action);
+    });
+
+    return;
+  }
+
+  // Trigger for banners
+  $('[data-image-id]').each(function(index, img) {
+    $(img).trigger('loaded.bs.banner')
+  });
 
   if (!data.action) {
     return;
   }
-  $img.on('click', function (event) {
+  $('[data-image-id]').click(function (event) {
     event.preventDefault();
-    if (data.action) {
-      // Set the title for GA Event
-      data.action.title = '<image>';
-      // Navigate
-      Fliplet.Navigate.to(data.action);
-    }
-  });
+    Fliplet.Navigate.to(data.action);
+  });    
 });

@@ -25,6 +25,8 @@ function init() {
     $('#none').prop('checked', true);
   }
 
+  $('#activate_lazyload').prop('checked', !!widgetData.lazyLoad);
+
   if (widgetData.fullScreen) {
     $('#fullscreen').prop('checked', true);
   }
@@ -193,6 +195,9 @@ function save(notifyComplete) {
   if ($('#none').is(':checked') && widgetData.action) {
     widgetData.action = null;
   }
+
+  var lazyLoadValue = $('#activate_lazyload').is(":checked");
+  widgetData.lazyLoad = lazyLoadValue;
 
   if ($('#fullscreen').is(':checked') && $('input[name="tap_action"]:checked').val() === 'fullscreen') {
     widgetData.fullScreen = true;

@@ -9,11 +9,15 @@
       </span>
     </span>
   {{else}}
-    {{#and image.width image.height}}
-      <canvas data-image-id="{{id}}" data-image-uuid="{{uuid}}" class="lazy-placeholder"{{#if image.width}} width="{{image.width}}"{{/if}}{{#if image.height}} height="{{image.height}}"{{/if}}></canvas>
+    {{#if lazyLoad}}
+      {{#and image.width image.height}}
+        <canvas data-image-id="{{id}}" data-image-uuid="{{uuid}}" class="lazy-placeholder"{{#if image.width}} width="{{image.width}}"{{/if}}{{#if image.height}} height="{{image.height}}"{{/if}}></canvas>
+      {{else}}
+        <img data-image-id="{{id}}" data-image-uuid="{{uuid}}" class="lazy-placeholder" src="{{image.url}}" />
+      {{/and}}
     {{else}}
-      <img data-image-id="{{id}}" data-image-uuid="{{uuid}}" src="{{image.url}}" />
-    {{/and}}
+      <img data-image-id="{{id}}" src="{{image.url}}" />
+    {{/if}}
   {{/if}}
 {{else}}
   <canvas data-image-id="{{id}}" data-image-uuid="{{uuid}}" class="lazy-placeholder" width="1680" height="460"></canvas>
