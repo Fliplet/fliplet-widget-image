@@ -92,14 +92,14 @@ Fliplet.Widget.instance('image', function (data) {
   }
 
   // Trigger for banners
-  $('[data-image-id]').each(function(index, img) {
-    $(img).trigger('loaded.bs.banner')
+  $('[data-image-id="' + data.id + '"]').each(function(index, img) {
+    $(img).trigger('loaded.bs.banner');
   });
 
   if (!data.action) {
     return;
   }
-  $('[data-image-id]').click(function (event) {
+  $('[data-image-id="' + data.id + '"]').click(function (event) {
     event.preventDefault();
     Fliplet.Navigate.to(data.action);
   });    
