@@ -31,9 +31,9 @@ Fliplet.Widget.instance('image', function (data) {
     var items = [
       {
         src: data.image.url,
-        w: data.image.width,
-        h: data.image.height,
-        msrc: data.image.urlSmall ? data.image.urlSmall : data.image.url
+        w: data.image.size ? data.image.size[0] : data.image.width,
+        h: data.image.size? data.image.size[1] : data.image.height,
+        msrc: data.image.thumbnail ? data.image.thumbnail : data.image.url
       }
     ];
     var options = {
