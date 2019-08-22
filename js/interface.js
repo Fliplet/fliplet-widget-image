@@ -85,6 +85,7 @@ function filePickerDataInit() {
 
 function filePickerInit() {
   filePickerDataInit();
+  filePickerData.filePickerOpenFromImage = true;
   if (filePickerProvider) {
     filePickerProvider = null;
     $('.file-picker-holder').html('');
