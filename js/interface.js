@@ -209,7 +209,6 @@ function save(notifyComplete) {
   return Fliplet.Widget.save(widgetData).then(function() {
     if (notifyComplete) {
       Fliplet.Widget.complete();
-      Fliplet.Studio.emit('reload-page-preview');
     } else {
       Fliplet.Studio.emit('reload-widget-instance', widgetId);
     }
