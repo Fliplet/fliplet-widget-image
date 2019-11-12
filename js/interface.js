@@ -1,11 +1,13 @@
 var widgetId = Fliplet.Widget.getDefaultId();
 var widgetData = Fliplet.Widget.getData() || {};
+var page = Fliplet.Widget.getPage();
 
 var filePickerProvider;
 var imageEditorProvider;
 var linkActionProvider;
 
 var filePickerData;
+var omitPages = page ? [page.id] : [];
 
 function init() {
   filePickerInit();
@@ -16,6 +18,7 @@ function init() {
   }
 
   if (widgetData.action && widgetData.action.action !== 'gallery') {
+    widgetData.action.omitPages = omitPages;
     linkProviderInit(widgetData.action);
     $('.link-actions').addClass('show');
     $('#link').prop('checked', true);
@@ -47,7 +50,7 @@ function attahObservers() {
   $('input[name="tap_action"]').on('change', function() {
     if ($(this).val() === "link" && $(this).is(':checked')) {
       if (!linkActionProvider) {
-        linkProviderInit();
+        linkProviderInit({ omitPages: omitPages });
       }
       $('.link-actions').addClass('show');
       return;
