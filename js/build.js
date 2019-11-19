@@ -98,13 +98,13 @@ Fliplet.Widget.instance('image', function (data) {
   }
 
   // Check when image is loaded
-  $('[data-image-id="' + data.id + '"]').each(function(index, img) {
-    if (img.complete) {
-      loaded();
-    } else {
-      img.addEventListener('load', loaded);
-    }
-  });
+  var image = $('[data-image-id="' + data.id + '"]').get(0);
+
+  if (image.complete) {
+    loaded();
+  } else {
+    image.addEventListener('load', loaded);
+  }
 
   // Trigger for banners
   $('[data-image-id="' + data.id + '"]').each(function(index, img) {
