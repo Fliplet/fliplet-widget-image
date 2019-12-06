@@ -65,11 +65,13 @@ function attahObservers() {
 
   // 1. Fired from Fliplet Studio when the external save button is clicked
   Fliplet.Widget.onSaveRequest(function() {
+    Fliplet.Widget.toggleSaveButton(false);
     if (linkActionProvider && !$('#pinch').is(':checked') && !$('#none').is(':checked')) {
       return linkActionProvider.forwardSaveRequest();
     } else {
       forwardSaveRequestFilePicker();
     }
+    Fliplet.Widget.complete();
   });
 }
 
