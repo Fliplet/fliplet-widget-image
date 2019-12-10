@@ -15,7 +15,7 @@ function imageInstance(data) {
 
   var authenticate = Promise.resolve();
 
-  if (Fliplet.Media.isMediaFile(imageUrl)) {
+  if (Fliplet.Media.isRemoteUrl(imageUrl)) {
     authenticate = Fliplet().then(function () {
       imageUrl = Fliplet.Media.authenticate(imageUrl);
     });
