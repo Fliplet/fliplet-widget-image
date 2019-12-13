@@ -117,6 +117,12 @@ function imageInstance(data) {
       return;
     }
 
+    if (_.get(data, 'action.action') === 'gallery') {
+      _.forEach(_.get(data, 'action.images'), function (image) {
+        image.url = Fliplet.Media.authenticate(image.url);
+      });
+    }
+
     $('[data-image-id="' + data.id + '"]').click(function (event) {
       event.preventDefault();
       Fliplet.Navigate.to(data.action);
