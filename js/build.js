@@ -6,13 +6,12 @@ function loaded() {
 }
 
 function imageInstance(data) {
-  var canvas = this;
-  var imageUrl = data.image && data.image.url || 'https://placehold.it/2160x680.png?text=Image';
-
-  if (!imageUrl) {
+  if (!data.image) {
     return;
   }
 
+  var canvas = this;
+  var imageUrl = _.get(data, 'image.url', 'https://placehold.it/2160x680.png?text=Image');
   var authenticate = Promise.resolve();
 
   if (Fliplet.Media.isRemoteUrl(imageUrl)) {
