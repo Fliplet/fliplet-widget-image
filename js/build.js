@@ -8,6 +8,10 @@ function loaded() {
 function checkImageIsLoaded(id) {
   var image = $('[data-image-id="' + id + '"]').get(0);
 
+  if (!image) {
+    return;
+  }
+
   if (image.complete) {
     loaded();
   } else {
