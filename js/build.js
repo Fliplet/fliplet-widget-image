@@ -5,8 +5,23 @@ function loaded() {
   Fliplet.Studio.emit('get-selected-widget');
 }
 
+function checkImageIsLoaded(id) {
+  var image = $('[data-image-id="' + id + '"]').get(0);
+
+  if (!image) {
+    return;
+  }
+
+  if (image.complete) {
+    loaded();
+  } else {
+    image.addEventListener('load', loaded);
+  }
+}
+
 function imageInstance(data) {
   if (!data.image) {
+    checkImageIsLoaded(data.id);
     return;
   }
 
@@ -69,7 +84,6 @@ function imageInstance(data) {
 
       $img.on('load', function(){
         $placeholder.fadeInImg(this);
-        loaded();
       }).on('error', function(){
         $placeholder.fadeInImg(this);
 
@@ -101,11 +115,7 @@ function imageInstance(data) {
       image.src = imageUrl;
     }
 
-    if (image.complete) {
-      loaded();
-    } else {
-      image.addEventListener('load', loaded);
-    }
+    checkImageIsLoaded(data.id);
 
     // Trigger for banners
     $('[data-image-id="' + data.id + '"]').each(function(index, img) {
@@ -136,6 +146,7 @@ $.fn.fadeInImg = function (img) {
     $(this).replaceWith(img);
     setTimeout(function () {
       $img.addClass('lazy-loaded');
+      loaded();
       setTimeout(function () {
         $img.removeClass('lazy-placeholder');
         $img.trigger('loaded.bs.banner')
