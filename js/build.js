@@ -30,12 +30,12 @@ function imageInstance(data) {
   var authenticate = Promise.resolve();
 
   if (Fliplet.Media.isRemoteUrl(imageUrl)) {
-    authenticate = Fliplet().then(function () {
+    authenticate = Fliplet().then(function() {
       imageUrl = Fliplet.Media.authenticate(imageUrl);
     });
   }
 
-  authenticate.then(function () {
+  authenticate.then(function() {
     if (data.image && !Fliplet.Env.get('interact') && data.fullScreen) {
       if (!$('.pswp').length) {
         $('[data-widget-id="' + data.id + '"]').append($(photoswipeHtml));
@@ -46,7 +46,7 @@ function imageInstance(data) {
         {
           src: imageUrl,
           w: data.image.size ? data.image.size[0] : data.image.width,
-          h: data.image.size? data.image.size[1] : data.image.height,
+          h: data.image.size ? data.image.size[1] : data.image.height,
           msrc: data.image.thumbnail ? data.image.thumbnail : imageUrl
         }
       ];
@@ -82,9 +82,9 @@ function imageInstance(data) {
 
       var $img = $(img);
 
-      $img.on('load', function(){
+      $img.on('load', function() {
         $placeholder.fadeInImg(this);
-      }).on('error', function(){
+      }).on('error', function() {
         $placeholder.fadeInImg(this);
 
         if (typeof Raven !== 'undefined' && Raven.captureMessage) {
@@ -101,7 +101,7 @@ function imageInstance(data) {
         return;
       }
 
-      $img.on('click', function (event) {
+      $img.on('click', function(event) {
         event.preventDefault();
         Fliplet.Navigate.to(data.action);
       });
@@ -127,29 +127,29 @@ function imageInstance(data) {
     }
 
     if (_.get(data, 'action.action') === 'gallery') {
-      _.forEach(_.get(data, 'action.images'), function (image) {
+      _.forEach(_.get(data, 'action.images'), function(image) {
         image.url = Fliplet.Media.authenticate(image.url);
       });
     }
 
-    $('[data-image-id="' + data.id + '"]').click(function (event) {
+    $('[data-image-id="' + data.id + '"]').click(function(event) {
       event.preventDefault();
       Fliplet.Navigate.to(data.action);
     });
   });
 }
 
-$.fn.fadeInImg = function (img) {
+$.fn.fadeInImg = function(img) {
   var $img = $(img);
 
-  return $(this).each(function () {
+  return $(this).each(function() {
     $(this).replaceWith(img);
-    setTimeout(function () {
+    setTimeout(function() {
       $img.addClass('lazy-loaded');
       loaded();
-      setTimeout(function () {
+      setTimeout(function() {
         $img.removeClass('lazy-placeholder');
-        $img.trigger('loaded.bs.banner')
+        $img.trigger('loaded.bs.banner');
       }, 0);
     }, 0);
   });
