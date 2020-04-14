@@ -7,10 +7,12 @@ var imageEditorProvider;
 var linkActionProvider;
 
 var filePickerData;
+var resetData = widgetData.image ? [widgetData.image] : [];
 var omitPages = page ? [page.id] : [];
 
 function init() {
   filePickerInit();
+  Fliplet.Widget.toggleCancelButton(false);
 
   // Load link action
   if (widgetData.action && widgetData.action.action === 'gallery') {
@@ -76,6 +78,13 @@ function attahObservers() {
       forwardSaveRequestFilePicker();
     }
 
+    Fliplet.Widget.complete();
+  });
+
+  Fliplet.Widget.onCancelRequest(function() {
+    filePickerData.selectFiles = resetData;
+
+    save(true);
     Fliplet.Widget.complete();
   });
 }
