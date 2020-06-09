@@ -2,7 +2,7 @@ var photoswipeHtml = '<!-- Root element of PhotoSwipe. Must have class pswp. -->
 
 function loaded(id) {
   // To process image selection after image is loaded
-  Fliplet.Widget.updateHighlightDimensions();
+  Fliplet.Widget.updateHighlightDimensions(id);
 }
 
 function checkImageIsLoaded(id) {
