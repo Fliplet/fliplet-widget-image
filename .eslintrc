@@ -1,8 +1,9 @@
 {
   "extends": "fliplet",
   "globals": {
-    Hermite_class: true,
-    PhotoSwipe: true,
-    Raven: true
+    "Hermite_class": true,
+    "PhotoSwipe": true,
+    "Raven": true,
+    "PhotoSwipeUI_Default": true
   }
 }

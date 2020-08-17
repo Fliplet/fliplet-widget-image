@@ -50,7 +50,7 @@ function forwardSaveRequestFilePicker() {
 function attahObservers() {
   // Handle the tap_action change event
   $('input[name="tap_action"]').on('change', function() {
-    if ($(this).val() === "link" && $(this).is(':checked')) {
+    if ($(this).val() === 'link' && $(this).is(':checked')) {
       if (!linkActionProvider) {
         linkProviderInit({ omitPages: omitPages });
       }
@@ -61,11 +61,16 @@ function attahObservers() {
     save();
   });
 
-  $('.nav-tabs [data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  $('.nav-tabs [data-toggle="tab"]').on('shown.bs.tab', function(e) {
     var tab = $(e.target).attr('href');
     if (tab === '#image-editor') {
       imageEditorInit();
     }
+  });
+
+  $('#image-description').on('input', function(e) {
+    widgetData.image.description = e.target.value;
+    save();
   });
 
   // 1. Fired from Fliplet Studio when the external save button is clicked
@@ -74,9 +79,9 @@ function attahObservers() {
 
     if (linkActionProvider && !$('#pinch').is(':checked') && !$('#none').is(':checked')) {
       return linkActionProvider.forwardSaveRequest();
-    } else {
-      forwardSaveRequestFilePicker();
     }
+
+    forwardSaveRequestFilePicker();
 
     Fliplet.Widget.complete();
   });
@@ -152,7 +157,7 @@ function imageEditorInit() {
     data: {
       image: widgetData.image
     },
-    onEvent: function(e, data) {
+    onEvent: function(e) {
       switch (e) {
         case 'widget-rendered':
           $('.image-editor-loading').removeClass('animated');
@@ -173,7 +178,7 @@ function imageEditorInit() {
   });
 }
 
-//mehtod used to init the link provider
+// method used to init the link provider
 function linkProviderInit(linkAction) {
   linkActionProvider = Fliplet.Widget.open('com.fliplet.link', {
     selector: '.link-actions',
@@ -213,7 +218,7 @@ function save(notifyComplete) {
     widgetData.action = null;
   }
 
-  var lazyLoadValue = $('#activate_lazyload').is(":checked");
+  var lazyLoadValue = $('#activate_lazyload').is(':checked');
   widgetData.lazyLoad = lazyLoadValue;
 
   if ($('#fullscreen').is(':checked') && $('input[name="tap_action"]:checked').val() === 'fullscreen') {

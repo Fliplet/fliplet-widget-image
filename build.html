@@ -5,7 +5,7 @@
         <span class="image-alert-placeholder">
           Displays in full screen mode
         </span>
-        <img src="{{image.url}}" />
+        <img src="{{image.url}}" alt="{{image.description}}"/>
       </span>
     </span>
   {{else}}
@@ -13,10 +13,10 @@
       {{#and image.width image.height}}
         <canvas data-image-id="{{id}}" data-image-uuid="{{uuid}}" class="lazy-placeholder"{{#if image.width}} width="{{image.width}}"{{/if}}{{#if image.height}} height="{{image.height}}"{{/if}}></canvas>
       {{else}}
-        <img data-image-id="{{id}}" data-image-uuid="{{uuid}}" class="lazy-placeholder" src="{{image.url}}" />
+        <img data-image-id="{{id}}" data-image-uuid="{{uuid}}" class="lazy-placeholder" src="{{image.url}}" alt="{{image.description}}"/>
       {{/and}}
     {{else}}
-      <img data-image-id="{{id}}" src="{{image.url}}" />
+      <img data-image-id="{{id}}" src="{{image.url}}" alt="{{image.description}}"/>
     {{/if}}
   {{/if}}
 {{else}}

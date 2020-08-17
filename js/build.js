@@ -15,7 +15,7 @@ function checkImageIsLoaded(id) {
   if (image.complete) {
     loaded(id);
   } else {
-    image.addEventListener('load', function () {
+    image.addEventListener('load', function() {
       loaded(id);
     });
   }
