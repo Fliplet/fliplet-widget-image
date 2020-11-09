@@ -1,7 +1,7 @@
 <div class="image-widget-holder">
   <header>
     <p>Configure your image</p>
-    <a href="https://help.fliplet.com/article/5-adding-images-to-your-app" target="_blank">Need help?</a>
+    <a href="https://help.fliplet.com/article/163" target="_blank">Need help?</a>
   </header>
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active" id="browse-control"><a href="#browse" data-toggle="tab">Select Image</a></li>
@@ -39,8 +39,8 @@
           <div class="radio radio-icon">
             <input type="radio" id="fullscreen" name="tap_action" value="fullscreen">
             <label for="fullscreen">
-                <span class="check"><i class="fa fa-circle"></i></span> Pinch-to-zoom (Full screen mode) - <small>This will cover any other content that you might have on the screen.</small>
-              </label>
+              <span class="check"><i class="fa fa-circle"></i></span> Pinch-to-zoom (Full screen mode) - <small>This will cover any other content that you might have on the screen.</small>
+            </label>
           </div>
           <div class="radio radio-icon">
             <input type="radio" id="link" name="tap_action" value="link">
@@ -62,6 +62,16 @@
               <span class="check"><i class="fa fa-check"></i></span> Enable
             </label>
           </div>
+        </div>
+      </div>
+      <div class="form-group cleafix">
+        <div class="col-xs-12">
+          <label class="control-label" for="image-description">Alternative text for your image (optional)</label>
+          <input class="form-control" id="image-description" type="text" value="{{image.description}}" placeholder="Describe the image" />
+          <p class="help-block">
+            Describe the image if it contains information for assistive technology to use. If the image
+            is decorative, leave it blank.
+          </p>
         </div>
       </div>
     </div>

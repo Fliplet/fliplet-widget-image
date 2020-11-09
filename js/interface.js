@@ -1,14 +1,18 @@
 var widgetId = Fliplet.Widget.getDefaultId();
 var widgetData = Fliplet.Widget.getData() || {};
+var page = Fliplet.Widget.getPage();
 
 var filePickerProvider;
 var imageEditorProvider;
 var linkActionProvider;
 
 var filePickerData;
+var resetData = widgetData.image ? [widgetData.image] : [];
+var omitPages = page ? [page.id] : [];
 
 function init() {
   filePickerInit();
+  Fliplet.Widget.toggleCancelButton(false);
 
   // Load link action
   if (widgetData.action && widgetData.action.action === 'gallery') {
@@ -16,6 +20,7 @@ function init() {
   }
 
   if (widgetData.action && widgetData.action.action !== 'gallery') {
+    widgetData.action.omitPages = omitPages;
     linkProviderInit(widgetData.action);
     $('.link-actions').addClass('show');
     $('#link').prop('checked', true);
@@ -45,9 +50,9 @@ function forwardSaveRequestFilePicker() {
 function attahObservers() {
   // Handle the tap_action change event
   $('input[name="tap_action"]').on('change', function() {
-    if ($(this).val() === "link" && $(this).is(':checked')) {
+    if ($(this).val() === 'link' && $(this).is(':checked')) {
       if (!linkActionProvider) {
-        linkProviderInit();
+        linkProviderInit({ omitPages: omitPages });
       }
       $('.link-actions').addClass('show');
       return;
@@ -56,20 +61,36 @@ function attahObservers() {
     save();
   });
 
-  $('.nav-tabs [data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  $('.nav-tabs [data-toggle="tab"]').on('shown.bs.tab', function(e) {
     var tab = $(e.target).attr('href');
     if (tab === '#image-editor') {
       imageEditorInit();
     }
   });
 
+  $('#image-description').on('input', function(e) {
+    widgetData.image.description = e.target.value;
+    save();
+  });
+
   // 1. Fired from Fliplet Studio when the external save button is clicked
   Fliplet.Widget.onSaveRequest(function() {
+    Fliplet.Widget.toggleSaveButton(false);
+
     if (linkActionProvider && !$('#pinch').is(':checked') && !$('#none').is(':checked')) {
       return linkActionProvider.forwardSaveRequest();
-    } else {
-      forwardSaveRequestFilePicker();
     }
+
+    forwardSaveRequestFilePicker();
+
+    Fliplet.Widget.complete();
+  });
+
+  Fliplet.Widget.onCancelRequest(function() {
+    filePickerData.selectFiles = resetData;
+
+    save(true);
+    Fliplet.Widget.complete();
   });
 }
 
@@ -136,7 +157,7 @@ function imageEditorInit() {
     data: {
       image: widgetData.image
     },
-    onEvent: function(e, data) {
+    onEvent: function(e) {
       switch (e) {
         case 'widget-rendered':
           $('.image-editor-loading').removeClass('animated');
@@ -157,7 +178,7 @@ function imageEditorInit() {
   });
 }
 
-//mehtod used to init the link provider
+// method used to init the link provider
 function linkProviderInit(linkAction) {
   linkActionProvider = Fliplet.Widget.open('com.fliplet.link', {
     selector: '.link-actions',
@@ -197,7 +218,7 @@ function save(notifyComplete) {
     widgetData.action = null;
   }
 
-  var lazyLoadValue = $('#activate_lazyload').is(":checked");
+  var lazyLoadValue = $('#activate_lazyload').is(':checked');
   widgetData.lazyLoad = lazyLoadValue;
 
   if ($('#fullscreen').is(':checked') && $('input[name="tap_action"]:checked').val() === 'fullscreen') {
@@ -209,7 +230,6 @@ function save(notifyComplete) {
   return Fliplet.Widget.save(widgetData).then(function() {
     if (notifyComplete) {
       Fliplet.Widget.complete();
-      Fliplet.Studio.emit('reload-page-preview');
     } else {
       Fliplet.Studio.emit('reload-widget-instance', widgetId);
     }
