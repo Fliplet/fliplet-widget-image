@@ -19,6 +19,13 @@
   bottom: 0;
 }
 
+.help-icon {
+  font-size: 16px;
+  margin-left: 8px;
+  color: #333;
+  opacity: 0.5;
+}
+
 .image-widget-holder .tab-pane {
   padding-top: 20px;
 }
