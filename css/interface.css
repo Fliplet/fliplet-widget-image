@@ -2,6 +2,7 @@
   width: 100%;
   border: 0;
   background-color: transparent;
+  flex: 1;
 }
 
 #image-manager iframe {
@@ -26,8 +27,20 @@
   opacity: 0.5;
 }
 
+.image-widget-holder .tab-content {
+  /* 83px is the size of the element above */
+  height: calc(100% - 83px);
+}
+
 .image-widget-holder .tab-pane {
   padding-top: 20px;
+  height: 100%;
+}
+
+.image-widget-holder .file-picker-holder {
+  display: flex;
+  flex-flow: column wrap;
+  height: 100%;
 }
 
 #preview-image {
