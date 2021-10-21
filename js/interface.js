@@ -1,6 +1,10 @@
 var widgetId = Fliplet.Widget.getDefaultId();
 var widgetData = Fliplet.Widget.getData() || {};
 var page = Fliplet.Widget.getPage();
+var queries = Fliplet.Navigate.query || {};
+
+// The following check is necessary because query value is a String
+var organizationIsSelfServe = queries.organizationIsSelfServe === 'true';
 
 var filePickerProvider;
 var imageEditorProvider;
@@ -100,7 +104,8 @@ function filePickerDataInit() {
     selectMultiple: false,
     type: 'image',
     fileExtension: ['JPG', 'JPEG', 'PNG', 'GIF', 'TIFF'],
-    autoSelectOnUpload: true
+    autoSelectOnUpload: true,
+    organizationIsSelfServe: organizationIsSelfServe
   };
 }
 
