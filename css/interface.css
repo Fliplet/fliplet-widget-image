@@ -12,7 +12,9 @@
 }
 
 .image-widget-holder {
-  padding: 15px 0;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 15px 0 0;
   position: absolute;
   left: 15px;
   right: 15px;
@@ -28,8 +30,7 @@
 }
 
 .image-widget-holder .tab-content {
-  /* 83px is the size of the element above */
-  height: calc(100% - 83px);
+  flex: 1;
 }
 
 .image-widget-holder .tab-pane {
@@ -95,6 +96,7 @@
   font-weight: bold;
   margin: 0;
 }
+
 /*LINK ACTION - NOT NEEDED*/
 #document,
 #screen,
@@ -115,11 +117,11 @@
   padding-top: 12px;
 }
 
-.inline-radio .radio.radio-icon + .radio.radio-icon {
+.inline-radio .radio.radio-icon+.radio.radio-icon {
   margin-top: 0;
 }
 
-.inline-radio .radio.radio-icon input[type="radio"] + label {
+.inline-radio .radio.radio-icon input[type="radio"]+label {
   padding-left: 15px;
 }
 
@@ -149,11 +151,11 @@
   border-color: #0087a6;
 }
 
-.inline-radio .radio.radio-icon + .radio.radio-icon {
+.inline-radio .radio.radio-icon+.radio.radio-icon {
   margin-top: 0;
 }
 
-.inline-radio .radio.radio-icon input[type="radio"] + label {
+.inline-radio .radio.radio-icon input[type="radio"]+label {
   padding-left: 15px;
 }
 
