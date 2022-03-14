@@ -48,7 +48,7 @@
   position: relative;
   text-align: center;
   border: 1px solid #d9ddde;
-  background-color: #FFF;
+  background-color: #fff;
 }
 
 #preview-image img {
@@ -87,7 +87,7 @@
 
 .titles {
   font-size: 1em;
-  border-bottom: 1px solid #E3E9EB;
+  border-bottom: 1px solid #e3e9eb;
   margin-bottom: 2rem;
   padding-bottom: 1em;
 }
@@ -117,11 +117,11 @@
   padding-top: 12px;
 }
 
-.inline-radio .radio.radio-icon+.radio.radio-icon {
+.inline-radio .radio.radio-icon + .radio.radio-icon {
   margin-top: 0;
 }
 
-.inline-radio .radio.radio-icon input[type="radio"]+label {
+.inline-radio .radio.radio-icon input[type="radio"] + label {
   padding-left: 15px;
 }
 
@@ -132,7 +132,7 @@
 
 .form-group .btn-default {
   color: #333;
-  background-color: #FFF;
+  background-color: #fff;
   border: 1px solid #e4e9eb;
   border-bottom-width: 2px;
   border-radius: 6px;
@@ -146,16 +146,16 @@
 }
 
 .form-group .btn-default:active:focus {
-  color: #FFF;
+  color: #fff;
   background-color: #0087a6;
   border-color: #0087a6;
 }
 
-.inline-radio .radio.radio-icon+.radio.radio-icon {
+.inline-radio .radio.radio-icon + .radio.radio-icon {
   margin-top: 0;
 }
 
-.inline-radio .radio.radio-icon input[type="radio"]+label {
+.inline-radio .radio.radio-icon input[type="radio"] + label {
   padding-left: 15px;
 }
 
