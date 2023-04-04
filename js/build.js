@@ -22,8 +22,13 @@ function checkImageIsLoaded(id) {
 }
 
 function imageInstance(data) {
+  if (!data) {
+    return;
+  }
+
   if (!data.image) {
     checkImageIsLoaded(data.id);
+
     return;
   }
 
@@ -65,6 +70,7 @@ function imageInstance(data) {
 
       // Start full screen image
       gallery.init();
+
       return;
     }
 
@@ -107,6 +113,7 @@ function imageInstance(data) {
         event.preventDefault();
         Fliplet.Navigate.to(data.action);
       });
+
       return;
     }
 
