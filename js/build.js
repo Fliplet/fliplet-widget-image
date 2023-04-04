@@ -22,13 +22,11 @@ function checkImageIsLoaded(id) {
 }
 
 function imageInstance(data) {
-  if (data && !data.image) {
+  if (!data.image) {
     checkImageIsLoaded(data.id);
 
     return;
   }
-
-  data = data || {};
 
   var canvas = this;
   var imageUrl = _.get(data, 'image.url', 'https://placehold.it/2160x680.png?text=Image');
