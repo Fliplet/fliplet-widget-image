@@ -1,0 +1,15 @@
+fl-helper[name="image-component"] {
+  /* add css here */
+}
+
+fl-helper[name="image-component"] .font-weight-bold {
+  font-weight: bold;
+}
+
+fl-helper[name="image-component"] .ds-id {
+  color: red;
+}
+
+fl-helper[name="image-component"] .ds-name {
+  
+}
