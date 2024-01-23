@@ -1,12 +1,24 @@
-// // This function is used to generate the interface for the widget
-var dataSourceColumns = [];
 
-Fliplet.Widget.generateInterface({
-  title: 'Image component',
-  fields: [
-    {
-      type: 'html',
-      html: `<header>
+Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' } }).then(function(widgets) {
+  if (!widgets.length) {
+    return Promise.reject('This widget must be placed inside a Dynamic Container component');
+  }
+
+  const dynamicContainerParent = widgets[0];
+  const dataSourceId = dynamicContainerParent.dataSourceId;
+
+  return Fliplet.DataSources.getById(dynamicContainerParent.dataSourceId, {
+    attributes: ['name', 'columns']
+  }).then(async function(dataSource) {
+    const dataSourceColumns = dataSource.columns;
+    const dataSourceName = dataSource.name;
+
+    return Fliplet.Widget.generateInterface({
+      title: 'Image component',
+      fields: [
+        {
+          type: 'html',
+          html: `<header>
               <p>
                 Configure image
               <a
@@ -17,59 +29,39 @@ Fliplet.Widget.generateInterface({
                 <i class="fa fa-question-circle-o"></i>
               </a>
               </p>
-            </header>
-            <hr/>`
-    },
-    {
-      type: 'html',
-      html: `<div>
-              <h3 class="font-weight-bold">Get image from</h3>
-              <p>
-                <span class="ds-id">xxxxxx</span>
-                <span class="ds-name">xxxx xxxx xxxx</span>
+            </header>`
+        },
+        {
+          type: 'html',
+          html: `<div>
+              <h3 style="color: black; font-weight: 600;">Get image from</h3>
+              <p style="margin-bottom: 5px;">
+                <span style="color: red;">${dataSourceId} </span>
+                <span style="color: black; font-weight: 600;">${dataSourceName}</span>
               </p>
+              <p style="color: grey; font-size: 10px; margin-bottom: 25px;">To change this Data Source, go to Parent data container</p>
             </div>`
-    },
-    {
-      name: 'imageColumn',
-      type: 'dropdown',
-      label: 'Select column',
-      options: dataSourceColumns,
-      default: '',
-      ready: async function() {
-        if (Fliplet.DynamicContainer) {
-          return await Fliplet.DynamicContainer.get().then(function(
-            container
-          ) {
-            return container.connection().then(function(connection) {
-              return connection.id;
-            }).then((dataSourceId) => {
-              return Fliplet.DataSources.getById(dataSourceId, {
-                attributes: ['columns']
-              }).then(async function(dataSource) {
-                dataSourceColumns = dataSource.columns.map((el) => {
-                  return {
-                    id: el,
-                    label: el
-                  };
-                });
-
-                return Promise.resolve(true);
-              });
-            });
-          });
+        },
+        {
+          name: 'imageColumn',
+          type: 'dropdown',
+          label: 'Select column',
+          options: dataSourceColumns,
+          default: ''
+        },
+        {
+          name: 'showIfImageNotFound',
+          type: 'radio',
+          label: 'If no image found',
+          options: [
+            { value: 'Placeholder', label: 'Show placeholder' },
+            { value: 'None', label: 'None' }
+          ],
+          default: 'Placeholder'
         }
-      }
-    },
-    {
-      name: 'noImageFound',
-      type: 'radio',
-      label: 'If no image found',
-      options: [
-        { value: 'Placeholder', label: 'Show placeholder' },
-        { value: 'None', label: 'None' }
-      ],
-      default: 'Placeholder'
-    }
-  ]
+      ]
+    });
+  });
 });
+
+

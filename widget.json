@@ -1,13 +1,11 @@
 {
-  "name": "Image component",
+  "name": "ImageComponent",
   "package": "com.fliplet.image-component",
   "version": "1.0.0",
   "icon": "img/icon.png",
   "tags": ["type:component", "category:general"],
   "provider_only": false,
-  "references": [
-    "image-content:richContent"
-  ],
+  "references": [],
   "settings": {
     "asyncRendering": true,
     "interfaceWidgetPackage": "com.fliplet.helper-configuration"
@@ -17,7 +15,8 @@
     "dependencies": [
       "fliplet-core",
       "fliplet-studio-ui",
-      "fliplet-media"
+      "fliplet-media",
+      "fliplet-datasources"
     ],
     "assets": [
       "js/interface.js"
@@ -36,5 +35,1056 @@
       "css/index.scss"
     ],
     "appAssets": []
+  },
+  "themeSettings": {
+    "name": "ImageComponent",
+    "variablePrefix": "imageComponent",
+    "variables": [
+      {
+        "description": "Width and Height",
+        "fields": [
+          {
+            "name": "Width",
+            "default": "auto",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["width"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "WidthTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "WidthDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "width",
+            "label": "Width"
+          },
+          {
+            "name": "MinWidth",
+            "default": "auto",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["min-width"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "MinWidthTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "MinWidthDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "width",
+            "label": "Min"
+          },
+          {
+            "name": "MaxWidth",
+            "default": "100%",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["max-width"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "MaxWidthTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "MaxWidthDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "max-width",
+            "label": "Max"
+          },
+          {
+            "name": "Height",
+            "default": "auto",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["height"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "HeightTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "HeightDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "height",
+            "label": "Height"
+          },
+          {
+            "name": "MinHeight",
+            "default": "auto",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["min-height"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "MinHeightTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "MinHeightDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "height",
+            "label": "Min"
+          },
+          {
+            "name": "MaxHeight",
+            "default": "none",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["max-height"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "MaxHeightTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "MaxHeightDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "max-height",
+            "label": "Max"
+          }
+        ]
+      },
+      {
+        "description": "Positioning",
+        "fields": [
+          {
+            "name": "Position",
+            "default": "relative",
+            "columns": 12,
+            "logic": {
+              "relative": {
+                "hide": [
+                  "PositionTop",
+                  "PositionRight",
+                  "PositionBottom",
+                  "PositionLeft"
+                ],
+                "show": ["Display"]
+              },
+              "absolute": {
+                "show": [
+                  "PositionTop",
+                  "PositionRight",
+                  "PositionBottom",
+                  "PositionLeft"
+                ],
+                "hide": ["Display"]
+              },
+              "fixed": {
+                "show": [
+                  "PositionTop",
+                  "PositionRight",
+                  "PositionBottom",
+                  "PositionLeft"
+                ],
+                "hide": ["Display"]
+              }
+            },
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["position"],
+                "type": "position",
+                "siblings": {
+                  "top": "PositionTop",
+                  "right": "PositionRight",
+                  "bottom": "PositionBottom",
+                  "left": "PositionLeft"
+                }
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "PositionTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "PositionDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "position"
+          },
+          {
+            "name": "Display",
+            "default": "inline-block",
+            "columns": 12,
+            "logic": {
+              "block": {
+                "show": ["MarginAlign"]
+              },
+              "inline-block": {
+                "hide": ["MarginAlign"]
+              }
+            },
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["display"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "DisplayTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "DisplayDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "display"
+          },
+          {
+            "name": "PositionTop",
+            "default": "auto",
+            "columns": 6,
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["top"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "PositionTopTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "PositionTopDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "label": "Top",
+            "type": "size",
+            "subtype": "position",
+            "allowNegative": true
+          },
+          {
+            "name": "PositionRight",
+            "default": "auto",
+            "columns": 6,
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["right"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "PositionRightTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "PositionRightDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "label": "Right",
+            "type": "size",
+            "subtype": "position",
+            "allowNegative": true
+          },
+          {
+            "name": "PositionBottom",
+            "default": "auto",
+            "columns": 6,
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["bottom"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "PositionBottomTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "PositionBottomDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "label": "Bottom",
+            "type": "size",
+            "subtype": "position",
+            "allowNegative": true
+          },
+          {
+            "name": "PositionLeft",
+            "default": "auto",
+            "columns": 6,
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["left"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "PositionLeftTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "PositionLeftDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "label": "Left",
+            "type": "size",
+            "subtype": "position",
+            "allowNegative": true
+          }
+        ]
+      },
+      {
+        "description": "Layer order",
+        "fields": [
+          {
+            "name": "Index",
+            "default": "auto",
+            "columns": 12,
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["z-index"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "IndexTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "IndexDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "z-index"
+          }
+        ]
+      },
+      {
+        "description": "Margin",
+        "fields": [
+          {
+            "name": "MarginAlign",
+            "default": "custom",
+            "columns": 12,
+            "logic": {
+              "left": {
+                "MarginRight": "auto",
+                "MarginLeft": "0px"
+              },
+              "center": {
+                "MarginRight": "auto",
+                "MarginLeft": "auto"
+              },
+              "right": {
+                "MarginRight": "0px",
+                "MarginLeft": "auto"
+              },
+              "custom": [
+                "MarginTop",
+                "MarginRight",
+                "MarginBottom",
+                "MarginLeft"
+              ]
+            },
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["margin"],
+                "type": "margin"
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "MarginAlignTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "MarginAlignDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "margin-align"
+          },
+          {
+            "name": "MarginTop",
+            "default": "0px",
+            "columns": 6,
+            "logic": "MarginAlign",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["margin-top"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "MarginTopTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "MarginTopDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "margin",
+            "label": "Top",
+            "allowNegative": true
+          },
+          {
+            "name": "MarginRight",
+            "default": "0px",
+            "columns": 6,
+            "logic": "MarginAlign",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["margin-right"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "MarginRightTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "MarginRightDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "margin",
+            "label": "Right",
+            "allowNegative": true
+          },
+          {
+            "name": "MarginBottom",
+            "default": "0px",
+            "columns": 6,
+            "logic": "imageMarginAlign",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["margin-bottom"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "MarginBottomTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "MarginBottomDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "margin",
+            "label": "Bottom",
+            "allowNegative": true
+          },
+          {
+            "name": "MarginLeft",
+            "default": "0px",
+            "columns": 6,
+            "logic": "MarginAlign",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "properties": ["margin-left"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "MarginLeftTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "MarginLeftDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "margin",
+            "label": "Left",
+            "allowNegative": true
+          }
+        ]
+      },
+      {
+        "description": "Padding",
+        "fields": [
+          {
+            "name": "PaddingTop",
+            "default": "0px",
+            "columns": 6,
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["padding-top"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "PaddingTopTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "PaddingTopDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "padding",
+            "label": "Top"
+          },
+          {
+            "name": "PaddingRight",
+            "default": "0px",
+            "columns": 6,
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["padding-right"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "PaddingRightTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "PaddingRightDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "padding",
+            "label": "Right"
+          },
+          {
+            "name": "PaddingBottom",
+            "default": "0px",
+            "columns": 6,
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["padding-bottom"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "PaddingBottomTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "PaddingBottomDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "padding",
+            "label": "Bottom"
+          },
+          {
+            "name": "PaddingLeft",
+            "default": "0px",
+            "columns": 6,
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["padding-left"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "PaddingLeftTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "PaddingLeftDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "padding",
+            "label": "Left"
+          }
+        ]
+      },
+      {
+        "description": "Border",
+        "fields": [
+          {
+            "name": "BorderSides",
+            "default": "none",
+            "logic": {
+              "none": {
+                "hide": ["BorderWidth", "BorderStyle", "BorderColor"]
+              },
+              "all": {
+                "show": ["BorderWidth", "BorderStyle", "BorderColor"]
+              },
+              "top": {
+                "show": ["BorderWidth", "BorderStyle", "BorderColor"]
+              },
+              "right": {
+                "show": ["BorderWidth", "BorderStyle", "BorderColor"]
+              },
+              "bottom": {
+                "show": ["BorderWidth", "BorderStyle", "BorderColor"]
+              },
+              "left": {
+                "show": ["BorderWidth", "BorderStyle", "BorderColor"]
+              }
+            },
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["border"],
+                "type": "border",
+                "siblings": {
+                  "sides": "BorderSides",
+                  "width": "BorderWidth",
+                  "style": "BorderStyle",
+                  "color": "BorderColor"
+                }
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "BorderSidesTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "BorderSidesDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "select",
+            "subtype": "border-sides"
+          },
+          {
+            "name": "BorderColor",
+            "default": "rgba(0, 0, 0, 0.2)",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["border"],
+                "type": "border",
+                "siblings": {
+                  "sides": "BorderSides",
+                  "width": "BorderWidth",
+                  "style": "BorderStyle",
+                  "color": "BorderColor"
+                }
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "BorderColorTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "BorderColorDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "color"
+          },
+          {
+            "name": "BorderWidth",
+            "default": "1px",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["border"],
+                "type": "border",
+                "siblings": {
+                  "sides": "BorderSides",
+                  "width": "BorderWidth",
+                  "style": "BorderStyle",
+                  "color": "BorderColor"
+                }
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "BorderWidthTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "BorderWidthDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "size",
+            "subtype": "border"
+          },
+          {
+            "name": "BorderStyle",
+            "default": "solid",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["border"],
+                "type": "border",
+                "siblings": {
+                  "sides": "BorderSides",
+                  "width": "BorderWidth",
+                  "style": "BorderStyle",
+                  "color": "BorderColor"
+                }
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "BorderStyleTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "BorderStyleDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "border-style"
+          },
+          {
+            "name": "BorderRadius",
+            "default": "0px",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["border-radius"]
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "BorderRadiusTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "BorderRadiusDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "label": "Corner radius",
+            "type": "size",
+            "subtype": "border"
+          }
+        ]
+      },
+      {
+        "description": "Shadow",
+        "fields": [
+          {
+            "name": "ShadowStyle",
+            "default": "none",
+            "logic": {
+              "none": {
+                "hide": [
+                  "ShadowXoffset",
+                  "ShadowYoffset",
+                  "ShadowBlur",
+                  "ShadowSpread",
+                  "ShadowColor"
+                ]
+              },
+              "outset": {
+                "show": [
+                  "ShadowXoffset",
+                  "ShadowYoffset",
+                  "ShadowBlur",
+                  "ShadowSpread",
+                  "ShadowColor"
+                ]
+              },
+              "inset": {
+                "show": [
+                  "ShadowXoffset",
+                  "ShadowYoffset",
+                  "ShadowBlur",
+                  "ShadowSpread",
+                  "ShadowColor"
+                ]
+              }
+            },
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["box-shadow"],
+                "type": "shadow",
+                "siblings": {
+                  "style": "ShadowStyle",
+                  "xoffset": "ShadowXoffset",
+                  "yoffset": "ShadowYoffset",
+                  "blur": "ShadowBlur",
+                  "spread": "ShadowSpread",
+                  "color": "ShadowColor"
+                }
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "ShadowStyleTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "ShadowStyleDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "select",
+            "subtype": "shadow-style"
+          },
+          {
+            "name": "ShadowXoffset",
+            "default": "0px",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["box-shadow"],
+                "type": "shadow",
+                "siblings": {
+                  "style": "ShadowStyle",
+                  "xoffset": "ShadowXoffset",
+                  "yoffset": "ShadowYoffset",
+                  "blur": "ShadowBlur",
+                  "spread": "ShadowSpread",
+                  "color": "ShadowColor"
+                }
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "ShadowXoffsetTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "ShadowXoffsetDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "label": "X offset",
+            "type": "size",
+            "subtype": "shadow",
+            "allowNegative": true
+          },
+          {
+            "name": "ShadowYoffset",
+            "default": "10px",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["box-shadow"],
+                "type": "shadow",
+                "siblings": {
+                  "style": "ShadowStyle",
+                  "xoffset": "ShadowXoffset",
+                  "yoffset": "ShadowYoffset",
+                  "blur": "ShadowBlur",
+                  "spread": "ShadowSpread",
+                  "color": "ShadowColor"
+                }
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "ShadowYoffsetTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "ShadowYoffsetDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "label": "Y offset",
+            "type": "size",
+            "subtype": "shadow",
+            "allowNegative": true
+          },
+          {
+            "name": "ShadowBlur",
+            "default": "20px",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["box-shadow"],
+                "type": "shadow",
+                "siblings": {
+                  "style": "ShadowStyle",
+                  "xoffset": "ShadowXoffset",
+                  "yoffset": "ShadowYoffset",
+                  "blur": "ShadowBlur",
+                  "spread": "ShadowSpread",
+                  "color": "ShadowColor"
+                }
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "ShadowBlurTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "ShadowBlurDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "label": "Blur",
+            "type": "size",
+            "subtype": "shadow"
+          },
+          {
+            "name": "ShadowSpread",
+            "default": "0px",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["box-shadow"],
+                "type": "shadow",
+                "siblings": {
+                  "style": "ShadowStyle",
+                  "xoffset": "ShadowXoffset",
+                  "yoffset": "ShadowYoffset",
+                  "blur": "ShadowBlur",
+                  "spread": "ShadowSpread",
+                  "color": "ShadowColor"
+                }
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "ShadowSpreadTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "ShadowSpreadDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "label": "Spread",
+            "type": "size",
+            "subtype": "shadow"
+          },
+          {
+            "name": "ShadowColor",
+            "default": "rgba(0, 0, 0, 0.2)",
+            "styles": [
+              {
+                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "selectors": "img[data-image-id]",
+                "properties": ["box-shadow"],
+                "type": "shadow",
+                "siblings": {
+                  "style": "ShadowStyle",
+                  "xoffset": "ShadowXoffset",
+                  "yoffset": "ShadowYoffset",
+                  "blur": "ShadowBlur",
+                  "spread": "ShadowSpread",
+                  "color": "ShadowColor"
+                }
+              }
+            ],
+            "breakpoints": {
+              "tablet": {
+                "name": "ShadowColorTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "ShadowColorDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "color"
+          }
+        ]
+      },
+      {
+        "description": "Visibility",
+        "appSupportsContainers": true,
+        "fields": [
+          {
+            "name": "Visibility",
+            "default": "visible",
+            "columns": 12,
+            "breakpoints": {
+              "tablet": {
+                "name": "VisibilityTablet",
+                "default": "inherit-mobile"
+              },
+              "desktop": {
+                "name": "VisibilityDesktop",
+                "default": "inherit-tablet"
+              }
+            },
+            "type": "toggle",
+            "subtype": "visibility"
+          }
+        ]
+      }
+    ]
   }
 }
