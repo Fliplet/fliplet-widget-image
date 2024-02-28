@@ -125,8 +125,15 @@ function filePickerInit() {
         case 'widget-rendered':
           break;
         case 'widget-set-info':
-          var oldSelectedFileId = filePickerData.selectFiles.length ? filePickerData.selectFiles[0].id :
-            (widgetData.image) ? widgetData.image.id : '';
+          var oldSelectedFileId;
+
+          if (filePickerData.selectFiles.length) {
+            oldSelectedFileId = filePickerData.selectFiles[0].id;
+          } else if (widgetData.image) {
+            oldSelectedFileId = widgetData.image.id;
+          } else {
+            oldSelectedFileId = '';
+          }
 
           filePickerData.selectFiles = data.length ? data : [];
 
