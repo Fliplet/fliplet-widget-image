@@ -11,7 +11,6 @@ var resetData = widgetData.image ? [widgetData.image] : [];
 var omitPages = page ? [page.id] : [];
 
 function init() {
-  debugger;
   filePickerInit();
   Fliplet.Widget.toggleCancelButton(false);
 
