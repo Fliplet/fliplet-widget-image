@@ -54,15 +54,19 @@ function attahObservers() {
       if (!linkActionProvider) {
         linkProviderInit({ omitPages: omitPages });
       }
+
       $('.link-actions').addClass('show');
+
       return;
     }
+
     $('.link-actions').removeClass('show');
     save();
   });
 
   $('.nav-tabs [data-toggle="tab"]').on('shown.bs.tab', function(e) {
     var tab = $(e.target).attr('href');
+
     if (tab === '#image-editor') {
       imageEditorInit();
     }
@@ -107,10 +111,12 @@ function filePickerDataInit() {
 function filePickerInit() {
   filePickerDataInit();
   filePickerData.filePickerOpenFromImage = true;
+
   if (filePickerProvider) {
     filePickerProvider = null;
     $('.file-picker-holder').html('');
   }
+
   filePickerProvider = Fliplet.Widget.open('com.fliplet.file-picker', {
     selector: '.file-picker-holder',
     data: filePickerData,
@@ -119,15 +125,26 @@ function filePickerInit() {
         case 'widget-rendered':
           break;
         case 'widget-set-info':
-          oldSelectedFileId = filePickerData.selectFiles.length ? filePickerData.selectFiles[0].id :
-            (widgetData.image) ? widgetData.image.id : '';
+          var oldSelectedFileId;
+
+          if (filePickerData.selectFiles.length) {
+            oldSelectedFileId = filePickerData.selectFiles[0].id;
+          } else if (widgetData.image) {
+            oldSelectedFileId = widgetData.image.id;
+          } else {
+            oldSelectedFileId = '';
+          }
+
           filePickerData.selectFiles = data.length ? data : [];
+
           if (data.length) {
             save();
+
             if (oldSelectedFileId !== data[0].id) {
               imageEditorInit();
             }
           }
+
           break;
         default:
           break;
@@ -152,6 +169,7 @@ function imageEditorInit() {
     $('.image-editor-holder').html('');
     $('.image-editor-loading').addClass('animated');
   }
+
   imageEditorProvider = Fliplet.Widget.open('com.fliplet.image-editor', {
     selector: '.image-editor-holder',
     data: {
@@ -214,11 +232,16 @@ function save(notifyComplete) {
     $('.nav-tabs li').removeClass('disabled');
   }
 
+  if (widgetData.image && !widgetData.image.description) {
+    widgetData.image.description = $('#image-description').val();
+  }
+
   if ($('#none').is(':checked') && widgetData.action) {
     widgetData.action = null;
   }
 
   var lazyLoadValue = $('#activate_lazyload').is(':checked');
+
   widgetData.lazyLoad = lazyLoadValue;
 
   if ($('#fullscreen').is(':checked') && $('input[name="tap_action"]:checked').val() === 'fullscreen') {
