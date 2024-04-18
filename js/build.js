@@ -6,20 +6,39 @@ Fliplet.Widget.instance({
       '<span class="image-component-container"></span>'
     ].join(''),
     ready: async function() {
-      const imageComponent = this;
-      const currentEntry = imageComponent.parent.entry;
-      const imageComponentInstanceId = imageComponent.id;
-      const placeholderPath = Fliplet.Widget.getAsset(imageComponentInstanceId, 'img/placeholder.jpg');
-      const $imageContainer = $(imageComponent.$el).find('.image-component-container');
+      const image = this;
+      const entryData = image?.parent?.entry?.data || {};
+      const imageInstanceId = image.id;
+      const $imageContainer = $(image.$el).find('.image-component-container');
 
-      let selectedImageColumn = null;
-      let showIfImageNotFound = null;
+      image.fields = _.assign(
+        {
+          showIfImageNotFound: 'Placeholder',
+          imageColumnName: ''
+        },
+        image.fields
+      );
 
-      if (Fliplet.Env.get('interface') || Fliplet.Env.get('mode') === 'interact') {
-        return renderImage(true);
+      let imageOptions = {
+        showPlaceholder: false,
+        url: null,
+        alt: 'Image placeholder',
+        imageColumnName: image.fields.showIfImageNotFound,
+        showIfImageNotFound: image.fields.showIfImageNotFound,
+        placeholderPath: Fliplet.Widget.getAsset(imageInstanceId, 'img/placeholder.jpg')
+      };
+
+      if (Fliplet.Env.get('interface') || Fliplet.Env.get('mode') === 'interact' || !imageOptions.imageColumnName) {
+        if (imageOptions.showIfImageNotFound === 'Placeholder') {
+          imageOptions.showPlaceholder = true;
+
+          return renderImage();
+        }
+
+        return;
       }
 
-      Fliplet.Widget.findParents({ instanceId: imageComponentInstanceId }).then(function(widgets) {
+      Fliplet.Widget.findParents({ instanceId: imageInstanceId }).then(function(widgets) {
         const dynamicContainer = widgets.find(widget => widget.package === 'com.fliplet.dynamic-container');
 
         if (!dynamicContainer) {
@@ -33,47 +52,29 @@ Fliplet.Widget.instance({
           return;
         }
 
-        imageComponent.fields = _.assign(
-          {
-            showIfImageNotFound: 'Placeholder',
-            imageColumn: ''
-          },
-          imageComponent.fields
-        );
-
-        selectedImageColumn = imageComponent.fields.imageColumn;
-        showIfImageNotFound = imageComponent.fields.showIfImageNotFound;
-
-        if (!selectedImageColumn) {
-          return; // TODO render placeholder, show image, or nothing?
-          // return renderImage(true);
-        }
-
-        // renderImage(!selectedImageColumn); // TODO
         renderImage();
       });
 
-      function renderImage(notPreview = false) {
-        const image = { url: '', alt: 'Image placeholder' };
-        let imageColumnValue = currentEntry.data[selectedImageColumn];
+      function renderImage() {
+        const imageColumnUrlValue = entryData[imageOptions.imageColumnName];
 
-        if (notPreview) {
-          image.url = placeholderPath;
-        } else if (imageColumnValue && imageColumnValue.length) {
-          if (Array.isArray(imageColumnValue)) {
-            image.url = imageColumnValue[0];
+        if (imageOptions.showPlaceholder) {
+          imageOptions.url = imageOptions.placeholderPath;
+        } else if (imageColumnUrlValue?.length) {
+          if (Array.isArray(imageColumnUrlValue)) {
+            imageOptions.url = imageColumnUrlValue[0];
           } else {
-            image.url = imageColumnValue;
+            imageOptions.url = imageColumnUrlValue;
           }
 
-          image.alt = 'Image component';
-        } else if (showIfImageNotFound === 'Placeholder') {
-          image.url = placeholderPath;
+          imageOptions.alt = 'Image component';
+        } else if (imageOptions.showIfImageNotFound === 'Placeholder') {
+          imageOptions.url = imageOptions.placeholderPath;
         } else {
           return; // Exit early if image doesn't exist and placeholder shouldn't be shown
         }
 
-        $imageContainer.html(`<img data-image-id="${imageComponentInstanceId}" src="${image.url}" alt="${image.alt}" />`);
+        $imageContainer.html(`<img data-image-id="${imageInstanceId}" src="${imageOptions.url}" alt="${imageOptions.alt}" />`);
       }
     }
   }

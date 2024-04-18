@@ -7,7 +7,7 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
   const dynamicContainerParent = widgets[0];
   const dataSourceId = dynamicContainerParent.dataSourceId;
 
-  return Fliplet.DataSources.getById(dynamicContainerParent.dataSourceId, {
+  return Fliplet.DataSources.getById(dataSourceId, {
     attributes: ['name', 'columns']
   }).then(async function(dataSource) {
     const dataSourceColumns = dataSource.columns;
@@ -43,9 +43,9 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
             </div>`
         },
         {
-          name: 'imageColumn',
+          name: 'imageColumnName',
           type: 'dropdown',
-          label: 'Select column',
+          label: 'Select image column',
           options: dataSourceColumns,
           default: ''
         },
