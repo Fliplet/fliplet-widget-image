@@ -1,4 +1,3 @@
-// Register this widget instance
 Fliplet.Widget.instance({
   name: 'image-component',
   displayName: 'Image component',
@@ -7,29 +6,8 @@ Fliplet.Widget.instance({
       '<span class="image-component-container"></span>'
     ].join(''),
     ready: async function() {
-      // todo remove
-      // ---------------------------------------------------------------------------------------
-      // await Fliplet.Widget.initializeChildren(this.$el, this);
-
-      // var src = 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ_13AsYQmPk9sRrdCs7Wr46-fpEJ3tY0GrHMiw-aEkNkGnW8hw';
-
-      // $(this.$el).find('.image-component-container').html(`<img data-image-id="1" src="${src}" alt="Image component" />`);
-
-      // var x = 1;
-      // var y = 1;
-
-      // if (x === y) {
-      //   return Promise.resolve('');
-      // }
-      // ---------------------------------------------------------------------------------------
-
-      if (Fliplet.Env.get('interface')) {
-        return;
-      }
-
       const imageComponent = this;
       const currentEntry = imageComponent.parent.entry;
-      // const instanceId = Fliplet.Widget.getDefaultId();
       const imageComponentInstanceId = imageComponent.id;
       const placeholderPath = Fliplet.Widget.getAsset(imageComponentInstanceId, 'img/placeholder.jpg');
       const $imageContainer = $(imageComponent.$el).find('.image-component-container');
@@ -37,53 +15,65 @@ Fliplet.Widget.instance({
       let selectedImageColumn = null;
       let showIfImageNotFound = null;
 
-      // TODO uncomment
-      // Fliplet.Widget.findParents({ instanceId: imageComponentInstanceId }).then(function(widgets) {
-      //   const dynamicContainer = widgets.find(widget => widget.package === 'com.fliplet.dynamic-container');
-
-      //   if (!dynamicContainer) {
-      //     return;
-      //   }
-
-      //   const recordContainer = widgets.find(widget => widget.package === 'com.fliplet.record-container');
-      //   const listRepeater = widgets.find(widget => widget.package === 'com.fliplet.repeater');
-
-      //   if (!recordContainer && !listRepeater) {
-      //     return;
-      //   }
-
-      imageComponent.fields = _.assign(
-        {
-          showIfImageNotFound: 'Placeholder',
-          imageColumn: ''
-        },
-        imageComponent.fields
-      );
-
-      // selectedImageColumn = 'Link'; // imageComponent.fields.imageColumn; // TODO uncomment
-      selectedImageColumn = imageComponent.fields.imageColumn; // TODO uncomment
-      showIfImageNotFound = imageComponent.fields.showIfImageNotFound;
-
-      if (!selectedImageColumn) {
-        return;
+      if (Fliplet.Env.get('interface') || Fliplet.Env.get('mode') === 'interact') {
+        return renderImage(true);
       }
 
-      renderImage();
-      // });
+      Fliplet.Widget.findParents({ instanceId: imageComponentInstanceId }).then(function(widgets) {
+        const dynamicContainer = widgets.find(widget => widget.package === 'com.fliplet.dynamic-container');
 
-      function renderImage() {
-        let imageColumnValue = currentEntry.data[selectedImageColumn];
-        let finalImage = '';
-
-        if (imageColumnValue && Array.isArray(imageColumnValue) && imageColumnValue.length) {
-          finalImage = `<img data-image-id="${imageComponentInstanceId}" src="${imageColumnValue[0]}" alt="Image component" />`;
-        } else if (imageColumnValue) {
-          finalImage = `<img data-image-id="${imageComponentInstanceId}" src="${imageColumnValue}" alt="Image component" />`;
-        } else if (showIfImageNotFound === 'Placeholder') {
-          finalImage = `<img data-image-id="${imageComponentInstanceId}" src="${placeholderPath}" alt="Image placeholder" />`;
+        if (!dynamicContainer) {
+          return;
         }
 
-        $imageContainer.html(finalImage);
+        const recordContainer = widgets.find(widget => widget.package === 'com.fliplet.record-container');
+        const listRepeater = widgets.find(widget => widget.package === 'com.fliplet.repeater');
+
+        if (!recordContainer && !listRepeater) {
+          return;
+        }
+
+        imageComponent.fields = _.assign(
+          {
+            showIfImageNotFound: 'Placeholder',
+            imageColumn: ''
+          },
+          imageComponent.fields
+        );
+
+        selectedImageColumn = imageComponent.fields.imageColumn;
+        showIfImageNotFound = imageComponent.fields.showIfImageNotFound;
+
+        if (!selectedImageColumn) {
+          return; // TODO render placeholder, show image, or nothing?
+          // return renderImage(true);
+        }
+
+        // renderImage(!selectedImageColumn); // TODO
+        renderImage();
+      });
+
+      function renderImage(notPreview = false) {
+        const image = { url: '', alt: 'Image placeholder' };
+        let imageColumnValue = currentEntry.data[selectedImageColumn];
+
+        if (notPreview) {
+          image.url = placeholderPath;
+        } else if (imageColumnValue && imageColumnValue.length) {
+          if (Array.isArray(imageColumnValue)) {
+            image.url = imageColumnValue[0];
+          } else {
+            image.url = imageColumnValue;
+          }
+
+          image.alt = 'Image component';
+        } else if (showIfImageNotFound === 'Placeholder') {
+          image.url = placeholderPath;
+        } else {
+          return; // Exit early if image doesn't exist and placeholder shouldn't be shown
+        }
+
+        $imageContainer.html(`<img data-image-id="${imageComponentInstanceId}" src="${image.url}" alt="${image.alt}" />`);
       }
     }
   }
