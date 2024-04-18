@@ -29,13 +29,9 @@ Fliplet.Widget.instance({
       };
 
       if (Fliplet.Env.get('interface') || Fliplet.Env.get('mode') === 'interact' || !imageOptions.imageColumnName) {
-        if (imageOptions.showIfImageNotFound === 'Placeholder') {
-          imageOptions.showPlaceholder = true;
+        imageOptions.showPlaceholder = true;
 
-          return renderImage();
-        }
-
-        return;
+        return renderImage();
       }
 
       Fliplet.Widget.findParents({ instanceId: imageInstanceId }).then(function(widgets) {
