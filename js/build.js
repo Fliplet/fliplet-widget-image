@@ -23,7 +23,7 @@ Fliplet.Widget.instance({
         showPlaceholder: false,
         url: null,
         alt: 'Image placeholder',
-        imageColumnName: image.fields.showIfImageNotFound,
+        imageColumnName: image.fields.imageColumnName,
         showIfImageNotFound: image.fields.showIfImageNotFound,
         placeholderPath: Fliplet.Widget.getAsset(imageInstanceId, 'img/placeholder.jpg')
       };
