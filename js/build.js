@@ -42,7 +42,7 @@ Fliplet.Widget.instance({
         }
 
         const recordContainer = widgets.find(widget => widget.package === 'com.fliplet.record-container');
-        const listRepeater = widgets.find(widget => widget.package === 'com.fliplet.repeater');
+        const listRepeater = widgets.find(widget => widget.package === 'com.fliplet.list-repeater');
 
         if (!recordContainer && !listRepeater) {
           return;
