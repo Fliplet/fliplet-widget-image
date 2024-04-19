@@ -30,6 +30,41 @@ Fliplet.Widget.findParents().then(function(widgets) {
       title: 'Dynamic image',
       supportUrl: 'https://www.google.com', // TODO missing link
       fields: [
+        // TODO REMOVE
+        // --------------------------------------------------------------------
+        {
+          name: 'columnEmail',
+          type: 'dropdown',
+          label: 'User email data field',
+          options: [],
+          default: '',
+          required: true
+        },
+        {
+          name: 'userDataSource',
+          type: 'provider',
+          label: 'Datasource',
+          package: 'com.fliplet.data-source-provider',
+          onEvent: function(event, data) {
+            debugger;
+          },
+          ready: function(el, value, provider) {
+            debugger;
+
+            if (value) {
+              Fliplet.DataSources.getById(value.id, {
+                attributes: ['columns']
+              }).then(function(columns) {
+                $('#columnEmail').html('');
+                $('#columnEmail').append('<option value="">Select an option</option>');
+                columns.columns.forEach((el) => {
+                  $('#columnEmail').append(`<option value="${el}">${el}</option>`);
+                });
+              });
+            }
+          }
+        },
+        // --------------------------------------------------------------------
         {
           type: 'html',
           html: `<div>
