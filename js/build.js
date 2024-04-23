@@ -2,14 +2,11 @@ Fliplet.Widget.instance({
   name: 'image',
   displayName: 'Dynamic image',
   render: {
-    template: [
-      '<span class="image-container"></span>'
-    ].join(''),
     ready: async function() {
       const image = this;
       const entryData = image?.parent?.entry?.data || {};
       const imageInstanceId = image.id;
-      const $imageContainer = $(image.$el).find('.image-container');
+      const $imageContainer = $(image.$el);
 
       image.fields = _.assign(
         {
