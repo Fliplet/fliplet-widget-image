@@ -1,7 +1,8 @@
 {
-  "name": "ImageComponent",
-  "package": "com.fliplet.image-component",
-  "version": "1.0.0",
+  "listable": true,
+  "name": "Dynamic image",
+  "package": "com.fliplet.image",
+  "version": "2.0.0",
   "icon": "img/icon.png",
   "tags": ["type:component", "category:general"],
   "provider_only": false,
@@ -37,8 +38,8 @@
     "appAssets": []
   },
   "themeSettings": {
-    "name": "ImageComponent",
-    "variablePrefix": "imageComponent",
+    "name": "Image",
+    "variablePrefix": "image",
     "variables": [
       {
         "description": "Width and Height",
@@ -48,7 +49,7 @@
             "default": "auto",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["width"]
               }
             ],
@@ -71,7 +72,7 @@
             "default": "auto",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["min-width"]
               }
             ],
@@ -94,7 +95,7 @@
             "default": "100%",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["max-width"]
               }
             ],
@@ -117,7 +118,7 @@
             "default": "auto",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["height"]
               }
@@ -141,7 +142,7 @@
             "default": "auto",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["min-height"]
               }
@@ -165,7 +166,7 @@
             "default": "none",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["max-height"]
               }
@@ -224,7 +225,7 @@
             },
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["position"],
                 "type": "position",
                 "siblings": {
@@ -261,7 +262,7 @@
             },
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["display"]
               }
             ],
@@ -283,7 +284,7 @@
             "columns": 6,
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["top"]
               }
             ],
@@ -308,7 +309,7 @@
             "columns": 6,
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["right"]
               }
             ],
@@ -333,7 +334,7 @@
             "columns": 6,
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["bottom"]
               }
             ],
@@ -358,7 +359,7 @@
             "columns": 6,
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["left"]
               }
             ],
@@ -388,7 +389,7 @@
             "columns": 12,
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["z-index"]
               }
             ],
@@ -436,7 +437,7 @@
             },
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["margin"],
                 "type": "margin"
               }
@@ -460,7 +461,7 @@
             "logic": "MarginAlign",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["margin-top"]
               }
             ],
@@ -486,7 +487,7 @@
             "logic": "MarginAlign",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["margin-right"]
               }
             ],
@@ -512,7 +513,7 @@
             "logic": "imageMarginAlign",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["margin-bottom"]
               }
             ],
@@ -538,7 +539,7 @@
             "logic": "MarginAlign",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "properties": ["margin-left"]
               }
             ],
@@ -568,7 +569,7 @@
             "columns": 6,
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["padding-top"]
               }
@@ -593,7 +594,7 @@
             "columns": 6,
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["padding-right"]
               }
@@ -618,7 +619,7 @@
             "columns": 6,
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["padding-bottom"]
               }
@@ -643,7 +644,7 @@
             "columns": 6,
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["padding-left"]
               }
@@ -692,7 +693,7 @@
             },
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["border"],
                 "type": "border",
@@ -722,7 +723,7 @@
             "default": "rgba(0, 0, 0, 0.2)",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["border"],
                 "type": "border",
@@ -751,7 +752,7 @@
             "default": "1px",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["border"],
                 "type": "border",
@@ -781,7 +782,7 @@
             "default": "solid",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["border"],
                 "type": "border",
@@ -810,7 +811,7 @@
             "default": "0px",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["border-radius"]
               }
@@ -868,7 +869,7 @@
             },
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["box-shadow"],
                 "type": "shadow",
@@ -900,7 +901,7 @@
             "default": "0px",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["box-shadow"],
                 "type": "shadow",
@@ -934,7 +935,7 @@
             "default": "10px",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["box-shadow"],
                 "type": "shadow",
@@ -968,7 +969,7 @@
             "default": "20px",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["box-shadow"],
                 "type": "shadow",
@@ -1001,7 +1002,7 @@
             "default": "0px",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["box-shadow"],
                 "type": "shadow",
@@ -1034,7 +1035,7 @@
             "default": "rgba(0, 0, 0, 0.2)",
             "styles": [
               {
-                "parentSelector": "[data-widget-package='com.fliplet.image-component']",
+                "parentSelector": "[data-widget-package='com.fliplet.image']",
                 "selectors": "img[data-image-id]",
                 "properties": ["box-shadow"],
                 "type": "shadow",

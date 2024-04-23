@@ -1,19 +1,16 @@
 Fliplet.Widget.instance({
-  name: 'image-component',
-  displayName: 'Image component',
+  name: 'image',
+  displayName: 'Dynamic image',
   render: {
-    template: [
-      '<span class="image-component-container"></span>'
-    ].join(''),
     ready: async function() {
       const image = this;
       const entryData = image?.parent?.entry?.data || {};
       const imageInstanceId = image.id;
-      const $imageContainer = $(image.$el).find('.image-component-container');
+      const $imageContainer = $(image.$el);
 
       image.fields = _.assign(
         {
-          showIfImageNotFound: 'Placeholder',
+          showIfImageNotFound: 'placeholder',
           imageColumnName: ''
         },
         image.fields
@@ -35,21 +32,27 @@ Fliplet.Widget.instance({
       }
 
       Fliplet.Widget.findParents({ instanceId: imageInstanceId }).then(function(widgets) {
-        const dynamicContainer = widgets.find(widget => widget.package === 'com.fliplet.dynamic-container');
+        let dynamicContainer = null;
+        let recordContainer = null;
+        let listRepeater = null;
 
-        if (!dynamicContainer) {
-          return;
-        }
+        widgets.forEach(widget => {
+          if (widget.package === 'com.fliplet.dynamic-container') {
+            dynamicContainer = widget;
+          } else if (widget.package === 'com.fliplet.record-container') {
+            recordContainer = widget;
+          } else if (widget.package === 'com.fliplet.list-repeater') {
+            listRepeater = widget;
+          }
+        });
 
-        const recordContainer = widgets.find(widget => widget.package === 'com.fliplet.record-container');
-        const listRepeater = widgets.find(widget => widget.package === 'com.fliplet.list-repeater');
-
-        if (!recordContainer && !listRepeater) {
+        if (!dynamicContainer && !dynamicContainer.dataSourceId && (!recordContainer && !listRepeater)) {
           return;
         }
 
         renderImage();
       });
+
 
       function renderImage() {
         const imageColumnUrlValue = entryData[imageOptions.imageColumnName];
@@ -63,14 +66,20 @@ Fliplet.Widget.instance({
             imageOptions.url = imageColumnUrlValue;
           }
 
-          imageOptions.alt = 'Image component';
-        } else if (imageOptions.showIfImageNotFound === 'Placeholder') {
+          imageOptions.alt = 'Image';
+        } else if (imageOptions.showIfImageNotFound === 'placeholder') {
           imageOptions.url = imageOptions.placeholderPath;
         } else {
           return; // Exit early if image doesn't exist and placeholder shouldn't be shown
         }
 
-        $imageContainer.html(`<img data-image-id="${imageInstanceId}" src="${imageOptions.url}" alt="${imageOptions.alt}" />`);
+        let img = document.createElement('img');
+
+        img.src = imageOptions.url;
+        img.alt = imageOptions.alt;
+        img.setAttribute('data-image-id', imageInstanceId);
+
+        $imageContainer.html(img);
       }
     }
   }

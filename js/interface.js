@@ -1,11 +1,24 @@
 
-Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' } }).then(function(widgets) {
-  if (!widgets.length) {
-    return Promise.reject('This widget must be placed inside a Dynamic Container component');
-  }
+Fliplet.Widget.findParents().then(function(widgets) {
+  let dynamicContainer = null;
+  let recordContainer = null;
+  let listRepeater = null;
 
-  const dynamicContainerParent = widgets[0];
-  const dataSourceId = dynamicContainerParent.dataSourceId;
+  widgets.forEach(widget => {
+    if (widget.package === 'com.fliplet.dynamic-container') {
+      dynamicContainer = widget;
+    } else if (widget.package === 'com.fliplet.record-container') {
+      recordContainer = widget;
+    } else if (widget.package === 'com.fliplet.list-repeater') {
+      listRepeater = widget;
+    }
+  });
+
+  const dataSourceId = dynamicContainer?.dataSourceId;
+
+  if (!dynamicContainer && !dataSourceId && (!recordContainer && !listRepeater)) {
+    return;
+  }
 
   return Fliplet.DataSources.getById(dataSourceId, {
     attributes: ['name', 'columns']
@@ -14,23 +27,9 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
     const dataSourceName = dataSource.name;
 
     return Fliplet.Widget.generateInterface({
-      title: 'Image component',
+      title: 'Dynamic image',
+      supportUrl: 'https://www.google.com', // TODO missing link
       fields: [
-        {
-          type: 'html',
-          html: `<header>
-              <p>
-                Configure image
-              <a
-                href="https://help.fliplet.com/image-component/"
-                class="help-icon"
-                target="_blank"
-              >
-                <i class="fa fa-question-circle-o"></i>
-              </a>
-              </p>
-            </header>`
-        },
         {
           type: 'html',
           html: `<div>
@@ -54,10 +53,10 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
           type: 'radio',
           label: 'If no image found',
           options: [
-            { value: 'Placeholder', label: 'Show placeholder' },
-            { value: 'None', label: 'None' }
+            { value: 'placeholder', label: 'Show placeholder' },
+            { value: 'none', label: 'None' }
           ],
-          default: 'Placeholder'
+          default: 'placeholder'
         }
       ]
     });
