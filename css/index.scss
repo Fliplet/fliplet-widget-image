@@ -108,7 +108,7 @@ $variablePrefix: "image";
         image-VisibilityDesktop: $image-VisibilityDesktop),
       $options);
 
-  $instanceSelector: '[data-widget-package="#{$packageName}"]';
+  $instanceSelector: '[data-widget-package="#{$packageName}"][data-widget-version="2.0.0"]';
 
   @if $widgetInstanceUUID !="" {
     $instanceSelector: '#{$instanceSelector}[data-uuid="#{$widgetInstanceUUID}"]';
