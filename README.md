@@ -1,1 +1,1 @@
-# fliplet-widget-image-component
+# fliplet-widget-image

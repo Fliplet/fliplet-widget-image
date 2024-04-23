@@ -14,23 +14,9 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
     const dataSourceName = dataSource.name;
 
     return Fliplet.Widget.generateInterface({
-      title: 'Image component',
+      title: 'Dynamic image',
+      supportUrl: 'https://www.google.com', // TODO missing link
       fields: [
-        {
-          type: 'html',
-          html: `<header>
-              <p>
-                Configure image
-              <a
-                href="https://help.fliplet.com/image-component/"
-                class="help-icon"
-                target="_blank"
-              >
-                <i class="fa fa-question-circle-o"></i>
-              </a>
-              </p>
-            </header>`
-        },
         {
           type: 'html',
           html: `<div>

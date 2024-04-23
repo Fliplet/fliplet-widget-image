@@ -1,15 +1,15 @@
 Fliplet.Widget.instance({
-  name: 'image-component',
-  displayName: 'Image component',
+  name: 'image',
+  displayName: 'Dynamic image',
   render: {
     template: [
-      '<span class="image-component-container"></span>'
+      '<span class="image-container"></span>'
     ].join(''),
     ready: async function() {
       const image = this;
       const entryData = image?.parent?.entry?.data || {};
       const imageInstanceId = image.id;
-      const $imageContainer = $(image.$el).find('.image-component-container');
+      const $imageContainer = $(image.$el).find('.image-container');
 
       image.fields = _.assign(
         {
@@ -63,7 +63,7 @@ Fliplet.Widget.instance({
             imageOptions.url = imageColumnUrlValue;
           }
 
-          imageOptions.alt = 'Image component';
+          imageOptions.alt = 'Image';
         } else if (imageOptions.showIfImageNotFound === 'Placeholder') {
           imageOptions.url = imageOptions.placeholderPath;
         } else {
