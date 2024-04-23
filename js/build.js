@@ -46,7 +46,7 @@ Fliplet.Widget.instance({
           }
         });
 
-        if (!dynamicContainer && !dynamicContainer.dataSourceId && (!recordContainer && !listRepeater)) {
+        if (!dynamicContainer || !dynamicContainer.dataSourceId || (!recordContainer && !listRepeater)) {
           return;
         }
 

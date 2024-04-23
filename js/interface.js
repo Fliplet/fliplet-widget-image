@@ -16,7 +16,7 @@ Fliplet.Widget.findParents().then(function(widgets) {
 
   const dataSourceId = dynamicContainer?.dataSourceId;
 
-  if (!dynamicContainer && !dataSourceId && (!recordContainer && !listRepeater)) {
+  if (!dynamicContainer || !dataSourceId || (!recordContainer && !listRepeater)) {
     return;
   }
 
