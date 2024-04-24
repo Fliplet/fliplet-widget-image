@@ -25,7 +25,7 @@ Fliplet.Widget.instance({
         placeholderPath: Fliplet.Widget.getAsset(imageInstanceId, 'img/placeholder.jpg')
       };
 
-      if (Fliplet.Env.get('interface') || Fliplet.Env.get('mode') === 'interact' || !imageOptions.imageColumnName) {
+      if (Fliplet.Env.get('mode') === 'interact' || !imageOptions.imageColumnName) {
         imageOptions.showPlaceholder = true;
 
         return renderImage();
