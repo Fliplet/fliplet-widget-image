@@ -7,105 +7,105 @@ $variablePrefix: "image";
 
 @mixin componentStyles($options: (), $widgetInstanceId: "", $widgetInstanceUUID: "") {
   /* LIST HERE ALL VARIABLES FROM YOUR THEME, INCLUDING TABLET AND DESKTOP */
-  $configuration: map-merge((image-Position: $image-Position,
-        image-Display: $image-Display,
-        image-PositionTop: $image-PositionTop,
-        image-PositionRight: $image-PositionRight,
-        image-PositionBottom: $image-PositionBottom,
-        image-PositionLeft: $image-PositionLeft,
-        image-Index: $image-Index,
-        image-Width: $image-Width,
-        image-Height: $image-Height,
-        image-MinWidth: $image-MinWidth,
-        image-MaxWidth: $image-MaxWidth,
-        image-MinHeight: $image-MinHeight,
-        image-MaxHeight: $image-MaxHeight,
-        image-MarginTop: $image-MarginTop,
-        image-MarginRight: $image-MarginRight,
-        image-MarginBottom: $image-MarginBottom,
-        image-MarginLeft: $image-MarginLeft,
-        image-PaddingTop: $image-PaddingTop,
-        image-PaddingRight: $image-PaddingRight,
-        image-PaddingBottom: $image-PaddingBottom,
-        image-PaddingLeft: $image-PaddingLeft,
-        image-BorderSides: $image-BorderSides,
-        image-BorderWidth: $image-BorderWidth,
-        image-BorderStyle: $image-BorderStyle,
-        image-BorderColor: $image-BorderColor,
-        image-BorderRadius: $image-BorderRadius,
-        image-ShadowStyle: $image-ShadowStyle,
-        image-ShadowXoffset: $image-ShadowXoffset,
-        image-ShadowYoffset: $image-ShadowYoffset,
-        image-ShadowBlur: $image-ShadowBlur,
-        image-ShadowSpread: $image-ShadowSpread,
-        image-ShadowColor: $image-ShadowColor,
-        image-Visibility: $image-Visibility,
-        image-PositionTablet: $image-PositionTablet,
-        image-DisplayTablet: $image-DisplayTablet,
-        image-PositionTopTablet: $image-PositionTopTablet,
-        image-PositionRightTablet: $image-PositionRightTablet,
-        image-PositionBottomTablet: $image-PositionBottomTablet,
-        image-PositionLeftTablet: $image-PositionLeftTablet,
-        image-IndexTablet: $image-IndexTablet,
-        image-WidthTablet: $image-WidthTablet,
-        image-HeightTablet: $image-HeightTablet,
-        image-MinWidthTablet: $image-MinWidthTablet,
-        image-MaxWidthTablet: $image-MaxWidthTablet,
-        image-MinHeightTablet: $image-MinHeightTablet,
-        image-MaxHeightTablet: $image-MaxHeightTablet,
-        image-MarginTopTablet: $image-MarginTopTablet,
-        image-MarginRightTablet: $image-MarginRightTablet,
-        image-MarginBottomTablet: $image-MarginBottomTablet,
-        image-MarginLeftTablet: $image-MarginLeftTablet,
-        image-PaddingTopTablet: $image-PaddingTopTablet,
-        image-PaddingRightTablet: $image-PaddingRightTablet,
-        image-PaddingBottomTablet: $image-PaddingBottomTablet,
-        image-PaddingLeftTablet: $image-PaddingLeftTablet,
-        image-BorderSidesTablet: $image-BorderSidesTablet,
-        image-BorderWidthTablet: $image-BorderWidthTablet,
-        image-BorderStyleTablet: $image-BorderStyleTablet,
-        image-BorderColorTablet: $image-BorderColorTablet,
-        image-BorderRadiusTablet: $image-BorderRadiusTablet,
-        image-ShadowStyleTablet: $image-ShadowStyleTablet,
-        image-ShadowXoffsetTablet: $image-ShadowXoffsetTablet,
-        image-ShadowYoffsetTablet: $image-ShadowYoffsetTablet,
-        image-ShadowBlurTablet: $image-ShadowBlurTablet,
-        image-ShadowSpreadTablet: $image-ShadowSpreadTablet,
-        image-ShadowColorTablet: $image-ShadowColorTablet,
-        image-VisibilityTablet: $image-VisibilityTablet,
-        image-PositionDesktop: $image-PositionDesktop,
-        image-DisplayDesktop: $image-DisplayDesktop,
-        image-PositionTopDesktop: $image-PositionTopDesktop,
-        image-PositionRightDesktop: $image-PositionRightDesktop,
-        image-PositionBottomDesktop: $image-PositionBottomDesktop,
-        image-PositionLeftDesktop: $image-PositionLeftDesktop,
-        image-IndexDesktop: $image-IndexDesktop,
-        image-WidthDesktop: $image-WidthDesktop,
-        image-HeightDesktop: $image-HeightDesktop,
-        image-MinWidthDesktop: $image-MinWidthDesktop,
-        image-MaxWidthDesktop: $image-MaxWidthDesktop,
-        image-MinHeightDesktop: $image-MinHeightDesktop,
-        image-MaxHeightDesktop: $image-MaxHeightDesktop,
-        image-MarginTopDesktop: $image-MarginTopDesktop,
-        image-MarginRightDesktop: $image-MarginRightDesktop,
-        image-MarginBottomDesktop: $image-MarginBottomDesktop,
-        image-MarginLeftDesktop: $image-MarginLeftDesktop,
-        image-PaddingTopDesktop: $image-PaddingTopDesktop,
-        image-PaddingRightDesktop: $image-PaddingRightDesktop,
-        image-PaddingBottomDesktop: $image-PaddingBottomDesktop,
-        image-PaddingLeftDesktop: $image-PaddingLeftDesktop,
-        image-BorderSidesDesktop: $image-BorderSidesDesktop,
-        image-BorderWidthDesktop: $image-BorderWidthDesktop,
-        image-BorderStyleDesktop: $image-BorderStyleDesktop,
-        image-BorderColorDesktop: $image-BorderColorDesktop,
-        image-BorderRadiusDesktop: $image-BorderRadiusDesktop,
-        image-ShadowStyleDesktop: $image-ShadowStyleDesktop,
-        image-ShadowXoffsetDesktop: $image-ShadowXoffsetDesktop,
-        image-ShadowYoffsetDesktop: $image-ShadowYoffsetDesktop,
-        image-ShadowBlurDesktop: $image-ShadowBlurDesktop,
-        image-ShadowSpreadDesktop: $image-ShadowSpreadDesktop,
-        image-ShadowColorDesktop: $image-ShadowColorDesktop,
-        image-VisibilityDesktop: $image-VisibilityDesktop),
+  $configuration: map-merge((imagePosition: $imagePosition,
+        imageDisplay: $imageDisplay,
+        imagePositionTop: $imagePositionTop,
+        imagePositionRight: $imagePositionRight,
+        imagePositionBottom: $imagePositionBottom,
+        imagePositionLeft: $imagePositionLeft,
+        imageIndex: $imageIndex,
+        imageWidth: $imageWidth,
+        imageHeight: $imageHeight,
+        imageMinWidth: $imageMinWidth,
+        imageMaxWidth: $imageMaxWidth,
+        imageMinHeight: $imageMinHeight,
+        imageMaxHeight: $imageMaxHeight,
+        imageMarginTop: $imageMarginTop,
+        imageMarginRight: $imageMarginRight,
+        imageMarginBottom: $imageMarginBottom,
+        imageMarginLeft: $imageMarginLeft,
+        imagePaddingTop: $imagePaddingTop,
+        imagePaddingRight: $imagePaddingRight,
+        imagePaddingBottom: $imagePaddingBottom,
+        imagePaddingLeft: $imagePaddingLeft,
+        imageBorderSides: $imageBorderSides,
+        imageBorderWidth: $imageBorderWidth,
+        imageBorderStyle: $imageBorderStyle,
+        imageBorderColor: $imageBorderColor,
+        imageBorderRadius: $imageBorderRadius,
+        imageShadowStyle: $imageShadowStyle,
+        imageShadowXoffset: $imageShadowXoffset,
+        imageShadowYoffset: $imageShadowYoffset,
+        imageShadowBlur: $imageShadowBlur,
+        imageShadowSpread: $imageShadowSpread,
+        imageShadowColor: $imageShadowColor,
+        imageVisibility: $imageVisibility,
+        imagePositionTablet: $imagePositionTablet,
+        imageDisplayTablet: $imageDisplayTablet,
+        imagePositionTopTablet: $imagePositionTopTablet,
+        imagePositionRightTablet: $imagePositionRightTablet,
+        imagePositionBottomTablet: $imagePositionBottomTablet,
+        imagePositionLeftTablet: $imagePositionLeftTablet,
+        imageIndexTablet: $imageIndexTablet,
+        imageWidthTablet: $imageWidthTablet,
+        imageHeightTablet: $imageHeightTablet,
+        imageMinWidthTablet: $imageMinWidthTablet,
+        imageMaxWidthTablet: $imageMaxWidthTablet,
+        imageMinHeightTablet: $imageMinHeightTablet,
+        imageMaxHeightTablet: $imageMaxHeightTablet,
+        imageMarginTopTablet: $imageMarginTopTablet,
+        imageMarginRightTablet: $imageMarginRightTablet,
+        imageMarginBottomTablet: $imageMarginBottomTablet,
+        imageMarginLeftTablet: $imageMarginLeftTablet,
+        imagePaddingTopTablet: $imagePaddingTopTablet,
+        imagePaddingRightTablet: $imagePaddingRightTablet,
+        imagePaddingBottomTablet: $imagePaddingBottomTablet,
+        imagePaddingLeftTablet: $imagePaddingLeftTablet,
+        imageBorderSidesTablet: $imageBorderSidesTablet,
+        imageBorderWidthTablet: $imageBorderWidthTablet,
+        imageBorderStyleTablet: $imageBorderStyleTablet,
+        imageBorderColorTablet: $imageBorderColorTablet,
+        imageBorderRadiusTablet: $imageBorderRadiusTablet,
+        imageShadowStyleTablet: $imageShadowStyleTablet,
+        imageShadowXoffsetTablet: $imageShadowXoffsetTablet,
+        imageShadowYoffsetTablet: $imageShadowYoffsetTablet,
+        imageShadowBlurTablet: $imageShadowBlurTablet,
+        imageShadowSpreadTablet: $imageShadowSpreadTablet,
+        imageShadowColorTablet: $imageShadowColorTablet,
+        imageVisibilityTablet: $imageVisibilityTablet,
+        imagePositionDesktop: $imagePositionDesktop,
+        imageDisplayDesktop: $imageDisplayDesktop,
+        imagePositionTopDesktop: $imagePositionTopDesktop,
+        imagePositionRightDesktop: $imagePositionRightDesktop,
+        imagePositionBottomDesktop: $imagePositionBottomDesktop,
+        imagePositionLeftDesktop: $imagePositionLeftDesktop,
+        imageIndexDesktop: $imageIndexDesktop,
+        imageWidthDesktop: $imageWidthDesktop,
+        imageHeightDesktop: $imageHeightDesktop,
+        imageMinWidthDesktop: $imageMinWidthDesktop,
+        imageMaxWidthDesktop: $imageMaxWidthDesktop,
+        imageMinHeightDesktop: $imageMinHeightDesktop,
+        imageMaxHeightDesktop: $imageMaxHeightDesktop,
+        imageMarginTopDesktop: $imageMarginTopDesktop,
+        imageMarginRightDesktop: $imageMarginRightDesktop,
+        imageMarginBottomDesktop: $imageMarginBottomDesktop,
+        imageMarginLeftDesktop: $imageMarginLeftDesktop,
+        imagePaddingTopDesktop: $imagePaddingTopDesktop,
+        imagePaddingRightDesktop: $imagePaddingRightDesktop,
+        imagePaddingBottomDesktop: $imagePaddingBottomDesktop,
+        imagePaddingLeftDesktop: $imagePaddingLeftDesktop,
+        imageBorderSidesDesktop: $imageBorderSidesDesktop,
+        imageBorderWidthDesktop: $imageBorderWidthDesktop,
+        imageBorderStyleDesktop: $imageBorderStyleDesktop,
+        imageBorderColorDesktop: $imageBorderColorDesktop,
+        imageBorderRadiusDesktop: $imageBorderRadiusDesktop,
+        imageShadowStyleDesktop: $imageShadowStyleDesktop,
+        imageShadowXoffsetDesktop: $imageShadowXoffsetDesktop,
+        imageShadowYoffsetDesktop: $imageShadowYoffsetDesktop,
+        imageShadowBlurDesktop: $imageShadowBlurDesktop,
+        imageShadowSpreadDesktop: $imageShadowSpreadDesktop,
+        imageShadowColorDesktop: $imageShadowColorDesktop,
+        imageVisibilityDesktop: $imageVisibilityDesktop),
       $options);
 
   $instanceSelector: '[data-widget-package="#{$packageName}"][data-widget-version="2.0.0"]';
@@ -121,17 +121,17 @@ $variablePrefix: "image";
   #{$instanceSelector} {
     flex-shrink: 0;
     /* Fix for IE11 when images are inside a flex container */
-    position: map-get($configuration, image-Position);
-    z-index: map-get($configuration, image-Index);
+    position: map-get($configuration, imagePosition);
+    z-index: map-get($configuration, imageIndex);
 
-    @if map-get($configuration, image-Position)=="relative" {
-      @if map-get($configuration, image-Visibility)=="visible" {
-        @if map-get($configuration, image-Width)=="100%" {
+    @if map-get($configuration, imagePosition)=="relative" {
+      @if map-get($configuration, imageVisibility)=="visible" {
+        @if map-get($configuration, imageWidth)=="100%" {
           display: block !important;
         }
 
         @else {
-          display: map-get($configuration, image-Display) !important;
+          display: map-get($configuration, imageDisplay) !important;
         }
       }
 
@@ -141,7 +141,7 @@ $variablePrefix: "image";
     }
 
     @else {
-      @if map-get($configuration, image-Visibility)=="visible" {
+      @if map-get($configuration, imageVisibility)=="visible" {
         display: block !important;
       }
 
@@ -149,31 +149,31 @@ $variablePrefix: "image";
         display: none !important;
       }
 
-      top: map-get($configuration, image-PositionTop);
-      right: map-get($configuration, image-PositionRight);
-      bottom: map-get($configuration, image-PositionBottom);
-      left: map-get($configuration, image-PositionLeft);
+      top: map-get($configuration, imagePositionTop);
+      right: map-get($configuration, imagePositionRight);
+      bottom: map-get($configuration, imagePositionBottom);
+      left: map-get($configuration, imagePositionLeft);
     }
 
-    width: map-get($configuration, image-Width);
-    min-width: map-get($configuration, image-MinWidth);
-    max-width: map-get($configuration, image-MaxWidth);
-    margin: map-get($configuration, image-MarginTop) map-get($configuration, image-MarginRight) map-get($configuration, image-MarginBottom) map-get($configuration, image-MarginLeft);
-    padding: map-get($configuration, image-PaddingTop) map-get($configuration, image-PaddingRight) map-get($configuration, image-PaddingBottom) map-get($configuration, image-PaddingLeft);
+    width: map-get($configuration, imageWidth);
+    min-width: map-get($configuration, imageMinWidth);
+    max-width: map-get($configuration, imageMaxWidth);
+    margin: map-get($configuration, imageMarginTop) map-get($configuration, imageMarginRight) map-get($configuration, imageMarginBottom) map-get($configuration, imageMarginLeft);
+    padding: map-get($configuration, imagePaddingTop) map-get($configuration, imagePaddingRight) map-get($configuration, imagePaddingBottom) map-get($configuration, imagePaddingLeft);
 
     // Styles for tablet
     @include above($tabletBreakpoint) {
-      position: map-get($configuration, image-PositionTablet);
-      z-index: map-get($configuration, image-IndexTablet);
+      position: map-get($configuration, imagePositionTablet);
+      z-index: map-get($configuration, imageIndexTablet);
 
-      @if map-get($configuration, image-PositionTablet)=="relative" {
-        @if map-get($configuration, image-VisibilityTablet)=="visible" {
-          @if map-get($configuration, image-WidthTablet)=="100%" {
+      @if map-get($configuration, imagePositionTablet)=="relative" {
+        @if map-get($configuration, imageVisibilityTablet)=="visible" {
+          @if map-get($configuration, imageWidthTablet)=="100%" {
             display: block !important;
           }
 
           @else {
-            display: map-get($configuration, image-DisplayTablet) !important;
+            display: map-get($configuration, imageDisplayTablet) !important;
           }
         }
 
@@ -183,7 +183,7 @@ $variablePrefix: "image";
       }
 
       @else {
-        @if map-get($configuration, image-VisibilityTablet)=="visible" {
+        @if map-get($configuration, imageVisibilityTablet)=="visible" {
           display: block !important;
         }
 
@@ -191,32 +191,32 @@ $variablePrefix: "image";
           display: none !important;
         }
 
-        top: map-get($configuration, image-PositionTopTablet);
-        right: map-get($configuration, image-PositionRightTablet);
-        bottom: map-get($configuration, image-PositionBottomTablet);
-        left: map-get($configuration, image-PositionLeftTablet);
+        top: map-get($configuration, imagePositionTopTablet);
+        right: map-get($configuration, imagePositionRightTablet);
+        bottom: map-get($configuration, imagePositionBottomTablet);
+        left: map-get($configuration, imagePositionLeftTablet);
       }
 
-      width: map-get($configuration, image-WidthTablet);
-      min-width: map-get($configuration, image-MinWidthTablet);
-      max-width: map-get($configuration, image-MaxWidthTablet);
-      margin: map-get($configuration, image-MarginTopTablet) map-get($configuration, image-MarginRightTablet) map-get($configuration, image-MarginBottomTablet) map-get($configuration, image-MarginLeftTablet);
-      padding: map-get($configuration, image-PaddingTopTablet) map-get($configuration, image-PaddingRightTablet) map-get($configuration, image-PaddingBottomTablet) map-get($configuration, image-PaddingLeftTablet);
+      width: map-get($configuration, imageWidthTablet);
+      min-width: map-get($configuration, imageMinWidthTablet);
+      max-width: map-get($configuration, imageMaxWidthTablet);
+      margin: map-get($configuration, imageMarginTopTablet) map-get($configuration, imageMarginRightTablet) map-get($configuration, imageMarginBottomTablet) map-get($configuration, imageMarginLeftTablet);
+      padding: map-get($configuration, imagePaddingTopTablet) map-get($configuration, imagePaddingRightTablet) map-get($configuration, imagePaddingBottomTablet) map-get($configuration, imagePaddingLeftTablet);
     }
 
     // Styles for desktop
     @include above($desktopBreakpoint) {
-      position: map-get($configuration, image-PositionDesktop);
-      z-index: map-get($configuration, image-IndexDesktop);
+      position: map-get($configuration, imagePositionDesktop);
+      z-index: map-get($configuration, imageIndexDesktop);
 
-      @if map-get($configuration, image-PositionDesktop)=="relative" {
-        @if map-get($configuration, image-VisibilityDesktop)=="visible" {
-          @if map-get($configuration, image-WidthDesktop)=="100%" {
+      @if map-get($configuration, imagePositionDesktop)=="relative" {
+        @if map-get($configuration, imageVisibilityDesktop)=="visible" {
+          @if map-get($configuration, imageWidthDesktop)=="100%" {
             display: block !important;
           }
 
           @else {
-            display: map-get($configuration, image-DisplayDesktop) !important;
+            display: map-get($configuration, imageDisplayDesktop) !important;
           }
         }
 
@@ -226,7 +226,7 @@ $variablePrefix: "image";
       }
 
       @else {
-        @if map-get($configuration, image-VisibilityDesktop)=="visible" {
+        @if map-get($configuration, imageVisibilityDesktop)=="visible" {
           display: block !important;
         }
 
@@ -234,75 +234,75 @@ $variablePrefix: "image";
           display: none !important;
         }
 
-        top: map-get($configuration, image-PositionTopDesktop);
-        right: map-get($configuration, image-PositionRightDesktop);
-        bottom: map-get($configuration, image-PositionBottomDesktop);
-        left: map-get($configuration, image-PositionLeftDesktop);
+        top: map-get($configuration, imagePositionTopDesktop);
+        right: map-get($configuration, imagePositionRightDesktop);
+        bottom: map-get($configuration, imagePositionBottomDesktop);
+        left: map-get($configuration, imagePositionLeftDesktop);
       }
 
-      width: map-get($configuration, image-WidthDesktop);
-      min-width: map-get($configuration, image-MinWidthDesktop);
-      max-width: map-get($configuration, image-MaxWidthDesktop);
-      margin: map-get($configuration, image-MarginTopDesktop) map-get($configuration, image-MarginRightDesktop) map-get($configuration, image-MarginBottomDesktop) map-get($configuration, image-MarginLeftDesktop);
-      padding: map-get($configuration, image-PaddingTopDesktop) map-get($configuration, image-PaddingRightDesktop) map-get($configuration, image-PaddingBottomDesktop) map-get($configuration, image-PaddingLeftDesktop);
+      width: map-get($configuration, imageWidthDesktop);
+      min-width: map-get($configuration, imageMinWidthDesktop);
+      max-width: map-get($configuration, imageMaxWidthDesktop);
+      margin: map-get($configuration, imageMarginTopDesktop) map-get($configuration, imageMarginRightDesktop) map-get($configuration, imageMarginBottomDesktop) map-get($configuration, imageMarginLeftDesktop);
+      padding: map-get($configuration, imagePaddingTopDesktop) map-get($configuration, imagePaddingRightDesktop) map-get($configuration, imagePaddingBottomDesktop) map-get($configuration, imagePaddingLeftDesktop);
     }
 
     img[data-image-id] {
-      height: map-get($configuration, image-Height);
-      min-height: map-get($configuration, image-MinHeight);
-      max-height: map-get($configuration, image-MaxHeight);
+      height: map-get($configuration, imageHeight);
+      min-height: map-get($configuration, imageMinHeight);
+      max-height: map-get($configuration, imageMaxHeight);
 
-      @include borderOnly((borderSides: map-get($configuration, image-BorderSides),
-          borderWidth: map-get($configuration, image-BorderWidth),
-          borderStyle: map-get($configuration, image-BorderStyle),
-          borderColor: map-get($configuration, image-BorderColor)));
-      border-radius: map-get($configuration, image-BorderRadius);
+      @include borderOnly((borderSides: map-get($configuration, imageBorderSides),
+          borderWidth: map-get($configuration, imageBorderWidth),
+          borderStyle: map-get($configuration, imageBorderStyle),
+          borderColor: map-get($configuration, imageBorderColor)));
+      border-radius: map-get($configuration, imageBorderRadius);
 
-      @include shadowOnly((shadowStyle: map-get($configuration, image-ShadowStyle),
-          shadowXOffset: map-get($configuration, image-ShadowXoffset),
-          shadowYOffset: map-get($configuration, image-ShadowYoffset),
-          shadowBlur: map-get($configuration, image-ShadowBlur),
-          shadowSpread: map-get($configuration, image-ShadowSpread),
-          shadowColor: map-get($configuration, image-ShadowColor)));
+      @include shadowOnly((shadowStyle: map-get($configuration, imageShadowStyle),
+          shadowXOffset: map-get($configuration, imageShadowXoffset),
+          shadowYOffset: map-get($configuration, imageShadowYoffset),
+          shadowBlur: map-get($configuration, imageShadowBlur),
+          shadowSpread: map-get($configuration, imageShadowSpread),
+          shadowColor: map-get($configuration, imageShadowColor)));
 
       // Styles for tablet
       @include above($tabletBreakpoint) {
-        height: map-get($configuration, image-HeightTablet);
-        min-height: map-get($configuration, image-MinHeightTablet);
-        max-height: map-get($configuration, image-MaxHeightTablet);
+        height: map-get($configuration, imageHeightTablet);
+        min-height: map-get($configuration, imageMinHeightTablet);
+        max-height: map-get($configuration, imageMaxHeightTablet);
 
-        @include borderOnly((borderSides: map-get($configuration, image-BorderSidesTablet),
-            borderWidth: map-get($configuration, image-BorderWidthTablet),
-            borderStyle: map-get($configuration, image-BorderStyleTablet),
-            borderColor: map-get($configuration, image-BorderColorTablet)));
-        border-radius: map-get($configuration, image-BorderRadiusTablet);
+        @include borderOnly((borderSides: map-get($configuration, imageBorderSidesTablet),
+            borderWidth: map-get($configuration, imageBorderWidthTablet),
+            borderStyle: map-get($configuration, imageBorderStyleTablet),
+            borderColor: map-get($configuration, imageBorderColorTablet)));
+        border-radius: map-get($configuration, imageBorderRadiusTablet);
 
-        @include shadowOnly((shadowStyle: map-get($configuration, image-ShadowStyleTablet),
-            shadowXOffset: map-get($configuration, image-ShadowXoffsetTablet),
-            shadowYOffset: map-get($configuration, image-ShadowYoffsetTablet),
-            shadowBlur: map-get($configuration, image-ShadowBlurTablet),
-            shadowSpread: map-get($configuration, image-ShadowSpreadTablet),
-            shadowColor: map-get($configuration, image-ShadowColorTablet)));
+        @include shadowOnly((shadowStyle: map-get($configuration, imageShadowStyleTablet),
+            shadowXOffset: map-get($configuration, imageShadowXoffsetTablet),
+            shadowYOffset: map-get($configuration, imageShadowYoffsetTablet),
+            shadowBlur: map-get($configuration, imageShadowBlurTablet),
+            shadowSpread: map-get($configuration, imageShadowSpreadTablet),
+            shadowColor: map-get($configuration, imageShadowColorTablet)));
       }
 
       // Styles for desktop
       @include above($desktopBreakpoint) {
-        height: map-get($configuration, image-HeightDesktop);
-        min-height: map-get($configuration, image-MinHeightDesktop);
-        max-height: map-get($configuration, image-MaxHeightDesktop);
+        height: map-get($configuration, imageHeightDesktop);
+        min-height: map-get($configuration, imageMinHeightDesktop);
+        max-height: map-get($configuration, imageMaxHeightDesktop);
 
-        @include borderOnly((borderSides: map-get($configuration, image-BorderSidesDesktop),
-            borderWidth: map-get($configuration, image-BorderWidthDesktop),
-            borderStyle: map-get($configuration, image-BorderStyleDesktop),
-            borderColor: map-get($configuration, image-BorderColorDesktop)));
-        border-radius: map-get($configuration, image-BorderRadiusDesktop);
+        @include borderOnly((borderSides: map-get($configuration, imageBorderSidesDesktop),
+            borderWidth: map-get($configuration, imageBorderWidthDesktop),
+            borderStyle: map-get($configuration, imageBorderStyleDesktop),
+            borderColor: map-get($configuration, imageBorderColorDesktop)));
+        border-radius: map-get($configuration, imageBorderRadiusDesktop);
 
-        @include shadowOnly((shadowStyle: map-get($configuration, image-ShadowStyleDesktop),
-            shadowXOffset: map-get($configuration, image-ShadowXoffsetDesktop),
-            shadowYOffset: map-get($configuration, image-ShadowYoffsetDesktop),
-            shadowBlur: map-get($configuration, image-ShadowBlurDesktop),
-            shadowSpread: map-get($configuration, image-ShadowSpreadDesktop),
-            shadowColor: map-get($configuration, image-ShadowColorDesktop)));
+        @include shadowOnly((shadowStyle: map-get($configuration, imageShadowStyleDesktop),
+            shadowXOffset: map-get($configuration, imageShadowXoffsetDesktop),
+            shadowYOffset: map-get($configuration, imageShadowYoffsetDesktop),
+            shadowBlur: map-get($configuration, imageShadowBlurDesktop),
+            shadowSpread: map-get($configuration, imageShadowSpreadDesktop),
+            shadowColor: map-get($configuration, imageShadowColorDesktop)));
       }
     }
   }
