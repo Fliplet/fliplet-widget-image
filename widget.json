@@ -31,7 +31,6 @@
       "fliplet-helper"
     ],
     "assets": [
-      "css/build.css",
       "js/build.js",
       "css/index.scss"
     ],
