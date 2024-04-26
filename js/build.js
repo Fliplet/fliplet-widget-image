@@ -75,9 +75,10 @@ Fliplet.Widget.instance({
 
         let img = document.createElement('img');
 
-        img.src = imageOptions.url;
-        img.alt = imageOptions.alt;
+        img.loading = 'lazy';
         img.setAttribute('data-image-id', imageInstanceId);
+        img.alt = imageOptions.alt;
+        img.src = imageOptions.url;
 
         $imageContainer.html(img);
       }
