@@ -1,5 +1,5 @@
 Fliplet.Widget.instance({
-  name: 'image',
+  name: 'image-2-0-0',
   displayName: 'Dynamic image',
   render: {
     ready: async function() {
