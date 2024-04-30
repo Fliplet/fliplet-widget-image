@@ -1,8 +1,7 @@
 Fliplet.Widget.instance({
   name: 'image-2-0-0',
-  displayName: 'Dynamic image',
   render: {
-    ready: async function() {
+    ready: function() {
       const image = this;
       const entryData = image?.parent?.entry?.data || {};
       const imageInstanceId = image.id;
