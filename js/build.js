@@ -78,7 +78,8 @@ Fliplet.Widget.instance({
         img.loading = 'lazy';
         img.setAttribute('data-image-id', imageInstanceId);
         img.alt = imageOptions.alt;
-        img.src = imageOptions.url;
+        // Authenticate the image URL
+        img.src = Fliplet.Media.authenticate(imageOptions.url);
 
         $imageContainer.html(img);
       }
