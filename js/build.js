@@ -77,6 +77,20 @@ Fliplet.Widget.instance({
 
         img.loading = 'lazy';
         img.alt = imageOptions.alt;
+
+        // Show placeholder or hide the image if it fails to load
+        img.onerror = function() {
+          if (imageOptions.showIfImageNotFound === 'placeholder') {
+            imageOptions.showPlaceholder = true;
+
+            renderImage();
+
+            return;
+          }
+
+          $imageContainer.html('');
+        };
+
         // Authenticate the image URL
         img.src = Fliplet.Media.authenticate(imageOptions.url);
 
