@@ -76,9 +76,23 @@ Fliplet.Widget.instance({
         let img = document.createElement('img');
 
         img.loading = 'lazy';
-        img.setAttribute('data-image-id', imageInstanceId);
         img.alt = imageOptions.alt;
-        img.src = imageOptions.url;
+
+        // Show placeholder or hide the image if it fails to load
+        img.onerror = function() {
+          if (imageOptions.showIfImageNotFound === 'placeholder') {
+            imageOptions.showPlaceholder = true;
+
+            renderImage();
+
+            return;
+          }
+
+          $imageContainer.html('');
+        };
+
+        // Authenticate the image URL
+        img.src = Fliplet.Media.authenticate(imageOptions.url);
 
         $imageContainer.html(img);
       }
