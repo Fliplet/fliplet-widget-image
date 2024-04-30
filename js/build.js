@@ -8,6 +8,54 @@ Fliplet.Widget.instance({
       const imageInstanceId = image.id;
       const $imageContainer = $(image.$el);
 
+      function renderImage() {
+        return new Promise((resolve) => {
+          const imageColumnUrlValue = entryData[imageOptions.imageColumnName];
+
+          if (imageOptions.showPlaceholder) {
+            imageOptions.url = imageOptions.placeholderPath;
+          } else if (imageColumnUrlValue?.length) {
+            if (Array.isArray(imageColumnUrlValue)) {
+              imageOptions.url = imageColumnUrlValue[0];
+            } else {
+              imageOptions.url = imageColumnUrlValue;
+            }
+
+            imageOptions.alt = 'Image';
+          } else if (imageOptions.showIfImageNotFound === 'placeholder') {
+            imageOptions.url = imageOptions.placeholderPath;
+          } else {
+            return; // Exit early if image doesn't exist and placeholder shouldn't be shown
+          }
+
+          let img = new Image();
+
+          img.loading = 'lazy';
+          img.alt = imageOptions.alt;
+
+          // Show placeholder or hide the image if it fails to load
+          img.onerror = function() {
+            if (imageOptions.showIfImageNotFound === 'placeholder') {
+              imageOptions.showPlaceholder = true;
+
+              renderImage().then(resolve);
+
+              return;
+            }
+
+            $imageContainer.html('');
+            resolve();
+          };
+
+          img.onload = resolve;
+
+          // Authenticate the image URL
+          img.src = Fliplet.Media.authenticate(imageOptions.url);
+
+          $imageContainer.html(img);
+        });
+      }
+
       image.fields = _.assign(
         {
           showIfImageNotFound: 'placeholder',
@@ -31,7 +79,7 @@ Fliplet.Widget.instance({
         return renderImage();
       }
 
-      Fliplet.Widget.findParents({ instanceId: imageInstanceId }).then(function(widgets) {
+      return Fliplet.Widget.findParents({ instanceId: imageInstanceId }).then(function(widgets) {
         let dynamicContainer = null;
         let recordContainer = null;
         let listRepeater = null;
@@ -50,52 +98,8 @@ Fliplet.Widget.instance({
           return;
         }
 
-        renderImage();
+        return renderImage();
       });
-
-
-      function renderImage() {
-        const imageColumnUrlValue = entryData[imageOptions.imageColumnName];
-
-        if (imageOptions.showPlaceholder) {
-          imageOptions.url = imageOptions.placeholderPath;
-        } else if (imageColumnUrlValue?.length) {
-          if (Array.isArray(imageColumnUrlValue)) {
-            imageOptions.url = imageColumnUrlValue[0];
-          } else {
-            imageOptions.url = imageColumnUrlValue;
-          }
-
-          imageOptions.alt = 'Image';
-        } else if (imageOptions.showIfImageNotFound === 'placeholder') {
-          imageOptions.url = imageOptions.placeholderPath;
-        } else {
-          return; // Exit early if image doesn't exist and placeholder shouldn't be shown
-        }
-
-        let img = document.createElement('img');
-
-        img.loading = 'lazy';
-        img.alt = imageOptions.alt;
-
-        // Show placeholder or hide the image if it fails to load
-        img.onerror = function() {
-          if (imageOptions.showIfImageNotFound === 'placeholder') {
-            imageOptions.showPlaceholder = true;
-
-            renderImage();
-
-            return;
-          }
-
-          $imageContainer.html('');
-        };
-
-        // Authenticate the image URL
-        img.src = Fliplet.Media.authenticate(imageOptions.url);
-
-        $imageContainer.html(img);
-      }
     }
   }
 });
