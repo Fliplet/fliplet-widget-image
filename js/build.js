@@ -76,7 +76,6 @@ Fliplet.Widget.instance({
         let img = document.createElement('img');
 
         img.loading = 'lazy';
-        img.setAttribute('data-image-id', imageInstanceId);
         img.alt = imageOptions.alt;
         // Authenticate the image URL
         img.src = Fliplet.Media.authenticate(imageOptions.url);
