@@ -3,19 +3,11 @@
   "package": "com.fliplet.image",
   "version": "1.0.0",
   "icon": "img/icon.png",
-  "tags": ["type:component", "category:general"],
+  "tags": ["type:component", "category:general", "listable:true"],
   "provider_only": false,
-  "providers": [
-    "com.fliplet.file-manager",
-    "com.fliplet.link"
-  ],
+  "providers": ["com.fliplet.file-manager", "com.fliplet.link"],
   "interface": {
-    "dependencies": [
-      "fliplet-core",
-      "fliplet-studio-ui",
-      "fliplet-media",
-      "bootstrap"
-    ],
+    "dependencies": ["fliplet-core", "fliplet-studio-ui", "fliplet-media", "bootstrap"],
     "assets": [
       "vendor/hermite/hermite.min.js",
       "vendor/load-image/load-image.all.min.js",
@@ -27,18 +19,8 @@
     ]
   },
   "build": {
-    "dependencies": [
-      "fliplet-core",
-      "font-awesome",
-      "photoswipe"
-    ],
-    "assets": [
-      "js/build.js",
-      "css/build.css"
-    ]
+    "dependencies": ["fliplet-core", "font-awesome", "photoswipe"],
+    "assets": ["js/build.js", "css/build.css"]
   },
-  "references": [
-    "action.page:page",
-    "image.id:mediaFile"
-  ]
+  "references": ["action.page:page", "image.id:mediaFile"]
 }
