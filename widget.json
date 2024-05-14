@@ -13,27 +13,12 @@
   },
   "html_tag": "div",
   "interface": {
-    "dependencies": [
-      "fliplet-core",
-      "fliplet-studio-ui",
-      "fliplet-media",
-      "fliplet-datasources"
-    ],
-    "assets": [
-      "js/interface.js"
-    ]
+    "dependencies": ["fliplet-core", "fliplet-studio-ui", "fliplet-media", "fliplet-datasources"],
+    "assets": ["js/interface.js"]
   },
   "build": {
-    "dependencies": [
-      "jquery",
-      "bootstrap",
-      "fliplet-core",
-      "fliplet-helper"
-    ],
-    "assets": [
-      "js/build.js",
-      "css/index.scss"
-    ],
+    "dependencies": ["jquery", "bootstrap", "fliplet-core", "fliplet-helper"],
+    "assets": ["js/build.js", "css/index.scss"],
     "appAssets": []
   },
   "themeSettings": {
@@ -195,30 +180,15 @@
             "columns": 12,
             "logic": {
               "relative": {
-                "hide": [
-                  "PositionTop",
-                  "PositionRight",
-                  "PositionBottom",
-                  "PositionLeft"
-                ],
+                "hide": ["PositionTop", "PositionRight", "PositionBottom", "PositionLeft"],
                 "show": ["Display"]
               },
               "absolute": {
-                "show": [
-                  "PositionTop",
-                  "PositionRight",
-                  "PositionBottom",
-                  "PositionLeft"
-                ],
+                "show": ["PositionTop", "PositionRight", "PositionBottom", "PositionLeft"],
                 "hide": ["Display"]
               },
               "fixed": {
-                "show": [
-                  "PositionTop",
-                  "PositionRight",
-                  "PositionBottom",
-                  "PositionLeft"
-                ],
+                "show": ["PositionTop", "PositionRight", "PositionBottom", "PositionLeft"],
                 "hide": ["Display"]
               }
             },
@@ -427,12 +397,7 @@
                 "MarginRight": "0px",
                 "MarginLeft": "auto"
               },
-              "custom": [
-                "MarginTop",
-                "MarginRight",
-                "MarginBottom",
-                "MarginLeft"
-              ]
+              "custom": ["MarginTop", "MarginRight", "MarginBottom", "MarginLeft"]
             },
             "styles": [
               {
