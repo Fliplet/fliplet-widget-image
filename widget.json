@@ -4,7 +4,7 @@
   "package": "com.fliplet.image",
   "version": "2.0.0",
   "icon": "img/icon.png",
-  "tags": ["type:component", "category:general"],
+  "tags": ["type:component", "category:general", "beta:true"],
   "provider_only": false,
   "references": [],
   "settings": {
