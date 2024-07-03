@@ -69,7 +69,7 @@ Fliplet.Widget.instance({
         alt: 'Image placeholder',
         imageColumnName: image.fields.imageColumnName,
         showIfImageNotFound: image.fields.showIfImageNotFound,
-        placeholderPath: Fliplet.Widget.getAsset(imageInstanceId, 'img/placeholder.jpg')
+        placeholderPath: Fliplet.Widget.getAsset(imageInstanceId, 'img/placeholder.png')
       };
 
       if (Fliplet.Env.get('mode') === 'interact' || !imageOptions.imageColumnName) {
