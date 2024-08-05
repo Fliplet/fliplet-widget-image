@@ -78,6 +78,11 @@ Fliplet.Widget.instance({
         return renderImage();
       }
 
+      function errorMessageStructureNotValid($element, message) {
+        $element.addClass('component-error-before');
+        Fliplet.UI.Toast(message);
+      }
+
       return Fliplet.Widget.findParents({ instanceId: imageInstanceId }).then(function(widgets) {
         let dynamicContainer = null;
         let recordContainer = null;
@@ -94,7 +99,11 @@ Fliplet.Widget.instance({
         });
 
         if (!dynamicContainer || !dynamicContainer.dataSourceId || (!recordContainer && !listRepeater)) {
-          return;
+          if (!dynamicContainer || !dynamicContainer.dataSourceId) {
+            return errorMessageStructureNotValid($(image.$el), 'This component needs to be placed inside a Dynamic Container and select a data source');
+          }
+
+          return errorMessageStructureNotValid($(image.$el), 'This component needs to be placed inside a Record container or List Repeater component');
         }
 
         return renderImage();
