@@ -11,22 +11,22 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
   }).then((dataSourceColumns = []) => {
     return Fliplet.Widget.generateInterface({
       fields: [
-        {
-          type: 'provider',
-          package: 'com.fliplet.data-source-provider',
-          data: function() {
-            return Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' } }).then((widgets) => {
-              const dynamicContainer = widgets[0];
+        // {
+        //   type: 'provider',
+        //   package: 'com.fliplet.data-source-provider',
+        //   data: function() {
+        //     return Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' } }).then((widgets) => {
+        //       const dynamicContainer = widgets[0];
 
-              return {
-                readonly: true,
-                dataSourceTitle: 'Get image from...',
-                dataSourceId: dynamicContainer && dynamicContainer.dataSourceId,
-                helpText: 'To change this data source, go to the parent <strong>Dynamic container</strong>'
-              };
-            });
-          }
-        },
+        //       return {
+        //         readonly: true,
+        //         dataSourceTitle: 'Get image from...',
+        //         dataSourceId: dynamicContainer && dynamicContainer.dataSourceId,
+        //         helpText: 'To change this data source, go to the parent <strong>Dynamic container</strong>'
+        //       };
+        //     });
+        //   }
+        // },
         {
           name: 'imageColumnName',
           type: 'dropdown',
