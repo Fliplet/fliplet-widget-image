@@ -78,8 +78,9 @@ Fliplet.Widget.instance({
         return renderImage();
       }
 
+      // TODO remove after product solution is implemented
       function errorMessageStructureNotValid($element, message) {
-        $element.addClass('component-error-before');
+        $element.addClass('component-error-before-xxx');
         Fliplet.UI.Toast(message);
       }
 
