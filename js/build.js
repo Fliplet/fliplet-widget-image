@@ -100,8 +100,10 @@ Fliplet.Widget.instance({
         });
 
         if (!dynamicContainer || !dynamicContainer.dataSourceId || (!recordContainer && !listRepeater)) {
-          if (!dynamicContainer || !dynamicContainer.dataSourceId) {
+          if (!dynamicContainer) {
             return errorMessageStructureNotValid($(image.$el), 'This component needs to be placed inside a Dynamic Container and select a data source');
+          } else if (!dynamicContainer.dataSourceId) {
+            return Fliplet.UI.Toast('Please select a valid data source.');
           }
 
           return errorMessageStructureNotValid($(image.$el), 'This component needs to be placed inside a Record container or List Repeater component');
