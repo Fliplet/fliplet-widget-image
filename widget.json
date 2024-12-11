@@ -19,7 +19,7 @@
   "build": {
     "dependencies": ["jquery", "bootstrap", "fliplet-core", "fliplet-helper"],
     "assets": ["js/build.js", "css/index.scss"],
-    "appAssets": ["img/placeholder.png"]
+    "appAssets": []
   },
   "themeSettings": {
     "name": "Image",
