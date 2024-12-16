@@ -22,7 +22,7 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
                 readonly: true,
                 dataSourceTitle: 'Get image from...',
                 dataSourceId: dynamicContainer && dynamicContainer.dataSourceId,
-                helpText: 'To change this data source, go to the parent <strong>Dynamic container</strong>'
+                helpText: 'To change this data source, go to the parent <strong>Data container</strong>'
               };
             });
           }
