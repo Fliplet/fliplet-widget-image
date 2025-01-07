@@ -17,7 +17,6 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
         //   data: function() {
         //     return Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' } }).then((widgets) => {
         //       const dynamicContainer = widgets[0];
-
         //       return {
         //         readonly: true,
         //         dataSourceTitle: 'Get image from...',
