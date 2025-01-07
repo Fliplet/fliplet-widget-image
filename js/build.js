@@ -69,13 +69,19 @@ Fliplet.Widget.instance({
         alt: 'Image placeholder',
         imageColumnName: image.fields.imageColumnName,
         showIfImageNotFound: image.fields.showIfImageNotFound,
-        placeholderPath: Fliplet.Widget.getAsset(imageInstanceId, 'img/placeholder.jpg')
+        placeholderPath: Fliplet.Widget.getAsset(imageInstanceId, 'img/placeholder.png')
       };
 
       if (Fliplet.Env.get('mode') === 'interact' || !imageOptions.imageColumnName) {
         imageOptions.showPlaceholder = true;
 
         return renderImage();
+      }
+
+      // TODO remove after product solution is implemented
+      function errorMessageStructureNotValid($element, message) {
+        $element.addClass('component-error-before-xxx');
+        Fliplet.UI.Toast(message);
       }
 
       return Fliplet.Widget.findParents({ instanceId: imageInstanceId }).then(function(widgets) {
@@ -94,7 +100,13 @@ Fliplet.Widget.instance({
         });
 
         if (!dynamicContainer || !dynamicContainer.dataSourceId || (!recordContainer && !listRepeater)) {
-          return;
+          if (!dynamicContainer) {
+            return errorMessageStructureNotValid($(image.$el), 'This component needs to be placed inside a Dynamic Container and select a data source');
+          } else if (!dynamicContainer.dataSourceId) {
+            return Fliplet.UI.Toast('Please select a valid data source.');
+          }
+
+          return errorMessageStructureNotValid($(image.$el), 'This component needs to be placed inside a Record container or List Repeater component');
         }
 
         return renderImage();
