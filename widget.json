@@ -1,6 +1,6 @@
 {
   "listable": true,
-  "name": "Dynamic image",
+  "name": "Data image",
   "package": "com.fliplet.image",
   "version": "2.0.0",
   "icon": "img/icon.png",
