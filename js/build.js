@@ -10,9 +10,11 @@ Fliplet.Widget.instance({
       function renderImage() {
         return new Promise((resolve) => {
           const imageColumnUrlValue = entryData[imageOptions.imageColumnName];
-
+          
+          // Set alt text based on configuration or data
           if (imageOptions.showPlaceholder) {
             imageOptions.url = imageOptions.placeholderPath;
+            imageOptions.alt = imageOptions.placeholderAltText || 'Placeholder image';
           } else if (imageColumnUrlValue?.length) {
             if (Array.isArray(imageColumnUrlValue)) {
               imageOptions.url = imageColumnUrlValue[0];
@@ -20,9 +22,11 @@ Fliplet.Widget.instance({
               imageOptions.url = imageColumnUrlValue;
             }
 
-            imageOptions.alt = 'Image';
+            // Use alt text from data source if available, fallback to configured alt text
+            imageOptions.alt = entryData[imageOptions.altTextColumnName] || imageOptions.configuredAltText || 'Image';
           } else if (imageOptions.showIfImageNotFound === 'placeholder') {
             imageOptions.url = imageOptions.placeholderPath;
+            imageOptions.alt = imageOptions.placeholderAltText || 'Placeholder image';
           } else {
             return; // Exit early if image doesn't exist and placeholder shouldn't be shown
           }
@@ -31,6 +35,14 @@ Fliplet.Widget.instance({
 
           img.loading = 'lazy';
           img.alt = imageOptions.alt;
+          
+          // Add ARIA attributes for better accessibility
+          if (imageOptions.decorative) {
+            img.setAttribute('role', 'presentation');
+            img.alt = ''; // Empty alt for decorative images
+          } else {
+            img.setAttribute('role', 'img');
+          }
 
           // Show placeholder or hide the image if it fails to load
           img.onerror = function() {
@@ -51,14 +63,29 @@ Fliplet.Widget.instance({
           // Authenticate the image URL
           img.src = Fliplet.Media.authenticate(imageOptions.url);
 
-          $imageContainer.html(img);
+          // Add wrapper div for better accessibility if image has a caption
+          if (imageOptions.caption) {
+            const figure = document.createElement('figure');
+            const figcaption = document.createElement('figcaption');
+            figcaption.textContent = imageOptions.caption;
+            figure.appendChild(img);
+            figure.appendChild(figcaption);
+            $imageContainer.html(figure);
+          } else {
+            $imageContainer.html(img);
+          }
         });
       }
 
       image.fields = _.assign(
         {
           showIfImageNotFound: 'placeholder',
-          imageColumnName: ''
+          imageColumnName: '',
+          altTextColumnName: '', // New field for alt text column
+          configuredAltText: 'Image', // New field for configured alt text
+          placeholderAltText: 'Placeholder image', // New field for placeholder alt text
+          decorative: false, // New field to mark image as decorative
+          caption: '' // New field for image caption
         },
         image.fields
       );
@@ -66,10 +93,15 @@ Fliplet.Widget.instance({
       let imageOptions = {
         showPlaceholder: false,
         url: null,
-        alt: 'Image placeholder',
+        alt: image.fields.configuredAltText || 'Image',
         imageColumnName: image.fields.imageColumnName,
+        altTextColumnName: image.fields.altTextColumnName,
         showIfImageNotFound: image.fields.showIfImageNotFound,
-        placeholderPath: Fliplet.Widget.getAsset(imageInstanceId, 'img/placeholder.png')
+        placeholderPath: Fliplet.Widget.getAsset(imageInstanceId, 'img/placeholder.png'),
+        placeholderAltText: image.fields.placeholderAltText,
+        configuredAltText: image.fields.configuredAltText,
+        decorative: image.fields.decorative,
+        caption: image.fields.caption
       };
 
       if (Fliplet.Env.get('mode') === 'interact' || !imageOptions.imageColumnName) {
