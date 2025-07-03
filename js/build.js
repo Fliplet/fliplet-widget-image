@@ -1,63 +1,18 @@
 Fliplet.Widget.instance({
   name: 'image-2-0-0',
   render: {
-    ready: async function() {
+    ready: function() {
       const image = this;
+      const entryData = image?.parent?.entry
+        ? image?.parent?.entry?.data
+        : image?.parent?.parent?.entry?.data || {};
       const imageInstanceId = image.id;
       const $imageContainer = $(image.$el);
-
-      const parents = await Fliplet.Widget.findParents({
-        instanceId: imageInstanceId
-      });
-
-      /**
-       * Finds and returns the parent widget and its entry data for a specified widget type
-       * @param {('RecordContainer'|'ListRepeater'|'DynamicContainer')} type - The type of parent widget to search for
-       * @returns {Promise<[Object|null, Object|null]>} A tuple containing:
-       *   - The parent widget configuration if found, null otherwise
-       *   - The parent widget instance if found, null otherwise
-       * @async
-       * @private
-       */
-      const findParentDataWidget = async (type, packageName) => {
-        const parent = parents.find((parent) => parent.package === packageName);
-
-        if (!parent) {
-          return [null, null];
-        }
-
-        const instance = await Fliplet[type].get({ id: parent.id });
-        return [parent, instance];
-      }
-
-      const [[ dynamicContainer ], [ recordContainer, recordContainerInstance ], [ listRepeater, listRepeaterInstance ]] = await Promise.all([
-        findParentDataWidget('DynamicContainer', 'com.fliplet.dynamic-container'),
-        findParentDataWidget('RecordContainer', 'com.fliplet.record-container'),
-        findParentDataWidget('ListRepeater', 'com.fliplet.list-repeater')
-      ]);
-
-      let ENTRY = null;
-
-      if (recordContainerInstance) {
-        ENTRY = recordContainerInstance.entry;
-      } else if (listRepeaterInstance) {
-        const closestListRepeaterRow = image.parents().find(parent => parent.element.nodeName.toLowerCase() === 'fl-list-repeater-row');
-        if (closestListRepeaterRow) {
-          ENTRY = closestListRepeaterRow.entry;
-        }
-      }
-
-      if (!ENTRY) {
-        console.error('No entry found');
-        return;
-      }
-
-      const entryData = ENTRY.data || {};
 
       function renderImage() {
         return new Promise((resolve) => {
           const imageColumnUrlValue = entryData[imageOptions.imageColumnName];
-          
+
           // Set alt text based on configuration or data
           if (imageOptions.showPlaceholder) {
             imageOptions.url = imageOptions.placeholderPath;
@@ -82,7 +37,7 @@ Fliplet.Widget.instance({
 
           img.loading = 'lazy';
           img.alt = imageOptions.alt;
-          
+
           // Add ARIA attributes for better accessibility
           if (imageOptions.decorative) {
             img.setAttribute('role', 'presentation');
@@ -114,6 +69,7 @@ Fliplet.Widget.instance({
           if (imageOptions.caption) {
             const figure = document.createElement('figure');
             const figcaption = document.createElement('figcaption');
+
             figcaption.textContent = imageOptions.caption;
             figure.appendChild(img);
             figure.appendChild(figcaption);
@@ -163,19 +119,33 @@ Fliplet.Widget.instance({
         Fliplet.UI.Toast(message);
       }
 
-      if (!dynamicContainer || !dynamicContainer.dataSourceId) {
-        if (!dynamicContainer) {
-          return errorMessageStructureNotValid($(image.$el), 'This component needs to be placed inside a Dynamic Container and select a data source');
-        } else if (!dynamicContainer.dataSourceId) {
-          return Fliplet.UI.Toast('Please select a valid data source.');
+      return Fliplet.Widget.findParents({ instanceId: imageInstanceId }).then(function(widgets) {
+        let dynamicContainer = null;
+        let recordContainer = null;
+        let listRepeater = null;
+
+        widgets.forEach(widget => {
+          if (widget.package === 'com.fliplet.dynamic-container') {
+            dynamicContainer = widget;
+          } else if (widget.package === 'com.fliplet.record-container') {
+            recordContainer = widget;
+          } else if (widget.package === 'com.fliplet.list-repeater') {
+            listRepeater = widget;
+          }
+        });
+
+        if (!dynamicContainer || !dynamicContainer.dataSourceId || (!recordContainer && !listRepeater)) {
+          if (!dynamicContainer) {
+            return errorMessageStructureNotValid($(image.$el), 'This component needs to be placed inside a Dynamic Container and select a data source');
+          } else if (!dynamicContainer.dataSourceId) {
+            return Fliplet.UI.Toast('Please select a valid data source.');
+          }
+
+          return errorMessageStructureNotValid($(image.$el), 'This component needs to be placed inside a Record container or List Repeater component');
         }
-      }
 
-      if (!recordContainer && !listRepeater) {
-        return errorMessageStructureNotValid($(image.$el), 'This component needs to be placed inside a Record container or List Repeater component');
-      }
-
-      return renderImage();
+        return renderImage();
+      });
     }
   }
 });
