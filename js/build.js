@@ -19,7 +19,7 @@ Fliplet.Widget.instance({
        * @async
        * @private
        */
-      const findParentDataWidget = async (type, packageName) => {
+      const findParentDataWidget = async(type, packageName) => {
         const parent = parents.find((parent) => parent.package === packageName);
 
         if (!parent) {
@@ -27,8 +27,9 @@ Fliplet.Widget.instance({
         }
 
         const instance = await Fliplet[type].get({ id: parent.id });
+
         return [parent, instance];
-      }
+      };
 
       const [[ dynamicContainer ], [ recordContainer, recordContainerInstance ], [ listRepeater, listRepeaterInstance ]] = await Promise.all([
         findParentDataWidget('DynamicContainer', 'com.fliplet.dynamic-container'),
@@ -38,10 +39,43 @@ Fliplet.Widget.instance({
 
       let ENTRY = null;
 
+      image.fields = _.assign(
+        {
+          showIfImageNotFound: 'placeholder',
+          imageColumnName: ''
+        },
+        image.fields
+      );
+
+      let imageOptions = {
+        showPlaceholder: false,
+        url: null,
+        alt: 'Image placeholder',
+        imageColumnName: image.fields.imageColumnName,
+        showIfImageNotFound: image.fields.showIfImageNotFound,
+        placeholderPath: Fliplet.Widget.getAsset(imageInstanceId, 'img/placeholder.png')
+      };
+
+      let entryData = {};
+
+
       if (recordContainerInstance) {
+        if (Fliplet.Env.get('mode') === 'interact') {
+          imageOptions.showPlaceholder = true;
+
+          return renderImage();
+        }
+
         ENTRY = recordContainerInstance.entry;
       } else if (listRepeaterInstance) {
         const closestListRepeaterRow = image.parents().find(parent => parent.element.nodeName.toLowerCase() === 'fl-list-repeater-row');
+
+        if (Fliplet.Env.get('mode') === 'interact') {
+          imageOptions.showPlaceholder = true;
+
+          return renderImage();
+        }
+
         if (closestListRepeaterRow) {
           ENTRY = closestListRepeaterRow.entry;
         }
@@ -49,14 +83,20 @@ Fliplet.Widget.instance({
 
       if (!ENTRY) {
         console.error('No entry found');
+
         return;
       }
 
-      const entryData = ENTRY.data || {};
+      entryData = ENTRY.data || {};
 
       function renderImage() {
         return new Promise((resolve) => {
-          const imageColumnUrlValue = entryData[imageOptions.imageColumnName];
+          let imageColumnUrlValue;
+
+          if (entryData) {
+            imageColumnUrlValue = entryData[imageOptions.imageColumnName];
+          }
+
 
           if (imageOptions.showPlaceholder) {
             imageOptions.url = imageOptions.placeholderPath;
@@ -102,24 +142,8 @@ Fliplet.Widget.instance({
         });
       }
 
-      image.fields = _.assign(
-        {
-          showIfImageNotFound: 'placeholder',
-          imageColumnName: ''
-        },
-        image.fields
-      );
 
-      let imageOptions = {
-        showPlaceholder: false,
-        url: null,
-        alt: 'Image placeholder',
-        imageColumnName: image.fields.imageColumnName,
-        showIfImageNotFound: image.fields.showIfImageNotFound,
-        placeholderPath: Fliplet.Widget.getAsset(imageInstanceId, 'img/placeholder.png')
-      };
-
-      if (Fliplet.Env.get('mode') === 'interact' || !imageOptions.imageColumnName) {
+      if (!imageOptions.imageColumnName) {
         imageOptions.showPlaceholder = true;
 
         return renderImage();
