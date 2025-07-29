@@ -11,11 +11,10 @@ Fliplet.Widget.instance({
       });
 
       /**
-       * Finds and returns the parent widget and its entry data for a specified widget type
-       * @param {('RecordContainer'|'ListRepeater'|'DynamicContainer')} type - The type of parent widget to search for
-       * @returns {Promise<[Object|null, Object|null]>} A tuple containing:
-       *   - The parent widget configuration if found, null otherwise
-       *   - The parent widget instance if found, null otherwise
+       * Finds and returns the parent widget and its entry data for a specified widget type.
+       * @param {'RecordContainer'|'ListRepeater'|'DynamicContainer'} type - The type of parent widget to search for.
+       * @param {string} packageName - The package name of the parent widget.
+       * @returns {Promise<[Object|null, Object|null]>} A promise that resolves to a tuple: [parent widget configuration or null, parent widget instance or null].
        * @async
        * @private
        */
@@ -82,7 +81,7 @@ Fliplet.Widget.instance({
       }
 
       if (!ENTRY) {
-        console.error('No entry found in the Data Source');
+        console.warn('No entry found');
 
         return;
       }
