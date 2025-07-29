@@ -82,7 +82,7 @@ Fliplet.Widget.instance({
       }
 
       if (!ENTRY) {
-        console.error('No entry found');
+        console.error('No entry found in the Data Source');
 
         return;
       }
