@@ -28,15 +28,21 @@ Fliplet.Widget.instance({
        * @private
        */
       const findParentDataWidget = async(type, packageName) => {
-        const parent = parents.find((parent) => parent.package === packageName);
+        try {
+          const parent = parents.find((parent) => parent.package === packageName);
 
-        if (!parent) {
+          if (!parent) {
+            return [null, null];
+          }
+
+          const instance = await Fliplet[type].get({ id: parent.id });
+
+          return [parent, instance];
+        } catch (error) {
+          console.error('Failed to fetch parent widget instance', error);
+
           return [null, null];
         }
-
-        const instance = await Fliplet[type].get({ id: parent.id });
-
-        return [parent, instance];
       };
 
       const [[ dynamicContainer ], [ recordContainer, recordContainerInstance ], [ listRepeater, listRepeaterInstance ]] = await Promise.all([
