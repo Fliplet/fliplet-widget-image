@@ -6,9 +6,18 @@ Fliplet.Widget.instance({
       const imageInstanceId = image.id;
       const $imageContainer = $(image.$el);
 
-      const parents = await Fliplet.Widget.findParents({
-        instanceId: imageInstanceId
-      });
+      let parents = [];
+
+      try {
+        parents = await Fliplet.Widget.findParents({
+          instanceId: imageInstanceId
+        });
+      } catch (error) {
+        console.error('Failed to find parent widgets', error);
+
+        return;
+      }
+
 
       /**
        * Finds and returns the parent widget and its entry data for a specified widget type.
