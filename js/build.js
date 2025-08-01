@@ -18,7 +18,6 @@ Fliplet.Widget.instance({
         return;
       }
 
-
       /**
        * Finds and returns the parent widget and its entry data for a specified widget type.
        * @param {'RecordContainer'|'ListRepeater'|'DynamicContainer'} type - The type of parent widget to search for.
