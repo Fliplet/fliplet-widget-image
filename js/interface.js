@@ -4,7 +4,7 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
 
   if (widgets.length === 0 || !dynamicContainer.dataSourceId) {
     Fliplet.Widget.generateInterface({
-      title: 'Configure data text',
+      title: 'Configure data image',
       fields: [
         {
           type: 'html',
