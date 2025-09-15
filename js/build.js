@@ -50,18 +50,16 @@ Fliplet.Widget.instance({
         findParentDataWidget('ListRepeater', 'com.fliplet.list-repeater')
       ]);
 
-      // TODO remove after product solution is implemented
-      function errorMessageStructureNotValid($element, message) {
-        $element.addClass('component-error-before-xxx');
+      function errorMessageStructureNotValid(message) {
         Fliplet.UI.Toast(message);
       }
 
       if (!dynamicContainer || !dynamicContainer.dataSourceId) {
-        return errorMessageStructureNotValid($(image.$el), 'This component needs to be placed inside a Data Container and select a data source');
+        return errorMessageStructureNotValid('This component needs to be placed inside a Data Container and select a data source');
       }
 
       if (!recordContainer && !listRepeater) {
-        return errorMessageStructureNotValid($(image.$el), 'This component needs to be placed inside a Record or Data list component');
+        return errorMessageStructureNotValid('This component needs to be placed inside a Record or Data list component');
       }
 
       let ENTRY = null;
