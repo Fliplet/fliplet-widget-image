@@ -1,9 +1,22 @@
+Fliplet.Widget.findParents().then(async(widgets) => {
+  const findParentDataWidget = async(packageName, parents) => {
+    const parent = parents.find((parent) => parent.package === packageName);
 
-Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' } }).then(function(widgets) {
-  const dynamicContainer = widgets[0];
+    if (!parent) {
+      return [null];
+    }
 
-  if (widgets.length === 0 || !dynamicContainer.dataSourceId) {
-    Fliplet.Widget.generateInterface({
+    return [parent];
+  };
+
+  const [[ dynamicContainer ], [ recordContainer ], [ listRepeater ]] = await Promise.all([
+    findParentDataWidget('com.fliplet.dynamic-container', widgets),
+    findParentDataWidget('com.fliplet.record-container', widgets),
+    findParentDataWidget('com.fliplet.list-repeater', widgets)
+  ]);
+
+  if (!dynamicContainer || !dynamicContainer.dataSourceId) {
+    return Fliplet.Widget.generateInterface({
       title: 'Configure data image',
       fields: [
         {
@@ -12,10 +25,17 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
         }
       ]
     });
-
-    return Fliplet.UI.Toast('This component needs to be placed inside a Data container with selected Data source');
+  } else if (!recordContainer && !listRepeater) {
+    return Fliplet.Widget.generateInterface({
+      title: 'Configure data image',
+      fields: [
+        {
+          type: 'html',
+          html: '<p style="color: #A5A5A5; font-size: 12px; font-weight: 400;">This component needs to be placed inside a Record or Data list component</p>'
+        }
+      ]
+    });
   }
-
 
   return Fliplet.DataSources.getById(dynamicContainer.dataSourceId, {
     attributes: ['columns']
@@ -26,21 +46,6 @@ Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' 
   }).then((dataSourceColumns = []) => {
     return Fliplet.Widget.generateInterface({
       fields: [
-        // {
-        //   type: 'provider',
-        //   package: 'com.fliplet.data-source-provider',
-        //   data: function() {
-        //     return Fliplet.Widget.findParents({ filter: { package: 'com.fliplet.dynamic-container' } }).then((widgets) => {
-        //       const dynamicContainer = widgets[0];
-        //       return {
-        //         readonly: true,
-        //         dataSourceTitle: 'Get image from...',
-        //         dataSourceId: dynamicContainer && dynamicContainer.dataSourceId,
-        //         helpText: 'To change this data source, go to the parent <strong>Dynamic container</strong>'
-        //       };
-        //     });
-        //   }
-        // },
         {
           name: 'imageColumnName',
           type: 'dropdown',
