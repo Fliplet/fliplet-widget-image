@@ -31,7 +31,7 @@ Fliplet.Widget.findParents().then(async(widgets) => {
       fields: [
         {
           type: 'html',
-          html: '<p style="color: #A5A5A5; font-size: 12px; font-weight: 400;">This component needs to be placed inside a Record or Data list component</p>'
+          html: '<p style="color: #A5A5A5; font-size: 12px; font-weight: 400;">This component needs to be placed inside a Data record or Data list component</p>'
         }
       ]
     });

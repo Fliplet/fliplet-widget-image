@@ -55,7 +55,7 @@ Fliplet.Widget.instance({
       }
 
       if (!recordContainer && !listRepeater) {
-        return  Fliplet.UI.Toast('This component needs to be placed inside a Record or Data list component');
+        return  Fliplet.UI.Toast('This component needs to be placed inside a Data record or Data list component');
       }
 
       let ENTRY = null;
