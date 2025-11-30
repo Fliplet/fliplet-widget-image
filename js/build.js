@@ -60,7 +60,7 @@ Fliplet.Widget.instance({
 
       let ENTRY = null;
 
-      image.fields = _.assign(
+      image.fields = Object.assign(
         {
           showIfImageNotFound: 'placeholder',
           imageColumnName: ''
