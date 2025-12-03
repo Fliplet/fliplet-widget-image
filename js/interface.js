@@ -14,6 +14,9 @@ function init() {
   filePickerInit();
   Fliplet.Widget.toggleCancelButton(false);
 
+  // Enable save button if an image is already selected
+  Fliplet.Widget.toggleSaveButton(!!widgetData.image);
+
   // Load link action
   if (widgetData.action && widgetData.action.action === 'gallery') {
     $('#pinch').prop('checked', true);
@@ -117,6 +120,14 @@ function filePickerInit() {
     $('.file-picker-holder').html('');
   }
 
+  // Set initial save button state and label to make it visible
+  // The button should be visible but enabled only when an image is selected
+  var hasInitialImage = !!(filePickerData && filePickerData.selectFiles &&filePickerData.selectFiles.length);
+  Fliplet.Widget.toggleSaveButton(hasInitialImage);
+  Fliplet.Studio.emit('widget-save-label-update', {
+    text: hasInitialImage ? 'Save & Close' : 'Select'
+  });
+
   filePickerProvider = Fliplet.Widget.open('com.fliplet.file-picker', {
     selector: '.file-picker-holder',
     data: filePickerData,
@@ -137,7 +148,15 @@ function filePickerInit() {
 
           filePickerData.selectFiles = data.length ? data : [];
 
-          if (data.length) {
+          // Enable/disable save button based on whether an image is selected
+          // Update the label to "Save & Close" when an image is selected
+          Fliplet.Widget.toggleSaveButton(!!(data && data.length));
+          Fliplet.Studio.emit('widget-save-label-update', {
+            text: (data && data.length) ? 'Save & Close' : 'Select'
+          });
+
+          if (data && data.length) {
+            // Save the selected image immediately
             save();
 
             if (oldSelectedFileId !== data[0].id) {
