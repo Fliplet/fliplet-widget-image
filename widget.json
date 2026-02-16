@@ -19,7 +19,7 @@
     ]
   },
   "build": {
-    "dependencies": ["fliplet-core", "font-awesome", "photoswipe"],
+    "dependencies": ["fliplet-core", "font-awesome", "photoswipe", "fliplet-utils"],
     "assets": ["js/build.js", "css/build.css"]
   },
   "references": ["action.page:page", "image.id:mediaFile"]
