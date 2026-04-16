@@ -29,7 +29,7 @@ function imageInstance(data) {
   }
 
   var canvas = this;
-  var imageUrl = _.get(data, 'image.url', 'https://placehold.it/2160x680.png?text=Image');
+  var imageUrl = Fliplet.Utils.get(data, 'image.url', 'https://placehold.it/2160x680.png?text=Image');
   var authenticate = Promise.resolve();
 
   if (Fliplet.Media.isRemoteUrl(imageUrl)) {
@@ -131,8 +131,8 @@ function imageInstance(data) {
       return;
     }
 
-    if (_.get(data, 'action.action') === 'gallery') {
-      _.forEach(_.get(data, 'action.images'), function(image) {
+    if (Fliplet.Utils.get(data, 'action.action') === 'gallery') {
+      Fliplet.Utils.forEach(Fliplet.Utils.get(data, 'action.images'), function(image) {
         image.url = Fliplet.Media.authenticate(image.url);
       });
     }
